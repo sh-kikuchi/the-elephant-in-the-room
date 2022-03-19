@@ -1,18 +1,18 @@
 <?php
 session_start();
 require_once '../controller/userAuth.php';
-require_once '../../csrf/index.php';
+require_once '../../fragile/index.php';
 
 //　ログインしているか判定し、していなかったら新規登録画面へ返す
-$result = UserAuth::checkLogin();
+$result = UserAuth::checkSign();
 
 if (!$result) {
-  $_SESSION['login_err'] = 'ユーザを登録してログインしてください！';
+  $_SESSION['signin_err'] = 'ユーザを登録してログインしてください！';
   header('Location: signup_form.php');
   return;
 }
 
-$login_user = $_SESSION['login_user'];
+$signin_user = $_SESSION['signin_user'];
 
 ?>
 <!DOCTYPE html>
@@ -24,8 +24,8 @@ $login_user = $_SESSION['login_user'];
 </head>
 <body>
 <h2>マイページ</h2>
-<p>ログインユーザ：<?php echo h($login_user['name']) ?></p>
-<p>メールアドレス：<?php echo h($login_user['email']) ?></p>
+<p>ログインユーザ：<?php echo h($signin_user['name']) ?></p>
+<p>メールアドレス：<?php echo h($signin_user['email']) ?></p>
 <form action="../controller/signout.php" method="POST">
 <input type="submit" name="logout" value="ログアウト">
 </form>

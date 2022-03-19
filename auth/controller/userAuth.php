@@ -22,7 +22,7 @@ class UserAuth
     $arr[] = password_hash($userData['password'], PASSWORD_DEFAULT);
 
     try {
-      $stmt = connect()->prepare($sql);
+      $stmt = db_connect()->prepare($sql);
       $result = $stmt->execute($arr);
       return $result;
     } catch(\Exception $e) {
@@ -38,7 +38,7 @@ class UserAuth
    * @param string $password
    * @return bool $result
    */
-  public static function login($email, $password)
+  public static function signin($email, $password)
   {
     // 結果
     $result = false;
@@ -54,7 +54,7 @@ class UserAuth
     if (password_verify($password, $user['password'])) {
       //ログイン成功
       session_regenerate_id(true);
-      $_SESSION['login_user'] = $user;
+      $_SESSION['signin_user'] = $user;
       $result = true;
       return $result;
     }
@@ -70,15 +70,15 @@ class UserAuth
    */
   public static function getUserByEmail($email)
   {
-    $sql = 'SELECT * FROM users WHERE email = ?';
+    $sql = 'SELECT * FROM users WHERE email = :email';
 
     // emailを配列に入れる
     $arr = [];
     $arr[] = $email;
 
     try {
-      $stmt = connect()->prepare($sql);
-      $stmt->execute($arr);
+      $stmt = db_connect()->prepare($sql);
+      $stmt->execute();
       // SQLの結果を返す
       $user = $stmt->fetch();
       return $user;
@@ -92,12 +92,12 @@ class UserAuth
    * @param void
    * @return bool $result
    */
-  public static function checkLogin()
+  public static function checkSign()
   {
     $result = false;
 
     // セッションにログインユーザが入っていなかったらfalse
-    if (isset($_SESSION['login_user']) && $_SESSION['login_user']['id'] > 0) {
+    if (isset($_SESSION['signin_user']) && $_SESSION['signin_user']['id'] > 0) {
       return $result = true;
     }
 
@@ -113,7 +113,8 @@ class UserAuth
     $_SESSION = array();
     session_destroy();
 
-    header('Location: ../view/signin.php');
+    //ログイン画面に戻る
+    header('Location: ../view/signin_form.php');
   }
 
 }

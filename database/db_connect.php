@@ -1,10 +1,10 @@
 <?php
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'user');
-define('DB_USER', 'shu');
-define('DB_PASS', 'login0726');
+define('DB_HOST', "localhost");
+define('DB_NAME', "elephant");
+define('DB_USER', "root"); //shu
+define('DB_PASS', ""); //shulogin0726
 
-function connect()
+function db_connect()
 {
     $host = DB_HOST;
     $db   = DB_NAME;

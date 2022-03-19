@@ -7,7 +7,7 @@ if (!$logout = filter_input(INPUT_POST, 'logout')) {
 }
 
 //　ログインしているか判定し、セッションが切れていたらログインしてくださいとメッセージを出す。
-$result = UserAuth::checkLogin();
+$result = UserAuth::checkSign();
 
 if (!$result) {
   exit('セッションが切れました。サインインして下さい');

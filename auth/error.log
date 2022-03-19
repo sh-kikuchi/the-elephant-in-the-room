@@ -3,3 +3,8 @@ Stack trace:
 #0 C:\xampp\htdocs\PHP_starter\auth\controller\userAuth.php(26): PDOStatement->execute(Array)
 #1 C:\xampp\htdocs\PHP_starter\auth\view\register.php(35): UserAuth::register(Array)
 #2 {main}
+PDOException: SQLSTATE[HY093]: Invalid parameter number: parameter was not defined in C:\xampp\htdocs\PHP_starter\auth\controller\userAuth.php:26
+Stack trace:
+#0 C:\xampp\htdocs\PHP_starter\auth\controller\userAuth.php(26): PDOStatement->execute(Array)
+#1 C:\xampp\htdocs\PHP_starter\auth\view\register.php(35): UserAuth::register(Array)
+#2 {main}

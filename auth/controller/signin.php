@@ -17,15 +17,15 @@ if(!$password = filter_input(INPUT_POST, 'password')) {
 if (count($err) > 0) {
   // エラーがあった場合は戻す
   $_SESSION = $err;
-  header('Location: signin_form.php');
+  header('Location:../view/signup_form.php');
   return;
 }
 // ログイン成功時の処理
-$result = UserAuth::login($email, $password);
-header('Location: loginTest.php');
+$result = UserAuth::signin($email, $password);
+header('Location:../view/signTest.php');
 // ログイン失敗時の処理
 if (!$result) {
-  header('Location: signin_form.php');
+  header('Location:../view/signTest.php');
   return;
 }
 
