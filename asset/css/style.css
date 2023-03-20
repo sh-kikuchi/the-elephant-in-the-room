@@ -1,44 +1,54 @@
 /*---------------------------
 フレームワーク名
 ----------------------------*/
-.framework-name{
+.framework-name {
   text-align: center;
 }
+
+
 /*---------------------------
 CRUDのチュートリアル
 コメントリスト
 ----------------------------*/
-.crud-container{}
-.crud-title{
+.crud-container {}
+
+.crud-title {
   text-align: center;
 }
-.crud-create{
+
+.crud-create {
   text-align: right;
 }
-.crud-card{
+
+.crud-card {
   margin: 10px;
   padding: 5px;
   border: 1px dashed #000;
 }
-.crud-card-description{}
-.crud-card-updated_at{
+
+.crud-card-description {}
+
+.crud-card-updated_at {
   font-size: 12px;
   text-align: right;
 }
-.crud-card-detail{
+
+.crud-card-detail {
   display: flex;
   justify-content: end;
 }
-.crud-form{}
 
-.crud-edit{
+.crud-form {}
+
+.crud-edit {
   color: #000;
   font-size: 15px;
   text-decoration: none;
   margin-right: 5px;
   margin-left: 10px;
 }
-.crud-delete{
+
+.crud-delete {
   font-size: 15px;
   background-color: transparent;
   border: none;
@@ -54,19 +64,22 @@ CRUDのチュートリアル
 CRUDのチュートリアル
 コメント追加/更新フォーム
 ----------------------------*/
-.crud-form-contents{
+.crud-form-contents {
   display: flex;
   justify-content: center;
 }
-.crud-form-contents label{
+
+.crud-form-contents label {
   display: block;
   text-align: center;
   margin: 0 auto;
 }
-.crud-form-input{
+
+.crud-form-input {
   width: 200px;
 }
-.crud-form-submit{
+
+.crud-form-submit {
   display: block;
   width: 100px;
   margin: 0 auto;
@@ -75,44 +88,123 @@ CRUDのチュートリアル
 
 
 
-.container {
+/* .container {
   display: grid;
   grid-template-rows: auto 1fr auto;
   height: calc(100vh - 20px);
   background-color: aquamarine;
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 2fr 1fr;
+} */
+
+#index-firstview {
+  display: grid;
+  height: 100vh;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
 }
+
+.index-fv-title {
+  height: 100vh;
+  display: flex;
+  font-size: 50px;
+  text-align: right;
+  justify-content: end;
+  align-items: center;
+}
+
+.elephant-letter {
+  color: mediumpurple;
+}
+
+.index-fv-img>img {
+  width: 300px;
+  height: 300px;
+  border: 1px solid #000;
+}
+
+.index-fv-img {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+#index-intro {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+}
+
+
+/*左側*/
+.index-intro-title {
+  font-size: 30px;
+  text-align: center;
+}
+
+.index-intro-img {
+  display: flex;
+  justify-content: center;
+}
+
+.index-intro-text {
+  width: 80%;
+  font-size: 40px;
+  display: flex;
+  align-items: center;
+}
+
+.index-message {
+  margin-top: 50px;
+  background-color: lightskyblue;
+  font-size: 25px;
+  text-align: center;
+
+}
+
+@media(max-width: 400px) {
+  .index-firstview {
+    grid-template-columns: 1fr;
+  }
+}
+
 
 .body {
   overflow-y: scroll;
 }
 
-#menu-btn{
+#menu-btn {
   width: 50px;
   height: 25px;
-  margin:0 0 0 auto;
+  margin: 0 0 0 auto;
   position: relative;
 }
+
 #menu-btn div {
   width: 50px;
   position: absolute;
   border-bottom: 2px solid black;
 }
 
-#menu-btn div:nth-child(1){ /*【A-4】:nth-child擬似クラス*/
-  top:0;
-}
-#menu-btn div:nth-child(2){
-  top:10px;
-}
-#menu-btn div:nth-child(3){
-  top:20px;
+#menu-btn div:nth-child(1) {
+  /*【A-4】:nth-child擬似クラス*/
+  top: 0;
 }
 
-#menu{
+#menu-btn div:nth-child(2) {
+  top: 10px;
+}
+
+#menu-btn div:nth-child(3) {
+  top: 20px;
+}
+
+#menu {
   display: none;
 }
 
-#menu.is-active{
+#menu.is-active {
   display: block;
   position: fixed;
   top: 0;
@@ -120,6 +212,6 @@ CRUDのチュートリアル
   z-index: 1;
   width: 100vw;
   height: 100vh;
-  transform:translateY(-110%);
+  transform: translateY(-110%);
   transition: all 0.6s;
 }

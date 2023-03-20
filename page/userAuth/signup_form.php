@@ -1,8 +1,8 @@
 <?php
 session_start();
 
-require_once '../../fragile/index.php';
-require_once '../controller/userAuth.php';
+require_once '../../util/fragile.php';
+require_once '../../class/users/userAuth.php';
 
 $result = UserAuth::checkSign();
 if($result) {

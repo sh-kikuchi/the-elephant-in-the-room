@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../controller/userAuth.php';
+require_once '../../class/users/userAuth.php';
 
 // エラーメッセージ
 $err = [];
@@ -29,17 +29,13 @@ $password_conf = filter_input(INPUT_POST, 'password_conf');
 if ($password !== $password_conf) {
   $err[] = '確認用パスワードと異なっています。';
 }
-
 if (count($err) === 0) {
   // ユーザを登録する処理
   $hasCreated = UserAuth::register($_POST);
-
   if(!$hasCreated) {
     $err[] = '登録に失敗しました';
   }
-
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,6 +53,5 @@ if (count($err) === 0) {
   <p>ユーザ登録が完了しました。</p>
 <?php endif ?>
 <a href="./signup_form.php">戻る</a>
-
 </body>
 </html>

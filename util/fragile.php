@@ -7,7 +7,6 @@
 function h($str){
     return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
 }
-
 /**
  * トークン生成
  * フォ―ムからトークンを生成。

@@ -1,8 +1,7 @@
 <?php
 session_start();
 
-require_once '../controller/userAuth.php';
-
+require_once '../../class/users/userAuth.php';
 // エラーメッセージ
 $err = [];
 
@@ -17,15 +16,16 @@ if(!$password = filter_input(INPUT_POST, 'password')) {
 if (count($err) > 0) {
   // エラーがあった場合は戻す
   $_SESSION = $err;
-  header('Location:../view/signup_form.php');
+  header('Location:../../../../../the_Elephant_in_the_Room/page/userAuth/signin_form.php');
   return;
 }
 // ログイン成功時の処理
-$result = UserAuth::signin($email, $password);
-header('Location:../view/signTest.php');
+$userAuth = new UserAuth();
+$result = $userAuth->signin($email, $password);
+header('Location:../../../../../the_Elephant_in_the_Room/page/userAuth/signTest.php');
 // ログイン失敗時の処理
 if (!$result) {
-  header('Location:../view/signTest.php');
+   header('Location:../../../../../the_Elephant_in_the_Room/page/userAuth/signin_form.php');
   return;
 }
 

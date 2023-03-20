@@ -1,7 +1,7 @@
 <?php
 session_start();
-require_once '../controller/userAuth.php';
-require_once '../../fragile/index.php';
+require_once '../../class/users/userAuth.php';
+require_once '../../util/fragile.php';
 
 //　ログインしているか判定し、していなかったら新規登録画面へ返す
 $result = UserAuth::checkSign();
@@ -26,7 +26,7 @@ $signin_user = $_SESSION['signin_user'];
 <h2>マイページ</h2>
 <p>ログインユーザ：<?php echo h($signin_user['name']) ?></p>
 <p>メールアドレス：<?php echo h($signin_user['email']) ?></p>
-<form action="../controller/signout.php" method="POST">
+<form action="../../function/userAuth/signout.php" method="POST">
 <input type="submit" name="logout" value="ログアウト">
 </form>
 <!-- ①ログアウト画面の作成 -->

@@ -26,8 +26,8 @@ class UserAuth
       $result = $stmt->execute($arr);
       return $result;
     } catch(\Exception $e) {
-      echo $e; // エラーを出力
-      error_log($e, 3, '../error.log'); //ログを出力
+      echo $e;
+      error_log($e, 3, '../error.log');
       return $result;
     }
   }
@@ -40,8 +40,10 @@ class UserAuth
    */
   public static function signin($email, $password)
   {
+
     // 結果
     $result = false;
+
     // ユーザをemailから検索して取得
     $user = self::getUserByEmail($email);
 
@@ -59,18 +61,18 @@ class UserAuth
       return $result;
     }
 
-    $_SESSION['msg'] = 'パスワードが一致しません。';
+    $_SESSION['msg'] =  $password;
     return $result;
   }
 
   /**
-   * emailからユーザを取得
+   * Get User Data By Email
    * @param string $email
    * @return array|bool $user|false
    */
   public static function getUserByEmail($email)
   {
-    $sql = 'SELECT * FROM users WHERE email = :email';
+    $sql = 'SELECT * FROM users WHERE email = ?';
 
     // emailを配列に入れる
     $arr = [];
@@ -78,7 +80,7 @@ class UserAuth
 
     try {
       $stmt = db_connect()->prepare($sql);
-      $stmt->execute();
+      $stmt->execute($arr);
       // SQLの結果を返す
       $user = $stmt->fetch();
       return $user;
@@ -86,35 +88,31 @@ class UserAuth
       return false;
     }
   }
-
   /**
-   * ログインチェック
+   * Sign-in Check
    * @param void
    * @return bool $result
    */
   public static function checkSign()
   {
     $result = false;
-
-    // セッションにログインユーザが入っていなかったらfalse
+    // true if there is 'signin_user' in the session
     if (isset($_SESSION['signin_user']) && $_SESSION['signin_user']['id'] > 0) {
       return $result = true;
     }
-
     return $result;
-
   }
 
   /**
-   * ログアウト処理
+   * Logout
    */
   public static function logout()
   {
     $_SESSION = array();
     session_destroy();
 
-    //ログイン画面に戻る
-    header('Location: ../view/signin_form.php');
+    //Back to Sign-in Page.
+    header('Location: ../../../../../the_Elephant_in_the_Room/page/userAuth/signin_form.php');
   }
 
 }

@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../controller/userAuth.php';
+require_once '../../class/users/userAuth.php';
 
 if (!$logout = filter_input(INPUT_POST, 'logout')) {
   exit('不正なリクエストです。');

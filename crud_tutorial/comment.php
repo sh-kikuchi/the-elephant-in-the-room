@@ -1,6 +1,6 @@
 
 <?php
-  require_once '../fragile/index.php';
+  require_once '../util/fragile.php';
   require_once '../database/db_connect.php';
   $pdo = db_connect();
 
