@@ -1,7 +1,7 @@
 
 <?php
-  require_once '../util/fragile.php';
-  require_once '../database/db_connect.php';
+  require_once '../../util/fragile.php';
+  require_once '../../database/db_connect.php';
   $pdo = db_connect();
 
     try {
@@ -13,7 +13,7 @@
       return false;
     }
 ?>
-<?php include('../layout/header.php'); ?>
+<?php include('../../layout/header.php'); ?>
   <div class="crud-container">
     <p class="crud-title">コメント一覧</p>
     <a class="crud-create" href="../crud_tutorial/create_form.php">コメントを追加する</a>
@@ -28,7 +28,7 @@
               <a class="crud-edit" href="../crud_tutorial/update_form.php?id=<?php echo $comment["id"]; ?>">編集</a>
          </div>
           <div>
-              <form name="id"  method="POST" action="../crud_tutorial/crud/delete.php">
+              <form name="id"  method="POST" action="../../function/crud_tutorial/delete.php">
                   <input hidden class="crud-form-input" name="id" value="<?php echo h($comment["id"]); ?>">
                   <button type="submit" class="crud-delete">削除</button>
               </form>
@@ -37,4 +37,4 @@
     </div>
   <?php }?>
 </div>
-<?php include('../layout/footer.php'); ?>
+<?php include('../../layout/footer.php'); ?>

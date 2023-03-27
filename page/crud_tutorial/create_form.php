@@ -1,9 +1,9 @@
-<?php include('../layout/header.php'); ?>
+<?php include('../../layout/footer.php'); ?>
   <div class="crud-container">
   <div>
     <h2 class="crud-title">コメントを追加しましょう</h2>
     <section class="crud-form-contents">
-      <form method="post" action="../crud_tutorial/crud/create.php">
+      <form method="post" action="../../function/crud_tutorial/create.php">
         <div>
           <label for="name">お名前（ニックネーム可）</label>
           <input name="name" class="crud-form-input" placeholder="名前を入力">
@@ -22,4 +22,4 @@
     </section>
   </div>
 </div>
-<?php include('../layout/footer.php'); ?>
+<?php include('../../layout/footer.php'); ?>

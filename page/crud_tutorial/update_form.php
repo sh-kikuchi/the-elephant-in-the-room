@@ -1,8 +1,8 @@
 <?php
 //h
-  require_once '../util/fragile.php';
+  require_once '../../util/fragile.php';
 //DB接続設定
-  require_once '../database/db_connect.php';
+  require_once '../../database/db_connect.php';
   $pdo = db_connect();
 
   //URLから値を受け取る（GET送信）
@@ -17,13 +17,13 @@
   //PDOのquery機能
   $comments = $pdo->query($sql);
 ?>
-<?php include('../layout/header.php'); ?>
+<?php include('../../layout/header.php'); ?>
 <!-- 下記は<body>タグの中身 -->
 <div class="crud-container">
     <h2 class="crud-title">コメントを編集します</h2>
     <section class="crud-form-contents">
         <?php foreach ($comments as $comment){?>
-        <form method="post" action="../crud_tutorial/crud/update.php">
+        <form method="post" action="../../function/crud_tutorial/update.php">
             <div>
               <input hidden name="id" value="<?php echo h($comment["id"]);?>">
             <div>
@@ -40,4 +40,4 @@
       <?php } ?>
     </section>
 </div>
-<?php include('../layout/footer.php'); ?>
+<?php include('../../layout/footer.php'); ?>
