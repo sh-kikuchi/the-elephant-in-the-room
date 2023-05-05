@@ -27,7 +27,7 @@ session_destroy();
         <p><?php echo $err['msg']; ?></p>
     <?php endif; ?>
     <section id="signin">
-        <form action="../../function/userAuth/signin.php" method="POST">
+        <form action="../../function/user_auth/signin.php" method="POST">
             <div>
               <label for="email">メールアドレス：</label>
               <input type="email" name="email">

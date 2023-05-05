@@ -31,7 +31,7 @@ if($_FILES['upfile']['error'] !== UPLOAD_ERR_OK){
    * @param string $src　一時ファイルパス
    * @param string [path].$dest 保存先
    */
-  if(!move_uploaded_file($src,'../../../the_Elephant_in_the_Room/storage/doc/'.$dest)){
+  if(!move_uploaded_file($src,'../../../the-elephant-in-the-room/storage/doc/'.$dest)){
     $err_msg = "アップロードに失敗しました";
   }
 }
@@ -41,6 +41,6 @@ if(isset($err_msg)){
   die('<div style="color:Red">'.$err_msg.'</div>');
 }
 
- header('Location:/the_Elephant_in_the_Room/page/uploadFile/upload.php');
+ header('Location:/the-elephant-in-the-room/page/uploadFile/upload.php');
 
 ?>

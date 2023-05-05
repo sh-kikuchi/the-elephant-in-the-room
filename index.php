@@ -1,5 +1,5 @@
 
-<?php include('../the_Elephant_in_the_Room/layout/header.php'); ?>
+<?php include('../the-elephant-in-the-room/layout/header.php'); ?>
   <div class="container">
     <div class="header">
     </div>
@@ -47,7 +47,7 @@
         </div>
       </section>
       <div class="index-message">
-         Release your own apps to the world.
+        project-G: guzzle
       </div>
     </div>
-<?php include('../the_Elephant_in_the_Room/layout/footer.php'); ?>
+<?php include('../the-elephant-in-the-room/layout/footer.php'); ?>

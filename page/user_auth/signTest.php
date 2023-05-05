@@ -26,7 +26,7 @@ $signin_user = $_SESSION['signin_user'];
 <h2>マイページ</h2>
 <p>ログインユーザ：<?php echo h($signin_user['name']) ?></p>
 <p>メールアドレス：<?php echo h($signin_user['email']) ?></p>
-<form action="../../function/userAuth/signout.php" method="POST">
+<form action="../../function/user_auth/signout.php" method="POST">
 <input type="submit" name="logout" value="ログアウト">
 </form>
 <!-- ①ログアウト画面の作成 -->
