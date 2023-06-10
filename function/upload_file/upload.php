@@ -1,5 +1,8 @@
 <?php
 
+
+
+
 if($_FILES['upfile']['error'] !== UPLOAD_ERR_OK){
   //アップロード処理の成否
   $msg =[

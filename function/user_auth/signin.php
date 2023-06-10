@@ -21,7 +21,7 @@ if (count($err) > 0) {
 }
 // ログイン成功時の処理
 $user_auth = new UserAuth();
-$result = $userAuth->signin($email, $password);
+$result = $user_auth->signin($email, $password);
 header('Location:../../../../../the-elephant-in-the-room/page/user_auth/signTest.php');
 // ログイン失敗時の処理
 if (!$result) {
