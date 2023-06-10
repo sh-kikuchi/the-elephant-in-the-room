@@ -23,6 +23,4 @@ function db_connect()
         echo '接続失敗です！'. $e->getMessage();
         exit();
     }
-
-
 }

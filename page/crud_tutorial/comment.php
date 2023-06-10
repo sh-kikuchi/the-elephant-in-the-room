@@ -1,4 +1,3 @@
-
 <?php
   require_once '../../util/fragile.php';
   require_once '../../database/db_connect.php';

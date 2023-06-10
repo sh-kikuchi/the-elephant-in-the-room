@@ -112,7 +112,7 @@ class UserAuth
     session_destroy();
 
     //Back to Sign-in Page.
-    header('Location: ../../../../../the_Elephant_in_the_Room/page/userAuth/signin_form.php');
+    header('Location: ../../../../../the-elephant-in-the-room/page/user_auth/signin_form.php');
   }
 
 }
