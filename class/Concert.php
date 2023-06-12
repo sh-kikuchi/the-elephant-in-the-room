@@ -1,9 +1,13 @@
 <?php
 
 require_once '../../database/db_connect.php';
+require_once '../../util/trait/file.php';
 
 class Concert
 {
+
+  use File;
+  
   /**
    * show artists
    * @param array $postData

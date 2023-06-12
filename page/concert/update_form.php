@@ -9,7 +9,7 @@
 <div>
     <h2 class="text-center">コンサート編集</h2>
     <section class="flex-box justify-center">
-        <form method="post" action="../../function/concert/update.php">
+        <form method="post" action="../../logics/concert/update.php">
             <?php foreach ($concerts as $concert){?>
                 <div class="flex-box justify-center my-2">
                   <input hidden name="id" value="<?php echo h($concert["id"]);?>">

@@ -1,9 +1,12 @@
 <?php
 
 require_once '../../database/db_connect.php';
+require_once '../../util/trait/file.php';
+require_once '../../util/trait/mail.php';
 
 class UserAuth
 {
+  use File, Mail;
   /**
    * ユーザを登録する
    * @param array $userData
