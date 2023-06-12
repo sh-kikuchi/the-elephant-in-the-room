@@ -51,7 +51,7 @@
                               <a class="crud-edit" href="../concert/update_form.php?id=<?php echo $concert["id"]; ?>">EDIT</a>
                         </div>
                         <div>
-                            <form name="id"  method="POST" action="../../function/crud_tutorial/delete.php">
+                            <form name="id"  method="POST" action="../../logics/crud_tutorial/delete.php">
                                 <input hidden class="crud-form-input" name="id" value="<?php echo h($concert["id"]); ?>">
                                 <button type="submit" class="crud-delete">DELETE</button>
                             </form>

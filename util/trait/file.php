@@ -42,7 +42,7 @@ trait File{
       die('<div style="color:Red">'.$err_msg.'</div>');
     }
     
-     header('Location:/the-elephant-in-the-room/page/uploadFile/upload.php');
+     header('Location:/the-elephant-in-the-room/page/concert');
 
 	}
 }

@@ -27,7 +27,7 @@
               <a class="crud-edit " href="../artist/update_form.php?id=<?php echo $artist["id"]; ?>">EDIT</a>
          </div>
           <div>
-              <form name="id"  method="POST" action="../../function/artist/delete.php">
+              <form name="id"  method="POST" action="../../logics/artist/delete.php">
                   <input hidden name="id" value="<?php echo h($artist["id"]); ?>">
                   <button type="submit" class="crud-delete">DELETE</button>
               </form>

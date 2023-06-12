@@ -19,7 +19,7 @@
   <div>
     <h2 class="text-center">アーティスト登録</h2>
     <section class="flex-box justify-center">
-      <form method="post" action="../../function/artist/create.php">
+      <form method="post" action="../../logics/artist/create.php">
         <input hidden name="user_id" value="<?php echo h($signin_user["id"]);?>"> 
         <div class="flex-box">
           <label for="name" class="label">アーティスト名</label>

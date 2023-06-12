@@ -16,7 +16,7 @@
   <div>
     <h2 class="text-center">コンサート登録</h2>
     <section class="flex-box justify-center">
-      <form method="post" action="../../function/concert/create.php">
+      <form method="post" action="../../logics/concert/create.php">
        <input hidden name="user_id" class="crud-form-input" value="<?php echo h($signin_user["id"]);?>"> <!--とりあえずきめうち-->
         <div class="flex-box justify-center my-2">
           <label for="date" class="label">日付</label>

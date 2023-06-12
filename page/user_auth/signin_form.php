@@ -21,7 +21,7 @@ session_destroy();
         <p><?php echo $err['msg']; ?></p>
     <?php endif; ?>
     <section class="flex-box justify-center">
-        <form action="../../function/user_auth/signin.php" method="POST">
+        <form action="../../logics/user_auth/signin.php" method="POST">
             <div class="flex-box justify-center">
               <label for="email" class="label">E-mail:</label>
               <input type="email" name="email" class="form-input">

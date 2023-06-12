@@ -9,7 +9,7 @@
 <div class="crud-container">
     <h2 class="text-center">アーティスト編集</h2>
     <section class="flex-box justify-center">
-        <form method="post" action="../../function/artist/update.php">
+        <form method="post" action="../../logics/artist/update.php">
             <?php foreach ($artists as $artist){?>
               <input hidden name="id" value="<?php echo h($artist["id"]);?>">
               <div class="flex-box">
