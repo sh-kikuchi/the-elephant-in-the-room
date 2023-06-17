@@ -1,32 +1,29 @@
 <?php
 session_start();
 
-require_once '../../class/users/userAuth.php';
-// エラーメッセージ
-$err = [];
+// Load other files.
+require_once 'classes/users/userAuth.php';
+require_once 'classes/rules/userRequest.php';
 
-// バリデーション
-if(!$email = filter_input(INPUT_POST, 'email')) {
-  $err['email'] = 'メールアドレスを記入してください。';
-}
-if(!$password = filter_input(INPUT_POST, 'password')) {
-  $err['password'] = 'パスワードを記入してください。';
-}
+//Set variables.
+$email    = filter_input(INPUT_POST, 'email');
+$password = filter_input(INPUT_POST, 'password');
 
-if (count($err) > 0) {
-  // エラーがあった場合は戻す
-  $_SESSION = $err;
-  header('Location:../../../../../the-elephant-in-the-room/page/user_auth/signin_form.php');
-  return;
-}
-// ログイン成功時の処理
-$user_auth = new UserAuth();
+// Create an instance
+$user_auth    = new UserAuth();
+$user_request = new UserRequest();
+
+// Validate post request data
+$user_request->signInValidation($email, $password);
+
+// Execute methods
 $result = $user_auth->signin($email, $password);
-header('Location:../../../../../the-elephant-in-the-room/page/user_auth/signTest.php');
-// ログイン失敗時の処理
+
+//Transitioning screen
 if (!$result) {
-   header('Location:../../../../../the-elephant-in-the-room/page/user_auth/signin_form.php');
-  return;
+  header('Location:/the-elephant-in-the-room/pages/user_auth/signin_form.php');
+}else{
+  header('Location: /the-elephant-in-the-room/pages/user_auth/signTest.php');
 }
 
 ?>

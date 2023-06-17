@@ -1,11 +1,11 @@
 
-<?php include('../the-elephant-in-the-room/layout/header.php'); ?>
+<?php include('layouts/header.php'); ?>
     <div class="body">
       <section id="index-firstview">
         <div class="index-fv-title">
             <h1>THE <br><span class="elephant-letter"> ELEPHANT </span><br>IN THE ROOM</h1>
         </div>
-            <div class="index-fv-img" ><img src="./asset/img/elephant.jpg"/></div>
+            <div class="index-fv-img" ><img src="assets/img/elephant.jpg"/></div>
       </section>
       <section class="flex-box justify-center">
           <div>
@@ -20,7 +20,7 @@
                   <div class="tab-content active">
                       <section class="grid-two-block">
                           <div class="flex-box justify-center align-center">
-                              <div class="index-intro-img" ><img src="./asset/img/auth.png"/></div>
+                              <div class="index-intro-img" ><img src="assets/img/auth.png"/></div>
                           </div>
                           <div class="index-intro-right">
                               <p class="index-intro-text">Sign-in, sign-up, and sign-out are easy to implement. By default, you can sign up with your email and password.</p>
@@ -30,7 +30,7 @@
                   <div class="tab-content">
                       <section class="grid-two-block">
                           <div class="flex-box justify-center align-center">
-                              <div class="index-intro-img" ><img src="./asset/img/db.png"/></div>
+                              <div class="index-intro-img" ><img src="assets/img/db.png"/></div>
                           </div>
                           <div class="index-intro-right">
                               <p class="index-intro-text">In conjunction with SQL, read, create, update, and delete operations can be easily performed on the DB.</p>
@@ -43,7 +43,7 @@
                   <div class="tab-content">
                       <section class="grid-two-block">
                           <div class="flex-box justify-center align-center">
-                              <div class="index-intro-img" ><img src="./asset/img/mail.png"/></div>
+                              <div class="index-intro-img" ><img src="assets/img/mail.png"/></div>
                           </div>
                           <div class="index-intro-right">
                               <p class="index-intro-text">You can use the function mb_send_mail to implement mail. For example, it is useful for sending a contact form.</p>
@@ -53,7 +53,7 @@
                   <div class="tab-content">
                       <section class="grid-two-block">
                           <div class="flex-box justify-center align-center">
-                              <div class="index-intro-img" ><img src="./asset/img/upload.png"/></div>
+                              <div class="index-intro-img" ><img src="assets/img/upload.png"/></div>
                           </div>
                           <div class="index-intro-right">
                               <p class="index-intro-text">By default, images are stored in the image folder of this framework. Of course, you can flexibly set the storage location and file extensions.</p>
@@ -69,6 +69,6 @@
         <div class="close">×</div>
           <h2>CRUD DEMO</h2>
           <p>This is an example of a function that can record a visit to a music concert.</p>
-          <a href="/the-elephant-in-the-room/page/concert/" class="modal-btn">CRUD DEMO</a>
+          <a href="pages/concert/" class="modal-btn">CRUD DEMO</a>
       </div>
-<?php include('../the-elephant-in-the-room/layout/footer.php'); ?>
+<?php include('layouts/footer.php'); ?>

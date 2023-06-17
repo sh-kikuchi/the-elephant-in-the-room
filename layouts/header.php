@@ -8,8 +8,8 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/the-elephant-in-the-room/asset/css/style.css">
-  <script type="text/javascript" src="/the-elephant-in-the-room/asset/js/script.js" defer></script>
+  <link rel="stylesheet" href="/the-elephant-in-the-room/assets/css/style.css">
+  <script type="text/javascript" src="/the-elephant-in-the-room/assets/js/script.js" defer></script>
   <title>The-elephant-in-the-room</title>
 </head>
 <body>
@@ -28,8 +28,8 @@
     <nav class="header-nav nav" id="js-nav">
         <ul class="nav-items">
             <li class="nav-item"><a class="nav-item" href=<?php echo Path::ROOT ?> >TOP</a></li>
-            <li class="nav-item"><a class="nav-item" href=<?php echo Path::ROOT."page/user_auth/signin_form.php" ?>>Signin</a></li>
-            <li class="nav-item"><a class="nav-item" href=<?php echo Path::ROOT."page/user_auth/signup_form.php" ?>>Signup</a></li>
+            <li class="nav-item"><a class="nav-item" href=<?php echo Path::ROOT."pages/user_auth/signin_form.php" ?>>Signin</a></li>
+            <li class="nav-item"><a class="nav-item" href=<?php echo Path::ROOT."pages/user_auth/signup_form.php" ?>>Signup</a></li>
         </ul>
     </nav>
 </header>

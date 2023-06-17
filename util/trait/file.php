@@ -1,6 +1,8 @@
 <?php
 trait File{
 	function uploadFile($file_data){
+    $result = false;
+
     if($file_data['upfile']['error'] !== UPLOAD_ERR_OK){
       //アップロード処理の成否
       $msg =[
@@ -32,18 +34,13 @@ trait File{
        * @param string $src　一時ファイルパス
        * @param string [path].$dest 保存先
        */
-      if(!move_uploaded_file($src,'../../../the-elephant-in-the-room/storage/doc/'.$dest)){
+      if(!move_uploaded_file($src,'../../storage/doc/'.$dest)){
         $err_msg = "アップロードに失敗しました";
+      }else{
+        $result = true;
       }
     }
-    
-    //エラーメッセージ
-    if(isset($err_msg)){
-      die('<div style="color:Red">'.$err_msg.'</div>');
-    }
-    
-     header('Location:/the-elephant-in-the-room/page/concert');
-
+    return $result;
 	}
 }
 ?>

@@ -1,19 +1,27 @@
 <?php
     session_start();
     require_once '../../util/fragile.php';
-    require_once '../../class/Artist.php';
-    require_once '../../class/users/userAuth.php';
+    require_once '../../classes/Artist.php';
+    require_once '../../classes/users/userAuth.php';
     $models = new Artist();
     $artists = $models->show();
 
     //　ログインしているか判定し、していなかったら新規登録画面へ返す
     $result = UserAuth::checkSign();
    
-    $signin_user = $_SESSION['signin_user'];
+    $signin_user = isset($_SESSION['signin_user']) ? $_SESSION['signin_user']: null;
+    $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
 ?>
-<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/layout/header.php') ?>
+<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/layouts/header.php') ?>
   <div class="crud-container">
   <div>
+    <?php if (isset($errors)) : ?>
+      <ul>
+      <?php foreach($errors as $error) {?>
+        <li class="text-center" style="list-style:none;"><?php echo h($error);?></li>
+      <?php }?>
+      </ul>
+    <?php endif; ?>
     <h2 class="text-center">コンサート登録</h2>
     <section class="flex-box justify-center">
       <form method="post" action="../../logics/concert/create.php">
@@ -60,4 +68,4 @@
     </section>
   </div>
 </div>
-<?php include('../../layout/footer.php'); ?>
+<?php include('../../layouts/footer.php'); ?>

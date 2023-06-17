@@ -1,7 +1,7 @@
 
 <?php
   require_once '../../util/fragile.php';
-  require_once '../../class/Artist.php';
+  require_once '../../classes/Artist.php';
   $models = new Artist();
   $artists = $models->show();
 
@@ -13,7 +13,7 @@
   $disp_data = array_slice($artists, $start_no, MAX, true); // array_slice
  
 ?>
-<?php include('../../layout/header.php'); ?>
+<?php include('../../layouts/header.php'); ?>
 <div class="wrapper">
     <h2 class="text-center">Artists</h2>
     <div class="text-right"><a href="../artist/create_form.php">add an artist</a></div>
@@ -38,8 +38,8 @@
     <!--pagenation-->
     <div class="flex-box justify-center my-2">
       <?php for($i = 1; $i <= $max_page; $i++){?>
-        <a href="/the-elephant-in-the-room/page/artist?page_id=<?php echo $i; ?>" > <?php echo  $i ?></a>
+        <a href="/the-elephant-in-the-room/pages/artist?page_id=<?php echo $i; ?>" > <?php echo  $i ?></a>
       <?php }?>
     </div>
 </div>
-<?php include('../../layout/footer.php'); ?>
+<?php include('../../layouts/footer.php'); ?>

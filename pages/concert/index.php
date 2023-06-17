@@ -1,7 +1,7 @@
 
 <?php
   require_once '../../util/fragile.php';
-  require_once '../../class\Concert.php';
+  require_once '../../classes\Concert.php';
   $models = new Concert();
   $concerts = $models->show();
 
@@ -12,7 +12,7 @@
   $start_no = ($now - 1) * MAX; // What number of the array should I get it from?
   $disp_data = array_slice($concerts, $start_no, MAX, true); // array_slice
 ?>
-<?php include('../../layout/header.php'); ?>
+<?php include('../../layouts/header.php'); ?>
 <div class="wrapper">
     <h2 class="text-center">Concerts</h2>
     <div class="text-right"><a href="../artist/create_form.php">Go artist list</a></div>
@@ -65,8 +65,8 @@
     <!--pagenation-->
     <div class="flex-box justify-center my-2">
         <?php for($i = 1; $i <= $max_page; $i++){?>
-        <a href="/the-elephant-in-the-room/page/concert?page_id=<?php echo $i; ?>" > <?php echo  $i ?></a>
+        <a href="/the-elephant-in-the-room/pages/concert?page_id=<?php echo $i; ?>" > <?php echo  $i ?></a>
         <?php }?>
     </div>
 </div>
-<?php include('../../layout/footer.php'); ?>
+<?php include('../../layouts/footer.php'); ?>

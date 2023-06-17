@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../class/users/userAuth.php';
+require_once '../../classes/users/userAuth.php';
 
 // エラーメッセージ
 $err = [];

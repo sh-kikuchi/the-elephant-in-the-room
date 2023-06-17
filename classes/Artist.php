@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../database/db_connect.php';
+require_once ('database\db_connect.php');
 
 class Artist
 {
@@ -50,7 +50,7 @@ class Artist
         $stmt->bindValue(":start_date", $start_date, PDO::PARAM_STR);
         $stmt->bindValue(":end_date", $end_date, PDO::PARAM_STR);
         $stmt->execute();
-        header('Location:../../../../../the-elephant-in-the-room/page/artist');
+        header('Location: /pages/artist');
       }catch(Exception $e){
         echo $e -> getMessage();
       }
@@ -78,7 +78,7 @@ class Artist
         $stmt->bindValue(":start_date", $start_date, PDO::PARAM_STR);
         $stmt->bindValue(":end_date", $end_date, PDO::PARAM_STR);
         $stmt->execute();
-        header('Location:../../../../../the-elephant-in-the-room/page/artist');
+        header('Location:../../../../../the-elephant-in-the-room/pages/artist');
         exit;
       }catch(PDOException $e){
           echo '更新に失敗しました。', $e->getmessage();
@@ -98,7 +98,7 @@ class Artist
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
-        header('Location:../../../../../the-elephant-in-the-room/page/artist');
+        header('Location:../../../../../the-elephant-in-the-room/pages/artist');
         exit;
       }catch(Exception $e){
         echo $e->getMessage();
