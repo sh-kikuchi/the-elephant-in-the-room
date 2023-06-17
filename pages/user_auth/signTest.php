@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../class/users/userAuth.php';
+require_once '../../classes/users/userAuth.php';
 require_once '../../util/fragile.php';
 $result = UserAuth::checkSign();
 if (!$result) {
@@ -10,7 +10,7 @@ if (!$result) {
 }
 $signin_user = $_SESSION['signin_user'];
 ?>
-<?php include('../../layout/header.php'); ?>
+<?php include('../../layouts/header.php'); ?>
 <div class="">
     <h2 class="text-center">My page</h2>
     <div class="flex-box justify-center">
@@ -60,10 +60,10 @@ $signin_user = $_SESSION['signin_user'];
         <h4 class="text-center">signout</h4>
         <div class="flex-box justify-center">
             <form action="../../logics/user_auth/signout.php" method="POST">
-                <input type="submit" name="logout" class="button primary my-2" value="signout">
+                <input type="submit" name="signout" class="button primary my-2" value="signout">
             </form>
         </div>
     </div>
 </div>
-<?php include('../../layout/footer.php'); ?>
+<?php include('../../layouts/footer.php'); ?>
 

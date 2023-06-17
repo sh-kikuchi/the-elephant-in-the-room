@@ -1,8 +1,14 @@
 <?php
-require_once("../../class/Artist.php");
-$pdo = db_connect();
+require_once 'classes/Artist.php';
+require_once 'classes/rules/ArtistRequest.php';
 
-$artist = new Artist();
+// Create an instance
+$artist         = new Artist();
+$artist_request = new ArtistRequest();
+
+// Validate post request data
+$artist_request->postValidation($_POST);
+
 $artist->create($_POST);
 
 ?>

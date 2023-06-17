@@ -1,12 +1,24 @@
 <?php
+  session_start();
   require_once '../../util/fragile.php';
-  require_once '../../class/Artist.php';
+  require_once '../../classes/Artist.php';
+  require_once '../../classes/users/userAuth.php';
   $models = new Artist();
   $artists = $models->getArtist(intval($_GET["id"]));
+  $result = UserAuth::checkSign();
+  $signin_user = isset($_SESSION['signin_user']) ? $_SESSION['signin_user']: null;
+  $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
 ?>
-<?php include('../../layout/header.php'); ?>
+<?php include('../../layouts/header.php'); ?>
 <!-- 下記は<body>タグの中身 -->
 <div class="crud-container">
+    <?php if (isset($errors)) : ?>
+      <ul>
+      <?php foreach($errors as $error) {?>
+        <li class="text-center" style="list-style:none;"><?php echo h($error);?></li>
+      <?php }?>
+      </ul>
+    <?php endif; ?>
     <h2 class="text-center">アーティスト編集</h2>
     <section class="flex-box justify-center">
         <form method="post" action="../../logics/artist/update.php">
@@ -35,4 +47,4 @@
         </form>
     </section>
 </div>
-<?php include('../../layout/footer.php'); ?>
+<?php include('../../layouts/footer.php'); ?>

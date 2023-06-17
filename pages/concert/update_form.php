@@ -1,10 +1,16 @@
 <?php
+session_start();
   require_once '../../util/fragile.php';
-  require_once '../../class/Concert.php';
+  require_once '../../classes/Concert.php';
+  require_once '../../classes/users/userAuth.php';
   $models = new Concert();
   $concerts = $models->getConcert(intval($_GET["id"]));
+  $result = UserAuth::checkSign();
+   
+  $signin_user = isset($_SESSION['signin_user']) ? $_SESSION['signin_user']: null;
+  $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
 ?>
-<?php include('../../layout/header.php'); ?>
+<?php include('../../layouts/header.php'); ?>
 <!-- 下記は<body>タグの中身 -->
 <div>
     <h2 class="text-center">コンサート編集</h2>
@@ -33,4 +39,4 @@
         </form>
     </section>
 </div>
-<?php include('../../layout/footer.php'); ?>
+<?php include('../../layouts/footer.php'); ?>

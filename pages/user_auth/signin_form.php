@@ -1,6 +1,6 @@
 <?php
 session_start();
-require_once '../../class/users/userAuth.php';
+require_once '../../classes/users/userAuth.php';
 
 $result = UserAuth::checkSign();
 if($result) {
@@ -14,11 +14,11 @@ $_SESSION = array();
 session_destroy();
 ?>
 
-<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/layout/header.php') ?>
+<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/layouts/header.php') ?>
 <div class="wrapper">
     <h2 class="text-center">Sign-in</h2>
     <?php if (isset($err['msg'])) : ?>
-        <p><?php echo $err['msg']; ?></p>
+        <p class="text-center"><?php echo $err['msg']; ?></p>
     <?php endif; ?>
     <section class="flex-box justify-center">
         <form action="../../logics/user_auth/signin.php" method="POST">
@@ -44,4 +44,4 @@ session_destroy();
         
     </section>
 </div>
-<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/layout/footer.php') ?>
+<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/layouts/footer.php') ?>

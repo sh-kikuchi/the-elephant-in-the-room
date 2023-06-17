@@ -1,8 +1,8 @@
 <?php
 
-require_once '../../database/db_connect.php';
-require_once '../../util/trait/file.php';
-require_once '../../util/trait/mail.php';
+require_once 'database/db_connect.php';
+require_once 'util/trait/file.php';
+require_once 'util/trait/mail.php';
 
 class UserAuth
 {
@@ -43,15 +43,13 @@ class UserAuth
    */
   public static function signin($email, $password)
   {
-
-    // 結果
     $result = false;
 
     // ユーザをemailから検索して取得
     $user = self::getUserByEmail($email);
 
     if (!$user) {
-      $_SESSION['msg'] = 'emailが一致しません。';
+      $_SESSION['msg'] = 'e-mail does not match.';
       return $result;
     }
 
@@ -107,15 +105,15 @@ class UserAuth
   }
 
   /**
-   * Logout
+   * Signout
    */
-  public static function logout()
+  public static function signout()
   {
     $_SESSION = array();
     session_destroy();
 
     //Back to Sign-in Page.
-    header('Location: ../../../../../the-elephant-in-the-room/page/user_auth/signin_form.php');
+    header('Location: /the-elephant-in-the-room/pages/user_auth/signin_form.php');
   }
 
 }

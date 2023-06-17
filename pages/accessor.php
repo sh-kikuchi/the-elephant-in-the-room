@@ -1,5 +1,5 @@
 <?php
-require_once '../class/Gcd2.php';
+require_once '../classes/Gcd2.php';
 
 $gcd = new Gcd2();
 print '整数1(初期値):'.$gcd->getNum1().'<br>';

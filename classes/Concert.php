@@ -1,7 +1,7 @@
 <?php
 
-require_once '../../database/db_connect.php';
-require_once '../../util/trait/file.php';
+require_once 'database/db_connect.php';
+require_once 'util/trait/file.php';
 
 class Concert
 {
@@ -61,7 +61,7 @@ class Concert
             $stmt->bindValue(":date", $date, PDO::PARAM_STR);
             $stmt->bindValue(":place", $place, PDO::PARAM_STR);
             $stmt->execute();
-            header('Location:../../../../../the-elephant-in-the-room/page/crud_tutorial/comment.php');
+            header('Location:../../../../../the-elephant-in-the-room/pages/crud_tutorial/comment.php');
         }catch(Exception $e){
             echo $e -> getMessage();
         }
@@ -88,7 +88,7 @@ class Concert
         $stmt->bindValue(":date", $date, PDO::PARAM_STR);
         $stmt->bindValue(":place", $place, PDO::PARAM_STR);
         $stmt->execute();
-        //header('Location:../../../../../the-elephant-in-the-room/page/crud_tutorial/comment.php');
+        //header('Location:../../../../../the-elephant-in-the-room/pages/crud_tutorial/comment.php');
         exit;
       }catch(PDOException $e){
           echo '更新に失敗しました。', $e->getmessage();
@@ -108,7 +108,7 @@ class Concert
         $stmt = $pdo->prepare($sql);
         $stmt->bindValue(":id", $id, PDO::PARAM_INT);
         $stmt->execute();
-        header('Location:../../../../../the-elephant-in-the-room/page/crud_tutorial/comment.php');
+        header('Location:../../../../../the-elephant-in-the-room/pages/crud_tutorial/comment.php');
         exit;
       }catch(Exception $e){
         echo $e->getMessage();

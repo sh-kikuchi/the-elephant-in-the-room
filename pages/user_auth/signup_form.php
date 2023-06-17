@@ -2,7 +2,7 @@
 session_start();
 
 require_once '../../util/fragile.php';
-require_once '../../class/users/userAuth.php';
+require_once '../../classes/users/userAuth.php';
 
 $result = UserAuth::checkSign();
 if($result) {
@@ -24,7 +24,7 @@ unset($_SESSION['signin_err']);
 <?php if (isset($signin_err)) : ?>
     <p><?php echo $signin_err; ?></p>
 <?php endif; ?>
-<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/layout/header.php') ?>
+<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/layouts/header.php') ?>
 <div class="wrapper">
     <h2 class="text-center">Sign-up</h2>
     <section class="flex-box justify-center">
@@ -53,4 +53,4 @@ unset($_SESSION['signin_err']);
         </form>
     </section>
 </div>
-<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/layout/footer.php') ?>
+<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/layouts/footer.php') ?>
