@@ -14,9 +14,8 @@
 </head>
 <body>
 <header>
-
     <div id="title">
-    <?php echo LABEL::HEADER['title'] ?>
+        <?php echo LABEL::HEADER['title'] ?>
     </div>
     <div id="menu">
         <div id="js-hamburger" class="hamburger">

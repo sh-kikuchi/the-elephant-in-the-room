@@ -2,7 +2,7 @@
 
 use PHPUnit\Framework\TestCase;
 
-require_once('classes\Artist.php');
+require_once('models\Artist.php');
 require_once('database\db_connect.php');
 
  

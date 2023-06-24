@@ -1,6 +1,6 @@
 <footer class="footer">
 <div class="index-message">
-        Project Gladiolus
+    Project Gladiolus
 </div>
 </footer>
 </body>

@@ -2,29 +2,22 @@
 session_start();
 
 require_once '../../util/fragile.php';
-require_once '../../classes/users/userAuth.php';
+require_once '../../models/UserAuth.php';
 
 $result = UserAuth::checkSign();
 if($result) {
-  header('Location: signTest.php');
-  return;
+    header('Location: signTest.php');
+    exit();
 }
 
 $signin_err = isset($_SESSION['signin_err']) ? $_SESSION['signin_err'] : null;
 unset($_SESSION['signin_err']);
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ユーザ登録画面</title>
-</head>
 <body>
 <?php if (isset($signin_err)) : ?>
     <p><?php echo $signin_err; ?></p>
 <?php endif; ?>
-<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/layouts/header.php') ?>
+<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/page/layouts/header.php') ?>
 <div class="wrapper">
     <h2 class="text-center">Sign-up</h2>
     <section class="flex-box justify-center">
@@ -53,4 +46,4 @@ unset($_SESSION['signin_err']);
         </form>
     </section>
 </div>
-<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/layouts/footer.php') ?>
+<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/page/layouts/footer.php') ?>

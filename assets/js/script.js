@@ -48,7 +48,7 @@ const modal = document.querySelector('.modal');
 const closeBtn = document.querySelector('.close');
 const overlay = document.querySelector('.overlay');
 
-// ボタンをクリックしたら、モダルとオーバーレイに.activeを付ける
+//ボタンをクリックしたら、モダルとオーバーレイに.activeを付ける
 btn.addEventListener('click', function(e){
   // aタグのデフォルトの機能を停止する
   e.preventDefault();
@@ -68,3 +68,27 @@ overlay.addEventListener('click', function() {
   modal.classList.remove('active');
   overlay.classList.remove('active');
 });
+/*********************************
+* Chanege show table records number
+*********************************/
+function change_table(){
+  let showRecords = 0;
+  let targetNumber = document.getElementById('list-num');
+
+  let listTable = document.getElementById('list-table');
+  let tblRecords = listTable.children[1].children;
+
+  if(targetNumber.value === ''){
+    showRecords = tblRecords.length;
+  }else{
+    showRecords = parseInt(targetNumber.value);
+  }
+  for(i=0; i<tblRecords.length; i++){
+    if(i< showRecords){
+      tblRecords[i].style.display = 'table-row';
+    } else {
+      tblRecords[i].style.display = 'none';
+    }
+  }
+  return true;
+}

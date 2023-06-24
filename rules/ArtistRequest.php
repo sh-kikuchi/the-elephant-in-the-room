@@ -1,6 +1,8 @@
 <?php
-
+require_once 'util\trait\session.php';
 class ArtistRequest{
+  use Session;
+
   public function postValidation($post_data) {
     session_start();
     unset($_SESSION['errors']);
@@ -9,7 +11,6 @@ class ArtistRequest{
     $name = $post_data['name'];
 
     if(!$name) {
-  
       array_push($errors,'Please fill in artist name.');
     }
 
@@ -19,8 +20,9 @@ class ArtistRequest{
 
     if (count($errors) > 0) {
       $_SESSION['errors'] = $errors;
+      $this->old_post_value($post_data);
       header('Location: /the-elephant-in-the-room/pages/artist/create_form.php');
-      return;
+      exit();
     }
 
   }
