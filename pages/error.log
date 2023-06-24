@@ -1,6 +1,0 @@
-PDOException: SQLSTATE[HY000] [1049] Unknown database 'elephant' in C:\xampp\htdocs\the-elephant-in-the-room\database\db_connect.php:18
-Stack trace:
-#0 C:\xampp\htdocs\the-elephant-in-the-room\database\db_connect.php(18): PDO->__construct('mysql:host=loca...', 'root', '', Array)
-#1 C:\xampp\htdocs\the-elephant-in-the-room\class\users\userAuth.php(25): db_connect()
-#2 C:\xampp\htdocs\the-elephant-in-the-room\page\userAuth\register.php(34): UserAuth::register(Array)
-#3 {main}

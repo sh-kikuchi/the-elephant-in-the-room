@@ -2,8 +2,8 @@
 session_start();
 
 // Load other files.
-require_once 'classes/users/userAuth.php';
-require_once 'classes/rules/userRequest.php';
+require_once 'models/UserAuth.php';
+require_once 'rules/userRequest.php';
 
 //Set variables.
 $email    = filter_input(INPUT_POST, 'email');

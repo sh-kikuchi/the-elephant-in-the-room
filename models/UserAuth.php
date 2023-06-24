@@ -3,10 +3,12 @@
 require_once 'database/db_connect.php';
 require_once 'util/trait/file.php';
 require_once 'util/trait/mail.php';
+require_once 'util/trait/pdf.php';
+
 
 class UserAuth
 {
-  use File, Mail;
+  use File, Mail, PDF;
   /**
    * ユーザを登録する
    * @param array $userData
@@ -15,22 +17,24 @@ class UserAuth
   public static function register($userData)
   {
     $result = false;
+    $pdo    = db_connect();
+    $sql    = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
 
-    $sql = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
-
-    // ユーザデータを配列に入れる
-    $arr = [];
+    // putting user data into an array
+    $arr   = [];
     $arr[] = $userData['name'];
     $arr[] = $userData['email'];
     $arr[] = password_hash($userData['password'], PASSWORD_DEFAULT);
 
-    try {
-      $stmt = db_connect()->prepare($sql);
+    try {    
+      $pdo->beginTransaction();
+      $stmt   = $pdo->prepare($sql);
       $result = $stmt->execute($arr);
+      $pdo->commit();
       return $result;
     } catch(\Exception $e) {
-      echo $e;
-      error_log($e, 3, '../error.log');
+      $pdo->rollBack();
+      error_log($e, 3, '/the-elephant-in-the-room/log/error.log');
       return $result;
     }
   }
@@ -115,5 +119,6 @@ class UserAuth
     //Back to Sign-in Page.
     header('Location: /the-elephant-in-the-room/pages/user_auth/signin_form.php');
   }
+
 
 }

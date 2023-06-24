@@ -4,7 +4,7 @@
 
 ## 1. directory
 ### ■ pages
-### ■ layouts
+### ■ page/layouts
 ### ■ classes
 - The classes directory can contain files for Model classes for DB operations and validation classes for each page.
 
@@ -15,6 +15,7 @@
 ### ■ errors
 ### ■ interface
 ### ■ util
+- trait
 
 ### ■ php unit
 - install it using Composer.
@@ -30,3 +31,8 @@ For example, if you are using XAMPP, set up the following
 ;include_path=C:\xampp\php\PEAR
 include_path=C:\xampp\htdocs\the-elephant-in-the-room
 ```
+
+## 3. architecture
+- 1. Pages(UI)
+- 2. Logics(Bussiness Logic)
+- 3. Class(Model)

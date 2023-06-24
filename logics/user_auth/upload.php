@@ -1,8 +1,8 @@
 
 <?php
   //Load other files.
-  require_once 'classes/users/userAuth.php';
-  require_once 'classes/rules/userRequest.php';
+  require_once 'models/users/UserAuth.php';
+  require_once 'rules/userRequest.php';
 
   //Create an instance
   $user_auth    = new UserAuth();
