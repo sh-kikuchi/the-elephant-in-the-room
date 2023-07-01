@@ -3,14 +3,11 @@
     try{
         $table_name = 'artists';
         $filepath = 'csv/downloads/'. $table_name .'.csv';
-        
         $fp = fopen($filepath, 'w');
-      
         $pdo = db_connect();
         $sql = 'SELECT * FROM '. $table_name;
         $sql = $pdo->prepare($sql);
         $sql ->execute();
-       
         foreach ($sql as $key => $row) {
             $output = '';
             $row_tmp = '"';
@@ -25,8 +22,4 @@
       print "[ERROR] {{$e->getMessage()}}\n";
       die();
     }
-
-
-
-
 ?>

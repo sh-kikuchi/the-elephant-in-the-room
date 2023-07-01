@@ -1,27 +1,30 @@
 <?php
 session_start();
-
 require_once '../../util/fragile.php';
 require_once '../../models/UserAuth.php';
-
-$result = UserAuth::checkSign();
+$result      = UserAuth::checkSign();
 if($result) {
-    header('Location: signTest.php');
+    header('Location: my_page.php');
     exit();
 }
-
-$signin_err = isset($_SESSION['signin_err']) ? $_SESSION['signin_err'] : null;
-unset($_SESSION['signin_err']);
+$errors      = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
+$old         = isset($_SESSION['old']) ? $_SESSION['old'] : null;
+unset($_SESSION['errors']);
+unset($_SESSION['old']);
 ?>
 <body>
-<?php if (isset($signin_err)) : ?>
-    <p><?php echo $signin_err; ?></p>
-<?php endif; ?>
-<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/page/layouts/header.php') ?>
+<?php include('pages/layouts/header.php') ?>
 <div class="wrapper">
+    <?php if (isset($errors)) : ?>
+      <ul>
+      <?php foreach($errors as $error) {?>
+        <li class="text-center" style="list-style:none;"><?php echo h($error);?></li>
+      <?php }?>
+      </ul>
+    <?php endif; ?>
     <h2 class="text-center">Sign-up</h2>
     <section class="flex-box justify-center">
-        <form action="register.php" method="POST">
+        <form action="../../logics/user_auth/signup.php" method="POST">
             <div class="flex-box justify-center my-2">
                 <label for="name" class="label">Username：</label>
                 <input type="text" name="name" class="form-input">
@@ -42,8 +45,8 @@ unset($_SESSION['signin_err']);
             <div class="flex-box justify-center my-2">
                 <input type="submit" value="Register" class="button primary">
             </div>
-            <a href="./signin_form.php" class="text-center">サインインはこちら</a>
+            <a href="./signin_form.php" class="text-center">Click here to sign in</a>
         </form>
     </section>
 </div>
-<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/page/layouts/footer.php') ?>
+<?php include('pages/layouts/footer.php') ?>

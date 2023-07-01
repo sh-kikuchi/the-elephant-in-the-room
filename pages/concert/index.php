@@ -11,7 +11,7 @@
   $start_no = ($now - 1) * MAX; // What number of the array should I get it from?
   $disp_data = array_slice($concerts, $start_no, MAX, true); // array_slice
 ?>
-<?php include('../../page/layouts/header.php'); ?>
+<?php include('pages/layouts/header.php'); ?>
 <div class="wrapper">
     <h2 class="text-center">Concerts</h2>
     <div class="text-right"><a href="../artist/create_form.php">Go artist list</a></div>
@@ -69,4 +69,4 @@
         <?php }?>
     </div>
 </div>
-<?php include('../../page/layouts/footer.php'); ?>
+<?php include('pages/layouts/footer.php'); ?>

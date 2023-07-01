@@ -4,16 +4,14 @@ require_once '../../models/UserAuth.php';
 
 $result = UserAuth::checkSign();
 if($result) {
-  header('Location: signTest.php');
+  header('Location: my_page.php');
   return;
 }
-
 $err = $_SESSION;
-
 $_SESSION = array();
 session_destroy();
 ?>
-<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/page/layouts/header.php') ?>
+<?php require('pages/layouts/header.php') ?>
 <div class="wrapper">
     <h2 class="text-center">Sign-in</h2>
     <?php if (isset($err['msg'])) : ?>
@@ -43,4 +41,4 @@ session_destroy();
         
     </section>
 </div>
-<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/page/layouts/footer.php') ?>
+<?php require('pages/layouts/footer.php') ?>

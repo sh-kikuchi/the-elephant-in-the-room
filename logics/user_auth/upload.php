@@ -1,8 +1,8 @@
 
 <?php
   //Load other files.
-  require_once 'models/users/UserAuth.php';
-  require_once 'rules/userRequest.php';
+  require_once 'models/UserAuth.php';
+  require_once 'rules/UserRequest.php';
 
   //Create an instance
   $user_auth    = new UserAuth();
@@ -17,7 +17,7 @@
   $result = $user_auth->uploadFile($_FILES);
 
   //Transitioning screen
-  header('Location:/the-elephant-in-the-room/pages/signTest.php');
+  header('Location:/the-elephant-in-the-room/pages/user_auth/my_page.php');
 
 ?>
 

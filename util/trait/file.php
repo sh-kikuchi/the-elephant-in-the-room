@@ -1,6 +1,7 @@
 <?php
 trait File{
 	function uploadFile($file_data){
+    var_dump($file_data);
     $result = false;
 
     if($file_data['upfile']['error'] !== UPLOAD_ERR_OK){

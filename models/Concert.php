@@ -15,15 +15,17 @@ class Concert
     $concerts_array = [];
     $pdo = db_connect();
     $sql = "SELECT 
-              c.name AS concert_name
-              ,c.id
-              , date
-              , place
-              , a.name AS artist_name
-            FROM concerts AS c 
-            LEFT JOIN artists AS a 
-            ON c.artist_id = a.id
-            ORDER BY c.id ASC;";
+        c.name AS concert_name
+        ,c.id
+        ,date
+        ,place
+        ,a.name AS artist_name
+        FROM artist_concert as ac
+        JOIN artists as a
+        ON a.id = ac.artist_id 
+        JOIN concerts as c
+        ON c.id = ac.concert_id
+        ORDER BY c.date desc";
     $concerts = $pdo->query($sql);
     $result = $concerts->fetchAll(PDO::FETCH_ASSOC|PDO::FETCH_GROUP);
     foreach($result as $key => $concert){
@@ -52,17 +54,19 @@ class Concert
     $concerts_array = [];
     $pdo = db_connect();
     $sql = "SELECT 
-              c.name AS concert_name
-              ,c.id
-              , date
-              , place
-              , a.id   AS artist_id
-              , a.name AS artist_name
-            FROM concerts AS c 
-            LEFT JOIN artists AS a 
-            ON c.artist_id = a.id
-            WHERE c.id = $id
-            ORDER BY c.id ASC;";
+        c.name AS concert_name
+        ,c.id
+        ,a.id AS artist_id
+        ,date
+        ,place
+        ,a.name AS artist_name
+        FROM artist_concert as ac
+        JOIN artists as a
+        ON a.id = ac.artist_id 
+        JOIN concerts as c
+        ON c.id = ac.concert_id
+        WHERE c.id = $id
+        ORDER BY c.date desc";
     $concerts = $pdo->query($sql);
     $result = $concerts->fetchAll(PDO::FETCH_ASSOC|PDO::FETCH_GROUP);
     foreach($result as $key => $concert){
@@ -93,31 +97,55 @@ class Concert
   public function create($postData){
       $result = false;
       $pdo    = db_connect();
-      $sql    = "INSERT INTO concerts(user_id, artist_id, name, date, place) VALUES(:user_id, :artist_id ,:name, :date, :place)";
-      $stmt   = $pdo->prepare($sql);
-      $user_id    = $postData["user_id"];
+      $sql     ="INSERT INTO artist_concert(artist_id, concert_id) VALUES(:artist_id,:concert_id)";
+      $stmt  = $pdo->prepare($sql);
       $artist_ids = $postData["artist_id"];
-      $name       = $postData["name"];
-      $date       = $postData["date"];
-      $place      = $postData["place"]; 
-      foreach($artist_ids as $artist_id){
-        try{
-            $pdo->beginTransaction();
-            $stmt->bindValue(":user_id", $user_id, PDO::PARAM_STR);
-            $stmt->bindValue(":artist_id", $artist_id, PDO::PARAM_STR);
-            $stmt->bindValue(":name", $name, PDO::PARAM_STR);
-            $stmt->bindValue(":date", $date, PDO::PARAM_STR);
-            $stmt->bindValue(":place", $place, PDO::PARAM_STR);
-            $stmt->execute();
-            $pdo->commit();
+      try{  
+          $pdo->beginTransaction();
+          $last_concert_id = self::storeConcertData($postData);
+          if($last_concert_id !== null){
+            foreach($artist_ids as $artist_id){
+              $stmt->bindValue(":artist_id", $artist_id, PDO::PARAM_STR);
+              $stmt->bindValue(":concert_id", $last_concert_id, PDO::PARAM_STR);
+              $stmt->execute();
+            };
             $result = true;
-        }catch(Exception $e){
-          $pdo->rollBack();
-          error_log($e -> getMessage());
-        }finally{
-          return $result;
-        }
+          }
+          $pdo->commit();
+      }catch(Exception $e){
+        $pdo->rollBack();
+        error_log($e -> getMessage());
+      }finally{
+        return $result;
       }
+  }
+  /**
+   * Store Concert Data
+   * @param  array   $postData
+   * @return boolean $last_concert_id
+   */
+  public function storeConcertData($postData){
+    $last_concert_id  = null;
+    $pdo         = db_connect();
+    $sql         = "INSERT INTO concerts(user_id, name, date, place) VALUES(:user_id ,:name, :date, :place)";
+    $stmt        = $pdo->prepare($sql);
+    $user_id     = $postData["user_id"];
+    $name        = $postData["name"];
+    $date        = $postData["date"];
+    $place       = $postData["place"]; 
+    try{
+        $stmt->bindValue(":user_id", $user_id, PDO::PARAM_STR);
+        $stmt->bindValue(":name", $name, PDO::PARAM_STR);
+        $stmt->bindValue(":date", $date, PDO::PARAM_STR);
+        $stmt->bindValue(":place", $place, PDO::PARAM_STR);
+        $stmt->execute();
+        $last_concert_id = $pdo->lastInsertId('id'); 
+    }catch(Exception $e){
+        $pdo->rollBack();
+        error_log($e -> getMessage());
+    }finally{
+      return $last_concert_id;
+    }
   }
   /**
    * Update Concert Data
@@ -155,15 +183,16 @@ class Concert
    * @return boolean $result
    */
   public function delete($postData){
-      $result = false;
-      $pdo    = db_connect();
-      $sql    = "DELETE FROM concerts WHERE id = :id";
-      $stmt   = $pdo->prepare($sql);
-      $id     = intval($postData["id"]);
+      $result      = false;
+      $pdo         = db_connect();
+      $sql         = "DELETE FROM artist_concert WHERE concert_id = :concert_id";
+      $stmt        = $pdo->prepare($sql);
+      $concert_id  = intval($postData["id"]);
       try{
           $pdo->beginTransaction();
+          self::trashConcertData($concert_id);
           $stmt = $pdo->prepare($sql);
-          $stmt->bindValue(":id", $id, PDO::PARAM_INT);
+          $stmt->bindValue(":concert_id", $concert_id, PDO::PARAM_INT);
           $stmt->execute();
           $pdo->commit();
           $result = true;
@@ -173,5 +202,26 @@ class Concert
       }finally{
         return $result;
       }
+  }
+  /**
+   * Store Concert Data
+   * @param  array   $postData
+   * @return boolean $last_concert_id
+   */
+  public function trashConcertData($target_concert_id){
+    $result  = false;
+    $pdo     = db_connect();
+    $sql     = "DELETE FROM concerts WHERE concert_id = :concert_id";
+    $stmt    = $pdo->prepare($sql);
+    try{
+        $stmt->bindValue(":concert_id", $target_concert_id, PDO::PARAM_STR);
+        $stmt->execute();
+        $result = true;
+    }catch(Exception $e){
+        //$pdo->rollBack();
+        error_log($e -> getMessage());
+    }finally{
+      return $result;
+    }
   }
 }

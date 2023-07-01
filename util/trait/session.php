@@ -1,10 +1,17 @@
 
 <?php
 trait Session{
-  function old_post_value($old_post_value){
-    foreach($old_post_value as $key => $value){
+  function oldPostValue($oldPostValue){
+    foreach($oldPostValue as $key => $value){
       $_SESSION['old'][$key] = $value;
     }
+  }
+  function checkToken( $token){
+    $result = false;
+    if (isset($_SESSION['csrf_token']) || $token === $_SESSION['csrf_token']) {
+      $result = true;
+    }
+    return $result;
   }
 }
 ?>

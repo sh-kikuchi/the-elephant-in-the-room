@@ -31,7 +31,7 @@ class ConcertRequest{
 
     if (count($errors) > 0) {
       $_SESSION['errors'] = $errors;
-      $this->old_post_value($post_data);
+      $this->oldPostValue($post_data);
       $param =  !$id ? '?id='.$id : '';
       header('Location: /the-elephant-in-the-room/pages/concert/create_form.php'.$param);
       exit();

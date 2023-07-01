@@ -4,9 +4,11 @@ require_once 'database/db_connect.php';
 require_once 'util/trait/file.php';
 require_once 'util/trait/mail.php';
 require_once 'util/trait/pdf.php';
+require_once 'interfaces/file.php';
+require_once 'interfaces/mail.php';
+require_once 'interfaces/pdf.php';
 
-
-class UserAuth
+class UserAuth implements IFile, IMail, IPDF
 {
   use File, Mail, PDF;
   /**
@@ -14,7 +16,7 @@ class UserAuth
    * @param array $userData
    * @return bool $result
    */
-  public static function register($userData)
+  public static function signup($userData)
   {
     $result = false;
     $pdo    = db_connect();
@@ -31,10 +33,11 @@ class UserAuth
       $stmt   = $pdo->prepare($sql);
       $result = $stmt->execute($arr);
       $pdo->commit();
-      return $result;
+      $result = true;
     } catch(\Exception $e) {
       $pdo->rollBack();
       error_log($e, 3, '/the-elephant-in-the-room/log/error.log');
+    }finally{
       return $result;
     }
   }
