@@ -1,5 +1,5 @@
 
-<?php include('page/layouts/header.php'); ?>
+<?php include('pages/layouts/header.php'); ?>
     <div class="body">
       <section id="index-firstview">
         <div class="index-fv-title">
@@ -71,4 +71,4 @@
           <p>This is an example of a function that can record a visit to a music concert.</p>
           <a href="pages/concert/" class="modal-btn">CRUD DEMO</a>
       </div>
-<?php include('page/layouts/footer.php'); ?>
+<?php include('pages/layouts/footer.php'); ?>

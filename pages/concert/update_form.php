@@ -12,7 +12,7 @@
   unset($_SESSION['errors']);
   unset($_SESSION['old']);
 ?>
-<?php include('../../page/layouts/header.php'); ?>
+<?php include('pages/layouts/header.php'); ?>
 <div>
     <h2 class="text-center">Concert Master <br>EDIT</h2>
     <section class="flex-box justify-center">
@@ -99,4 +99,4 @@
         </form>
     </section>
 </div>
-<?php include('../../page/layouts/footer.php'); ?>
+<?php include('pages/layouts/footer.php'); ?>

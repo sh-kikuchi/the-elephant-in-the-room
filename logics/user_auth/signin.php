@@ -3,7 +3,7 @@ session_start();
 
 // Load other files.
 require_once 'models/UserAuth.php';
-require_once 'rules/userRequest.php';
+require_once 'rules/UserRequest.php';
 
 //Set variables.
 $email    = filter_input(INPUT_POST, 'email');
@@ -23,7 +23,7 @@ $result = $user_auth->signin($email, $password);
 if (!$result) {
   header('Location:/the-elephant-in-the-room/pages/user_auth/signin_form.php');
 }else{
-  header('Location: /the-elephant-in-the-room/pages/user_auth/signTest.php');
+  header('Location: /the-elephant-in-the-room/pages/user_auth/my_page.php');
 }
 
 ?>

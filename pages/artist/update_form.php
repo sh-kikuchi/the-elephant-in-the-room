@@ -11,7 +11,7 @@
   unset($_SESSION['errors']);
   unset($_SESSION['old']);
 ?>
-<?php include('../../page/layouts/header.php'); ?>
+<?php include('pages/layouts/header.php'); ?>
 <!-- 下記は<body>タグの中身 -->
 <div class="crud-container">
     <?php if (isset($errors)) : ?>
@@ -49,4 +49,4 @@
         </form>
     </section>
 </div>
-<?php include('../../page/layouts/footer.php'); ?>
+<?php include('pages/layouts/footer.php'); ?>

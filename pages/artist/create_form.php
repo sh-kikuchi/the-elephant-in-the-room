@@ -18,7 +18,7 @@
     unset($_SESSION['errors']);
     unset($_SESSION['old']);
 ?>
-<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/page/layouts/header.php') ?>
+<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/pages/layouts/header.php') ?>
   <div class="crud-container">
   <div>
    <?php if (isset($errors)) : ?>
@@ -55,4 +55,4 @@
     </section>
   </div>
 </div>
-<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/page/layouts/footer.php') ?>
+<?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/pages/layouts/footer.php') ?>

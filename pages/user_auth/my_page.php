@@ -10,7 +10,7 @@ if (!$result) {
 }
 $signin_user = $_SESSION['signin_user'];
 ?>
-<?php include('../../page/layouts/header.php'); ?>
+<?php include('pages/layouts/header.php'); ?>
 <div class="">
     <h2 class="text-center">My page</h2>
     <div class="flex-box justify-center">
@@ -73,5 +73,5 @@ $signin_user = $_SESSION['signin_user'];
         </div>
     </div>
 </div>
-<?php include('../../page/layouts/footer.php'); ?>
+<?php include('pages/layouts/footer.php'); ?>
 

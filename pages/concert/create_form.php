@@ -12,7 +12,7 @@
     unset($_SESSION['errors']);
     unset($_SESSION['old']);
 ?>
-<?php include('page/layouts/header.php') ?>
+<?php include('pages/layouts/header.php') ?>
   <div class="crud-container">
   <div>
     <?php if (isset($errors)) : ?>
@@ -81,4 +81,4 @@
     </section>
   </div>
 </div>
-<?php include('page/layouts/footer.php'); ?>
+<?php include('pages/layouts/footer.php'); ?>
