@@ -18,8 +18,6 @@ $user_request->signUpValidation($paramPostData);
 // Execute methods
 $result = $user_auth->signup($paramPostData);
 
-var_dump($result);
-
 //Transitioning screen
 if($result){
   header('Location:/the-elephant-in-the-room/pages/user_auth/complete.php');

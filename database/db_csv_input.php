@@ -5,7 +5,7 @@ $table_name = 'artists';
 $table_cols = 'user_id, name, debut, start_date, end_date, created_at,updated_at';
 
 $pdo = db_connect();
-$f = fopen("../database/csv/downloads/" . $table_name . ".csv", "r");
+$f = fopen("../database/csv/uploads/" . $table_name . ".csv", "r");
 $data = fgetcsv($f);
 
 while($data = fgetcsv($f)){
