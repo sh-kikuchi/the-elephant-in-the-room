@@ -1,15 +1,13 @@
 
 <?php
   require_once '../../util/fragile.php';
+  require_once '../../util/pagination.php';
   require_once '../../models\Concert.php';
-  $models = new Concert();
-  $concerts = $models->show();
-  define('MAX','10'); // show data per page  
-  $concert_count = count($concerts); // Total data
-  $max_page = ceil($concert_count / MAX); // Total pages
-  $now = !isset($_GET['page_id'])? 1: $_GET['page_id']; //What number?
-  $start_no = ($now - 1) * MAX; // What number of the array should I get it from?
-  $disp_data = array_slice($concerts, $start_no, MAX, true); // array_slice
+  $models     = new Concert();
+  $showData   = $models->show();
+  $pagination = paginate($showData, 10);
+  $concerts   = $pagination['data'];
+  $max_page   = $pagination['max_page'];
 ?>
 <?php include('pages/layouts/header.php'); ?>
 <div class="wrapper">
@@ -30,7 +28,7 @@
                 </tr>
             </thead>
             <tbody>
-                <?php foreach ($disp_data as $concert){?>
+                <?php foreach ($concerts as $concert){?>
                 <tr>
                     <td class="text-center">
                       <?php echo h($concert["date"]);?>

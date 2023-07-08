@@ -1,5 +1,4 @@
 <?php
-
 require_once 'database/db_connect.php';
 require_once 'util/trait/file.php';
 require_once 'util/trait/mail.php';
@@ -48,27 +47,25 @@ class UserAuth implements IFile, IMail, IPDF
    * @param string $password
    * @return bool $result
    */
-  public static function signin($email, $password)
+  public static function signin($userData)
   {
     $result = false;
-
-    // ユーザをemailから検索して取得
+    $email    = $userData['email'];
+    $password = $userData['password'];
+    // retrieve users by searching email
     $user = self::getUserByEmail($email);
 
     if (!$user) {
       $_SESSION['msg'] = 'e-mail does not match.';
       return $result;
     }
-
-    //　パスワードの照会
+    // password enquiry
     if (password_verify($password, $user['password'])) {
-      //ログイン成功
       session_regenerate_id(true);
       $_SESSION['signin_user'] = $user;
       $result = true;
       return $result;
     }
-
     $_SESSION['msg'] =  $password;
     return $result;
   }
@@ -116,7 +113,6 @@ class UserAuth implements IFile, IMail, IPDF
    */
   public static function signout()
   {
-    $_SESSION = array();
     session_destroy();
 
     //Back to Sign-in Page.

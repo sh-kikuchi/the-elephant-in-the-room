@@ -20,7 +20,7 @@ class ArtistRequest{
 
     if (count($errors) > 0) {
       $_SESSION['errors'] = $errors;
-      $this->old_post_value($post_data);
+      $this->oldPostValue($post_data);
       header('Location: /the-elephant-in-the-room/pages/artist/create_form.php');
       exit();
     }

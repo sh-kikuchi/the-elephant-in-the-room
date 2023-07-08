@@ -1,22 +1,19 @@
 
 <?php
   require_once '../../util/fragile.php';
+  require_once '../../util/pagination.php';
   require_once '../../models/Artist.php';
-  $models = new Artist();
-  $artists = $models->show();
-  // Pagination
-  define('MAX','10');                    // show data per page  
-  $artist_count = count($artists);       // Total data
-  $max_page = ceil($artist_count / MAX); // Total pages
-  $now = !isset($_GET['page_id'])? 1: $_GET['page_id']; //What number?
-  $start_no = ($now - 1) * MAX; // What number of the array should I get it from?
-  $disp_data = array_slice($artists, $start_no, MAX, true); // array_slice
+  $models     = new Artist();
+  $showData   = $models->show();
+  $pagination = paginate($showData, 10);
+  $artists    = $pagination['data'];
+  $max_page   = $pagination['max_page'];
 ?>
 <?php include('pages/layouts/header.php'); ?>
 <div class="wrapper">
     <h2 class="text-center">Artists</h2>
     <div class="text-right"><a href="../artist/create_form.php">add an artist</a></div>
-    <?php foreach ($disp_data as $artist){?>
+    <?php foreach ($artists as $artist){?>
     <div class="crud-card">
         <p class="crud-card-updated_at"><?php echo h($artist["updated_at"]);?></p>
         <h3 class="crud-card-title"> <?php echo h($artist["name"]);?></h3>

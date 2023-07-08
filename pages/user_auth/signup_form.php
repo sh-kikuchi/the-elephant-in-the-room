@@ -2,13 +2,14 @@
 session_start();
 require_once '../../util/fragile.php';
 require_once '../../models/UserAuth.php';
-$result      = UserAuth::checkSign();
+$models = new UserAuth();
+$result = $models->checkSign();
 if($result) {
     header('Location: my_page.php');
     exit();
 }
-$errors      = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
-$old         = isset($_SESSION['old']) ? $_SESSION['old'] : null;
+$errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
+$old    = isset($_SESSION['old']) ? $_SESSION['old'] : null;
 unset($_SESSION['errors']);
 unset($_SESSION['old']);
 ?>
@@ -25,23 +26,23 @@ unset($_SESSION['old']);
     <h2 class="text-center">Sign-up</h2>
     <section class="flex-box justify-center">
         <form action="../../logics/user_auth/signup.php" method="POST">
+            <input type="hidden" name="csrf_token" value="<?php echo h(setToken()); ?>">
             <div class="flex-box justify-center my-2">
                 <label for="name" class="label">Username：</label>
-                <input type="text" name="name" class="form-input">
+                <input type="text" name="name" class="form-input" value="<?php if($old){echo h($old['name']);}"}"?>">
             </div>
             <div class="flex-box justify-center my-2">
                 <label for="email" class="label">E-mail：</label>
-                <input type="email" name="email" class="form-input">
+                <input type="email" name="email" class="form-input" value="<?php if($old){echo h($old['email']);}"}"?>">
             </div>
             <div class="flex-box justify-center my-2">
                 <label for="password" class="label">Password：</label>
-                <input type="password" name="password" class="form-input">
+                <input type="password" name="password" class="form-input" value="<?php if($old){echo h($old['password']);}"}"?>">
             </div>
             <div class="flex-box justify-center my-2">
                 <label for="password_conf" class="label">Pass-Confirm：</label>
-                <input type="password" name="password_conf" class="form-input">
+                <input type="password" name="password_conf" class="form-input" value="<?php if($old){echo h($old['password_conf']);}"}"?>">
             </div>
-              <input type="hidden" name="csrf_token" value="<?php echo h(setToken()); ?>">
             <div class="flex-box justify-center my-2">
                 <input type="submit" value="Register" class="button primary">
             </div>

@@ -5,16 +5,22 @@ class UserRequest{
   public function fileValidation($file){
     if (empty($file['upfile']['full_path'])) {
       $_SESSION['msg'] = 'No files have been uploaded.';
-      header('Location: /the-elephant-in-the-room/pages/user_auth/signTest.php');
+      header('Location: /the-elephant-in-the-room/pages/user_auth/my_page.php');
     }
   }
-  public function signInValidation($email, $password){
+  public function signInValidation($post_data){
       $err = [];
+      $email         = $post_data['email'];
+      $password      = $post_data['password'];
+      $csrf_token    = $post_data['csrf_token'];
       if(!$email) {
         $err['email'] = 'Please fill in your email address.';
       }
       if(!$password) {
         $err['password'] = 'Please fill in your password.';
+      }
+      if (!isset($_SESSION['csrf_token']) || $csrf_token !== $_SESSION['csrf_token']) {
+        array_push($errors,'Invalid request.');
       }
       if (count($err) > 0) {
         $_SESSION = $err;
