@@ -1,22 +1,21 @@
 <?php
 /**
- * XSS対策：エスケープ処理
- * @param string $str 対象の文字列
- * @return string 処理された文字列
+ * Anti-XSS measures: escaping process.
+ * @param string  $str
+ * @return string htmlspecialchars($str)
  */
-function h($str){
+function h($str) :string {
     return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
 }
 /**
- * トークン生成
- * フォ―ムからトークンを生成。
- * 送信後の画面でそのトークンを照会
+ * token generation
+ * @param  void
+ * @return $csrf_token
  */
-function setToken(){
+function setToken() :string {
     $csrf_token = bin2hex(random_bytes(32));
     $_SESSION['csrf_token'] = $csrf_token;
 
     return $csrf_token;
 }
-
 ?>

@@ -3,12 +3,13 @@
     require_once '../../util/fragile.php';
     require_once '../../models/Artist.php';
     require_once '../../models/UserAuth.php';
+    require_once '../../config/message.php';
     $models = new Artist();
     $artists = $models->show();
-    //　ログインしているか判定し、していなかったら新規登録画面へ返す
+    //Determines if you are logged in and returns you to the new registration screen if you are not.
     $result = UserAuth::checkSign();
     if (!$result) {
-      $_SESSION['signin_err'] = 'ユーザを登録してログインしてください！';
+      $_SESSION['signin_err'] = MASSAGE::sign_error;
       header('Location: /the-elephant-in-the-room/pages/user_auth/signup_form.php');
       return;
     }
@@ -19,8 +20,7 @@
     unset($_SESSION['old']);
 ?>
 <?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/pages/layouts/header.php') ?>
-  <div class="crud-container">
-  <div>
+<div class="wrapper">
    <?php if (isset($errors)) : ?>
       <ul>
       <?php foreach($errors as $error) {?>
@@ -28,13 +28,14 @@
       <?php }?>
       </ul>
     <?php endif; ?>
-    <h2 class="text-center">Artist Master <br>Registration</h2>
+    <h2 class="text-center pt-2">Artist Master <br>Registration</h2>
+    <a class="pl-3" href="../artist">BACK</a>
     <section class="flex-box justify-center">
       <form method="post" action="../../logics/artist/create.php">
         <input hidden name="user_id" value="<?php echo h($signin_user["id"]);?>"> 
         <div class="flex-box">
           <label for="name" class="label">name</label>
-          <input name="name" class="form-input" placeholder="100字以内" value="<?php if($old){echo h($old['name']);}?>">
+          <input name="name" class="form-input" placeholder="100 words or less" value="<?php if($old){echo h($old['name']);}?>">
         </div>
         <div class="flex-box">
           <label for="title" class="label">debut</label>
@@ -53,6 +54,5 @@
         </div>
       </form>
     </section>
-  </div>
 </div>
 <?php require($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/pages/layouts/footer.php') ?>

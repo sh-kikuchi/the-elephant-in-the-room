@@ -15,7 +15,6 @@ final class StackTest extends TestCase
 
         $this->assertSame('foo', array_pop($stack));
         $this->assertSame(0, count($stack));
-
-      
+        
     }
 }

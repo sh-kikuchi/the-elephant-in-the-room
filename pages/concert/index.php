@@ -11,10 +11,10 @@
 ?>
 <?php include('pages/layouts/header.php'); ?>
 <div class="wrapper">
-    <h2 class="text-center">Concerts</h2>
-    <div class="text-right"><a href="../artist/create_form.php">Go artist list</a></div>
-    <div class="text-right  my-2">
-        <a class="crud-create" href="../concert/create_form.php">Add a Concert Record</a>
+    <h2 class="text-center pt-2">Concerts</h2>
+    <div class="text-left pl-2"><a href="../home.php">Home</a></div>
+    <div class="text-right pr-2 my-2">
+        <a class="crud-create" href="../concert/create_form.php">create a new concert</a>
     </div>
     <div class="flex-box justify-center">
         <table>
@@ -63,7 +63,7 @@
     <!--pagenation-->
     <div class="flex-box justify-center my-2">
         <?php for($i = 1; $i <= $max_page; $i++){?>
-        <a href="/the-elephant-in-the-room/pages/concert?page_id=<?php echo $i; ?>" > <?php echo  $i ?></a>
+        <a class="pagenation" href="/the-elephant-in-the-room/pages/concert?page_id=<?php echo $i; ?>" > <?php echo  $i ?></a>
         <?php }?>
     </div>
 </div>
