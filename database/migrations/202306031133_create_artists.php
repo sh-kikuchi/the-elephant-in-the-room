@@ -2,7 +2,6 @@
     require_once ('database\db_connect.php');
     try {
         $pdo = db_connect();
-        // usersテーブルを作成するためのSQL文を変数$sqlに代入する
         $sql = 'CREATE TABLE if not exists artists(
             id int not null primary key AUTO_INCREMENT
             , user_id int not null
@@ -14,7 +13,6 @@
             , updated_at DATETIME DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
             , FOREIGN KEY(user_id)   REFERENCES users(id)
           )';
-        // SQL文を実行する
         $pdo->query($sql);
     } catch (PDOException $e) {
         exit($e->getMessage());

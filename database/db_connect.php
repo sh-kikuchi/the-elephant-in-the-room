@@ -1,8 +1,8 @@
 <?php
 define('DB_HOST', "localhost");
 define('DB_NAME', "elephant");
-define('DB_USER', "root"); //shu
-define('DB_PASS', ""); //shulogin0726
+define('DB_USER', "root");
+define('DB_PASS', ""); 
 
 function db_connect()
 {
@@ -19,8 +19,8 @@ function db_connect()
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]);
         return $pdo;
-    } catch(PDOExeption $e) {
-        echo '接続失敗です！'. $e->getMessage();
+    } catch (PDOExeption $e) {
+        echo $e->getMessage();
         exit();
     }
 }

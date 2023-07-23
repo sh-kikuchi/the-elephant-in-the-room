@@ -1,7 +1,7 @@
 <?php
   require_once ('database\db_connect.php');
     try{
-        $table_name = 'artists';
+        $table_name = 'users';
         $filepath = 'csv/downloads/'. $table_name .'.csv';
         $fp = fopen($filepath, 'w');
         $pdo = db_connect();
