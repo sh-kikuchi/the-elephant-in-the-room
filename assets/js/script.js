@@ -69,7 +69,7 @@ overlay.addEventListener('click', function() {
   overlay.classList.remove('active');
 });
 /*********************************
-* Chanege show table records number
+* Change show table records number
 *********************************/
 function change_table(){
   let showRecords = 0;

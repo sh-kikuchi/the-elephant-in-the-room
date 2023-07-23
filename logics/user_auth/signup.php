@@ -5,7 +5,7 @@ session_start();
 require_once 'models/UserAuth.php';
 require_once 'rules/UserRequest.php';
 
-//Set variables.
+// Set variables.
 $paramPostData = $_POST;
 
 // Create an instance
@@ -18,7 +18,7 @@ $user_request->signUpValidation($paramPostData);
 // Execute methods
 $result = $user_auth->signup($paramPostData);
 
-//Transitioning screen
+// Transitioning screen
 if($result){
   header('Location:/the-elephant-in-the-room/pages/user_auth/complete.php');
   exit();

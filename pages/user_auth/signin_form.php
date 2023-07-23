@@ -22,7 +22,7 @@ unset($_SESSION['old']);
       <?php }?>
       </ul>
     <?php endif; ?>
-    <h2 class="text-center">Sign-in</h2>
+    <h2 class="text-center pt-2">Sign-in</h2>
     <section class="flex-box justify-center">
         <form action="../../logics/user_auth/signin.php" method="POST">
           <input type="hidden" name="csrf_token" value="<?php echo h(setToken()); ?>">  

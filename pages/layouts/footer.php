@@ -1,6 +1,6 @@
 <footer class="footer">
 <div class="index-message">
-    Project Gladiolus
+    <small>© Re:vue All Rights Reserved.</small>
 </div>
 </footer>
 </body>
