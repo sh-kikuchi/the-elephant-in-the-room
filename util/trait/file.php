@@ -1,5 +1,5 @@
 <?php
-require_once('../../config/message.php');
+require_once('config/message.php');
 trait File{
     /**
      * uploaded_file

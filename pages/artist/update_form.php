@@ -1,15 +1,15 @@
 <?php
-  session_start();
-  require_once '../../util/fragile.php';
-  require_once '../../models/Artist.php';
-  require_once '../../models/UserAuth.php';
-  $models = new Artist();
-  $artists = $models->getArtist(intval($_GET["id"]));
-  $result = UserAuth::checkSign();
-  $signin_user = isset($_SESSION['signin_user']) ? $_SESSION['signin_user']: null;
-  $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
-  unset($_SESSION['errors']);
-  unset($_SESSION['old']);
+    session_start();
+    require_once '../../util/fragile.php';
+    require_once '../../models/Artist.php';
+    require_once '../../models/UserAuth.php';
+    $models = new Artist();
+    $artists = $models->getArtist(intval($_GET["id"]));
+    $result = UserAuth::checkSign();
+    $signin_user = isset($_SESSION['signin_user']) ? $_SESSION['signin_user']: null;
+    $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
+    unset($_SESSION['errors']);
+    unset($_SESSION['old']);
 ?>
 <?php include('pages/layouts/header.php'); ?>
 <div class="wrapper">

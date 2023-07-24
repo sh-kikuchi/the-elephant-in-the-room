@@ -1,16 +1,16 @@
 <?php
-  session_start();
-  require_once '../../util/fragile.php';
-  require_once '../../models/Concert.php';
-  require_once '../../models/UserAuth.php';
-  $models = new Concert();
-  $concerts = $models->getConcert(intval($_GET["id"]));
-  $result = UserAuth::checkSign();
-  $signin_user = isset($_SESSION['signin_user']) ? $_SESSION['signin_user']: null;
-  $errors      = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
-  $old         = isset($_SESSION['old']) ? $_SESSION['old'] : null;
-  unset($_SESSION['errors']);
-  unset($_SESSION['old']);
+    session_start();
+    require_once '../../util/fragile.php';
+    require_once '../../models/Concert.php';
+    require_once '../../models/UserAuth.php';
+    $models      = new Concert();
+    $concerts    = $models->getConcert(intval($_GET["id"]));
+    $result      = UserAuth::checkSign();
+    $signin_user = isset($_SESSION['signin_user']) ? $_SESSION['signin_user']: null;
+    $errors      = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
+    $old         = isset($_SESSION['old']) ? $_SESSION['old'] : null;
+    unset($_SESSION['errors']);
+    unset($_SESSION['old']);
 ?>
 <?php include('pages/layouts/header.php'); ?>
 <div class="wrapper">

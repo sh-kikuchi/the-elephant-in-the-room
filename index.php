@@ -1,4 +1,9 @@
 
+<?php 
+require 'models/UserAuth.php';
+session_start();
+$signin_user = isset($_SESSION['signin_user'])?$_SESSION['signin_user']:null;
+?>
 <?php include('pages/layouts/header.php'); ?>
     <section id="index-firstview">
         <div class="index-fv-title">

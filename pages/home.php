@@ -1,3 +1,7 @@
+<?php
+session_start();
+$signin_user = isset($_SESSION['signin_user'])?$_SESSION['signin_user']:null;
+?>
 <?php include('pages/layouts/header.php'); ?>
 <div class="wrapper">
       <h2 class="text-center pt-2 pb-2">experiment</h2>

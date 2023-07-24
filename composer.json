@@ -1,4 +1,20 @@
 {
+    "name": "gladiolus/the-elephant-in-the-room",
+    "version": "1.0.0",
+    "time": "2023-07-26",
+    "description": "My private PHP framework developed as part of the 'Gladiolus' project.",
+    "authors": [
+        {
+            "name": "Re:vue",
+            "email": "sh.revue.projects@gmail.com",
+            "homepage": "https://sh-revue.net/",
+            "role": "Japanese Developer"
+        }
+    ],
+    "keywords": [
+        "framework",
+        "elephant"
+    ],
     "require": {
         "guzzlehttp/guzzle": "^7.7",
         "tecnickcom/tcpdf": "^6.6"

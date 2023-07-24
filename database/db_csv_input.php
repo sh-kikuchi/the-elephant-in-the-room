@@ -1,5 +1,5 @@
 <?php
-require_once ('database\db_connect.php');
+require_once 'database/db_connect.php';
 
 // $table_name = 'artists';
 // $table_cols = 'user_id, name, debut, start_date, end_date, created_at,updated_at';
