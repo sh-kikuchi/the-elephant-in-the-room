@@ -52,7 +52,24 @@
 
 <br>
 
-## 2. database
+
+## 2. Set up
+
+- Let's start by cloning the project.
+    ```
+    git clone https://github.com/sh-kikuchi/the-elephant-in-the-room.git
+    ```
+
+<br>
+
+- After that, let's run `composer install`.
+    ```
+    composer install
+    ```
+
+<br>
+
+## 3. database
 1. Set up the DB in 'db_connect.php' in the database directory 
 2. There are PHP files for creating sample tables in database>migrations, which you can run with the command.You can run the sample application by executing the commands in all the table files provided.
 
@@ -70,7 +87,7 @@
 
 <br>　
 
-## 3. Settings
+## 4. Settings
 
 ### ■ including_path
 - Set include_path to the path to the project directory in the ini file.
