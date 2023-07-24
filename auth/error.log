@@ -1,5 +1,0 @@
-PDOException: SQLSTATE[23000]: Integrity constraint violation: 1048 Column 'name' cannot be null in C:\xampp\htdocs\PHP_starter\auth\controller\userAuth.php:26
-Stack trace:
-#0 C:\xampp\htdocs\PHP_starter\auth\controller\userAuth.php(26): PDOStatement->execute(Array)
-#1 C:\xampp\htdocs\PHP_starter\auth\view\register.php(35): UserAuth::register(Array)
-#2 {main}

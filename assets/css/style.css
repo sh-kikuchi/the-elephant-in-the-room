@@ -1,0 +1,159 @@
+/*********************************
+* the Elephant in the Room: TOP
+*********************************/
+#index-firstview {
+  display: grid;
+  height: 100vh;
+  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+}
+/******right side*****/
+.index-fv-title {
+  height: 100vh;
+  display: flex;
+  font-size: 50px;
+  text-align: right;
+  justify-content: end;
+  align-items: center;
+}
+.elephant-letter {
+  color: crimson;
+}
+.index-fv-img>img {
+  width:  250px;
+  height: 250px;
+  margin: 30px;
+  border: 2px dashed #000;
+  transform: rotateZ(-10deg);
+}
+.index-fv-img {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+/*****left side*****/
+.index-intro-title {
+  font-size: 30px;
+  text-align: center;
+}
+.index-intro-img {
+  display: flex;
+  justify-content: center;
+}
+.index-intro-img>img {
+  width:  150px;
+  height: 150px;
+}
+.index-intro-text {
+  width: 80%;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+.index-message {
+  background-color:palegreen;
+  font-size: 15px;
+  text-align: center;
+}
+/*****responsive design*****/
+@media(max-width: 400px) {
+  .index-firstview {
+    grid-template-columns: 1fr;
+  }
+}
+/*********************************
+* CARD for APP demo
+*********************************/
+.crud-card {
+  margin: 10px;
+  padding: 5px;
+  border: 1px dashed #000;
+}
+.crud-card-updated_at {
+  font-size: 12px;
+  text-align: right;
+}
+.crud-card-detail {
+  display: flex;
+  justify-content: end;
+}
+.crud-edit {
+  color: #000;
+  font-size: 15px;
+  text-decoration: none;
+  margin-right: 5px;
+  margin-left: 10px;
+}
+.crud-delete {
+  font-size: 15px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  padding: 0;
+  appearance: none;
+  margin-right: 10px;
+  margin-left: 5px;
+}
+/*********************************
+* LAYOUT
+*********************************/
+header{
+  background-color: crimson;
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: bisque;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+header> #title {
+font-size: 25px;
+font-weight: 800;
+}
+header> #menu> a {
+  color: bisque;
+  text-decoration: none;
+  padding-right: 10px;
+  padding-left: 10px;
+}
+button{
+  background: none;
+	border: none;
+	outline: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	appearance: none;
+}
+.wrapper{
+  height: calc(100vh - 72.4px);
+}
+.input-init{
+    margin: 0 ; 
+    padding: 0 ; 
+    background: none;
+    border: none; 
+    border-radius: 0 ; 
+    outline: none; 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    font-size: 25px;
+}
+.pagenation{
+  width: 20px;
+  height: 20px;
+  padding: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  text-align: center;
+  text-decoration: none;
+  color: gray;
+  background-color: skyblue;
+  border-radius: 50%;
+}
+.footer{
+  margin: 0;
+  height: 12px;
+}

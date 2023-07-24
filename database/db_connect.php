@@ -1,10 +1,10 @@
 <?php
-define('DB_HOST', 'localhost');
-define('DB_NAME', 'user');
-define('DB_USER', 'shu');
-define('DB_PASS', 'login0726');
+define('DB_HOST', "localhost");
+define('DB_NAME', "elephant");
+define('DB_USER', "root");
+define('DB_PASS', ""); 
 
-function connect()
+function db_connect()
 {
     $host = DB_HOST;
     $db   = DB_NAME;
@@ -19,10 +19,8 @@ function connect()
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
         ]);
         return $pdo;
-    } catch(PDOExeption $e) {
-        echo '接続失敗です！'. $e->getMessage();
+    } catch (PDOExeption $e) {
+        echo $e->getMessage();
         exit();
     }
-
-
 }
