@@ -1,7 +1,7 @@
 <?php
 
 interface IPDF{
-    function output($html);
+    function output(IPDF $iPdf);
 }
 
 ?>

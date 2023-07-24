@@ -1,16 +1,16 @@
 
 <?php
-require_once '../../util/fragile.php';
-require_once '../../util/pagination.php';
-require_once '../../models/Artist.php';
-session_start();
-$models     = new Artist();
-$showData   = $models->show();
-$pagination = paginate($showData, 10);
-$artists    = $pagination['data'];
-$max_page   = $pagination['max_page'];
-$errors      = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
-unset($_SESSION['errors']);
+    session_start();
+    require_once '../../util/fragile.php';
+    require_once '../../util/pagination.php';
+    require_once '../../models/Artist.php';
+    $models     = new Artist();
+    $showData   = $models->show();
+    $pagination = paginate($showData, 10);
+    $artists    = $pagination['data'];
+    $max_page   = $pagination['max_page'];
+    $errors      = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
+    unset($_SESSION['errors']);
 ?>
 <?php include('pages/layouts/header.php'); ?>
 <div class="px-2">

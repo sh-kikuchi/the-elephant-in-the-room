@@ -1,5 +1,5 @@
 <?php
-    require_once ('database\db_connect.php');
+    require_once 'database/db_connect.php';
     try {
         $pdo = db_connect();
         $sql = 'CREATE TABLE if not exists users (

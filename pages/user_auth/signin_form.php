@@ -1,17 +1,17 @@
 <?php
-session_start();
-require_once '../../util/fragile.php';
-require_once '../../models/UserAuth.php';
-require_once '../../models/UserAuth.php';
-$result = UserAuth::checkSign();
-if($result) {
-  header('Location: my_page.php');
-  return;
-}
-$errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
-$old    = isset($_SESSION['old']) ? $_SESSION['old'] : null;
-unset($_SESSION['errors']);
-unset($_SESSION['old']);
+    session_start();
+    require_once '../../util/fragile.php';
+    require_once '../../models/UserAuth.php';
+    require_once '../../models/UserAuth.php';
+    $result = UserAuth::checkSign();
+    if($result) {
+      header('Location: my_page.php');
+      return;
+    }
+    $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
+    $old    = isset($_SESSION['old']) ? $_SESSION['old'] : null;
+    unset($_SESSION['errors']);
+    unset($_SESSION['old']);
 ?>
 <?php require('pages/layouts/header.php') ?>
 <div class="wrapper">

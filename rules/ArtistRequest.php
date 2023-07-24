@@ -1,5 +1,5 @@
 <?php
-require_once 'util\trait\session.php';
+require_once 'util/trait/session.php';
 require_once 'models/Artist.php';
 class ArtistRequest{
     use Session;

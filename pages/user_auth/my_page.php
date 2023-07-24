@@ -1,14 +1,14 @@
 <?php
-session_start();
-require_once '../../models/UserAuth.php';
-require_once '../../util/fragile.php';
-$result = UserAuth::checkSign();
-if (!$result) {
-$_SESSION['signin_err'] = 'ユーザを登録してログインしてください！';
-header('Location: signup_form.php');
-return;
-}
-$signin_user = $_SESSION['signin_user'];
+    session_start();
+    require_once 'models/UserAuth.php';
+    require_once 'util/fragile.php';
+    $result = UserAuth::checkSign();
+    if (!$result) {
+        $_SESSION['signin_err'] = 'Please sign in.';
+        header('Location: signup_form.php');
+    return;
+    }
+    $signin_user = $_SESSION['signin_user'];
 ?>
 <?php include('pages/layouts/header.php'); ?>
 <div class="wrapper">

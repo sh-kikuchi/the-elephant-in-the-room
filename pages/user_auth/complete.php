@@ -1,4 +1,6 @@
 <?php require('pages/layouts/header.php') ?>
-  <p>User registration is completed.</p>
-  <a href="./signin_form.php">Click here to sign in</a>
+    <div class="wrapper">
+        <p>User registration is completed.</p>
+        <a href="./signin_form.php">Click here to sign in</a>
+    </div>
 <?php require('pages/layouts/footer.php') ?>

@@ -1,13 +1,15 @@
 
 <?php
-  require_once '../../util/fragile.php';
-  require_once '../../util/pagination.php';
-  require_once '../../models\Concert.php';
-  $models     = new Concert();
-  $showData   = $models->show();
-  $pagination = paginate($showData, 10);
-  $concerts   = $pagination['data'];
-  $max_page   = $pagination['max_page'];
+    session_start();
+    require_once '../../util/fragile.php';
+    require_once '../../util/pagination.php';
+    require_once '../../models\Concert.php';
+    $models     = new Concert();
+    $showData   = $models->show();
+    $pagination = paginate($showData, 10);
+    $concerts   = $pagination['data'];
+    $max_page   = $pagination['max_page'];
+    $signin_user = isset($_SESSION['signin_user'])?$_SESSION['signin_user']:null;
 ?>
 <?php include('pages/layouts/header.php'); ?>
 <div class="wrapper">
