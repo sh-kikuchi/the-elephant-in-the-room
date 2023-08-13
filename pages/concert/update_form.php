@@ -32,13 +32,13 @@
                 <div class="flex-box justify-center my-2">
                     <label for="name"  class="label">name</label>
                     <input 
-                        name="concert_name" 
+                        name="name" 
                         class="form-input" 
                         placeholder="名前を入力"
                         value="<?php if($old){
-                            echo h($old['concert_name']);
+                            echo h($old['name']);
                         }else{
-                            echo h($concert["concert_name"]);
+                            echo h($concert["name"]);
                         }?>"
                     />
                 </div>
@@ -68,29 +68,6 @@
                         }?>"
                     />
                 </div>
-            <div class="flex-box justify-center my-2">
-            <table style="width: 500px">
-                <thead>
-                    <tr>
-                        <th style="width: 50px">id</th>
-                        <th >name</th>
-                    <tr>
-                </thead>
-                <tbody>
-                  <?php foreach ($concert['artists'] as $artist){?>
-                  <tr>
-                      <td class="text-center">
-                        <?php echo h($artist["id"]); ?>
-                        <input hidden type="checkbox" name="artist_id[]" value="<?php echo h($artist["id"]);?>" checked>
-                      </td>
-                      <td class="pl-1">
-                          <?php echo h($artist["name"]);?>
-                      </td>
-                  </tr>
-                  <?php }?>
-                </tbody>
-              </table>
-            </div>
             <?php } ?>
             <div class="flex-box justify-center py-2">
                 <button type="submit" class="button primary">EDIT</button>

@@ -35,11 +35,11 @@
                   <input type="date" class="form-input" name="debut" value="<?php echo h($artist["debut"]);?>">
                 </div>
                 <div class="flex-box">
-                  <label for="start_date" class="label">start date of AC</label>
+                  <label for="start_date" class="label">start date of activity</label>
                   <input type="date" class="form-input" name="start_date" value="<?php echo h($artist["start_date"]);?>">
                 </div>
                 <div class="flex-box">
-                  <label for="end_date" class="label">end date of AC</label>
+                  <label for="end_date" class="label">end date of activity</label>
                   <input type="date" class="form-input" name="end_date" value="<?php echo h($artist["end_date"] = "0000-00-00"? '':$artist["end_date"]);?>">
                 </div>
             <?php } ?>

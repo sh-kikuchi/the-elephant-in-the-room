@@ -62,40 +62,6 @@
   }
 }
 /*********************************
-* CARD for APP demo
-*********************************/
-.crud-card {
-  margin: 10px;
-  padding: 5px;
-  border: 1px dashed #000;
-}
-.crud-card-updated_at {
-  font-size: 12px;
-  text-align: right;
-}
-.crud-card-detail {
-  display: flex;
-  justify-content: end;
-}
-.crud-edit {
-  color: #000;
-  font-size: 15px;
-  text-decoration: none;
-  margin-right: 5px;
-  margin-left: 10px;
-}
-.crud-delete {
-  font-size: 15px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  outline: none;
-  padding: 0;
-  appearance: none;
-  margin-right: 10px;
-  margin-left: 5px;
-}
-/*********************************
 * LAYOUT
 *********************************/
 header{

@@ -42,11 +42,11 @@
           <input type="date" name="debut" class="form-input"  value="<?php if($old){echo h($old['debut']);}"}"?>">
         </div>
         <div class="flex-box">
-          <label for="title" class="label">start date of AC</label>
+          <label for="title" class="label">start date of activity</label>
           <input type="date" name="start_date" class="form-input" value="<?php if($old){echo h($old['start_date']);}?>">
         </div>
         <div class="flex-box">
-          <label for="title" class="label">end date of AC</label>
+          <label for="title" class="label">end date of activity</label>
           <input type="date" name="end_date" class="form-input" value="<?php if($old){echo h($old['end_date']);}?>">
         </div>
         <div class="flex-box justify-center">
