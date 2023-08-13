@@ -32,49 +32,11 @@
             </div>
             <div class="flex-box justify-center my-2">
                 <label for="name" class="label">name</label>
-                <input name="concert_name" class="form-input" placeholder="100 words or less" value="<?php if($old){echo h($old['concert_name']);}"}"?>">
+                <input name="name" class="form-input" placeholder="100 words or less" value="<?php if($old){echo h($old['name']);}"}"?>">
             </div>
             <div class="flex-box justify-center my-2">
                 <label for="place" class="label">place</label>
                 <input name="place" class="form-input" placeholder="100 words or less" value="<?php if($old){echo h($old['place']);}"}"?>">
-            </div>
-            <div class="flex-box justify-center my-2">
-                <label for="artist" class="label pl-2">artist
-                    <p>
-                        <select id="list-num" onchange="change_table();">
-                            <option value="" selected>all records</option>
-                            <option value="3">3 records</option>
-                            <option value="5">5 records</option>
-                            <option value="10">10 records</option>
-                        </select>
-                    </p>
-                </label>
-                <div style="width: 500px; height: 250px; overflow-y: scroll">
-                <table id="list-table">
-                    <thead>
-                      <tr>
-                          <th style="width: 50px"></th>
-                          <th >name</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <?php foreach ($artists as $artist){?>
-                      <tr>
-                          <td>
-                              <input 
-                                type="checkbox" 
-                                name="artist_id[]" 
-                                value= <?php echo h($artist["id"]);?>
-                                />
-                          </td>
-                          <td class="pa-1">
-                              <?php echo h($artist["name"]);?>
-                          </td>
-                      </tr>
-                      <?php }?>
-                    </tbody>
-                </table>
-                      </div>
             </div>
             <div class="flex-box justify-center py-2">
                 <button type="submit" class="button primary">CREATE</button>

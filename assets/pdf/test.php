@@ -140,10 +140,6 @@ table>tr>th{
         <td>Modal</td>
         <td>A popup window that appears on top of the main content, blocking interaction with the rest of the page. It is created using HTML, CSS, and JavaScript, allowing you to display additional information or forms in a temporary overlay.</td>
       </tr>
-      <tr>
-        <td>Show table records</td>
-        <td>Implement a feature to switch the number of displayed items in the table. Provide options such as 5 items, 10 items, and so on, allowing users to select their preferred number of items to be shown at a time</td>
-      </tr>
     </table>
   </section>
 </div>

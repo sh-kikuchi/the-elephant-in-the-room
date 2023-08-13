@@ -13,7 +13,7 @@
     unset($_SESSION['errors']);
 ?>
 <?php include('pages/layouts/header.php'); ?>
-<div class="px-2">
+<div class="wrapper px-2">
     <?php if (isset($errors)) : ?>
         <ul>
             <?php foreach($errors as $error) {?>
@@ -24,24 +24,46 @@
     <h2 class="text-center pt-2">Artists</h2>
     <div class="text-left pl-2"><a href="../home.php">Home</a></div>
     <div class="text-right"><a href="../artist/create_form.php">create a new artist</a></div>
-    <?php foreach ($artists as $artist){?>
-    <div class="crud-card">
-        <p class="crud-card-updated_at"><?php echo h($artist["updated_at"]);?></p>
-        <h3 class="crud-card-title"> <?php echo h($artist["name"]);?></h3>
-        <p class="crud-card-description"><?php echo h($artist["debut"]);?></p>
-        <div class="crud-card-detail">
-          <div>
-              <a class="crud-edit " href="../artist/update_form.php?id=<?php echo $artist["id"]; ?>">EDIT</a>
-         </div>
-          <div>
-              <form name="id"  method="POST" action="../../logics/artist/delete.php">
-                  <input hidden name="id" value="<?php echo h($artist["id"]); ?>">
-                  <button type="submit" class="crud-delete">DELETE</button>
-              </form>
-          </div>
-        </div>
+    <div class="flex-box justify-center">
+        <table class="mx-3">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Debut</th>
+                    <th>Updated_at</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php foreach ($artists as $artist){?>
+                <tr>
+                    <td class="text-center">
+                      <?php echo h($artist["name"]);?>
+                    </td>
+                    <td class="text-center">
+                      <?php echo h($artist["debut"]);?>
+                    </td>
+                    <td class="text-center">
+                      <?php echo h($artist["updated_at"]);?>
+                    </td>
+                    <td class="text-center">
+                        <div class="flex-box justify-center">
+                            <div>
+                                <a class="crud-edit " href="../artist/update_form.php?id=<?php echo $artist["id"]; ?>">EDIT</a>
+                            </div>
+                        </div>
+                        <div>
+                            <form name="id"  method="POST" action="../../logics/artist/delete.php">
+                                <input hidden name="id" value="<?php echo h($artist["id"]); ?>">
+                                <button type="submit" class="crud-delete">DELETE</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+                <?php }?>
+            </tbody>
+        </table>
     </div>
-    <?php }?>
     <!--pagenation-->
     <div class="flex-box justify-center my-2">
         <?php for($i = 1; $i <= $max_page; $i++){?>

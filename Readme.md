@@ -1,5 +1,6 @@
 # the Elephant in the room
 'the Elephant in the room' is my private PHP flame work.
+<br> since 2023.7.26
 
 ## 1. directory
 ```
@@ -74,13 +75,13 @@
 2. There are PHP files for creating sample tables in database>migrations, which you can run with the command.You can run the sample application by executing the commands in all the table files provided.
 
     ```
-    C:\xampp\htdocs\the-elephant-in-the-room>php 202306031133_create_artists.php
+    C:\xampp\htdocs\the-elephant-in-the-room/database>php 202306031133_create_artists.php
     ```
 <br>
 
 3. There is a db_csv_input.php directly under the database directory. This reads the CSV files provided in database>uploads and inserts the data into the relevant table. By default, the 'Artists' table is targeted,
     ```
-    C:\xampp\htdocs\the-elephant-in-the-room>php db_csv_input.php
+    C:\xampp\htdocs\the-elephant-in-the-room/database>php db_csv_input.php
     ```
 <br>
 ※The file db_csv_output.php allows data from specified tables to be stored in CSV. Make use of this if necessary.

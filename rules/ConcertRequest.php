@@ -15,11 +15,10 @@ class ConcertRequest{
         $errors        = [];
         $id            = isset($post_data['id'])?$post_data['id']:null;
         $date          = $post_data['date'];
-        $concert_name  = $post_data['concert_name'];
+        $name          = $post_data['name'];
         $place         = $post_data['place'];
-        $artist_id     = isset($post_data['artist_id'])?$post_data['artist_id']:null;
 
-        if(!$concert_name) {
+        if(!$name) {
           array_push($errors,'Please fill in concert name.');
         }
         if(!$date) {
@@ -28,10 +27,7 @@ class ConcertRequest{
         if(!$place) {
           array_push($errors,'Please fill in place.');
         }
-        if(!empty($id) && empty($artist_id)) {
-          array_push($errors,'Please select artist name.');
-        }
-        if(mb_strlen($concert_name)>100 || mb_strlen($place)>100) {
+        if(mb_strlen($name)>100 || mb_strlen($place)>100) {
           array_push($errors,'Please enter up to 100 characters.');
         }
         if (count($errors) > 0) {
