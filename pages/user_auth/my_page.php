@@ -1,15 +1,3 @@
-<?php
-    session_start();
-    require_once 'models/UserAuth.php';
-    require_once 'util/fragile.php';
-    $result = UserAuth::checkSign();
-    if (!$result) {
-        $_SESSION['signin_err'] = 'Please sign in.';
-        header('Location: signup_form.php');
-    return;
-    }
-    $signin_user = $_SESSION['signin_user'];
-?>
 <?php include('pages/layouts/header.php'); ?>
 <div class="wrapper">
     <h2 class="text-center pt-2">My page</h2>
@@ -32,7 +20,8 @@
                 <div class="tab-content active">
                     <section class="grid-two-block">
                         <div class="flex-box justify-center align-center">
-                            <div class="index-intro-img" ><img src="../../assets/img/auth.png"/></div>
+                            <div class="index-intro-img" ><img src="<?php echo Path::ROOT . 'assets/img/auth.png' ?>"/></div>
+                            
                         </div>
                         <div class="index-intro-right">
                             <p class="index-intro-text">Authentication functionality is provided by default. The various authentication functions are as follows.</p>
@@ -47,7 +36,7 @@
                 <div class="tab-content">
                     <section class="grid-two-block">
                         <div class="flex-box justify-center align-center">
-                            <div class="index-intro-img" ><img src="../../assets/img/db.png"/></div>
+                            <div class="index-intro-img" ><img src="<?php echo Path::ROOT . 'assets/img/db.png' ?>"/></div>
                         </div>
                         <div class="index-intro-right">
                             <p class="index-intro-text">In conjunction with SQL, read, create, update, and delete operations can be easily performed on the DB.</p>
@@ -58,7 +47,7 @@
                 <div class="tab-content">
                     <section class="grid-two-block">
                         <div class="flex-box justify-center align-center">
-                            <div class="index-intro-img" ><img src="../../assets/img/mail.png"/></div>
+                            <div class="index-intro-img" ><img src="<?php echo Path::ROOT . 'assets/img/mail.png' ?>"/></div>
                         </div>
                         <div class="index-intro-right">
                             <p class="index-intro-text">You can use the function mb_send_mail to implement mail. For example, it is useful for sending a contact form.</p>
@@ -66,7 +55,7 @@
                                 <form 
                                     id="contactForm" 
                                     class="flex-box"
-                                    action="../../logics/user_auth/mail.php" method="POST">
+                                    action="<?php echo Path::ROOT . 'mail' ?>" method="POST">
                                     <div class="mr-2">
                                         <div class="form-group">
                                             <label for="name">name</label>
@@ -101,14 +90,14 @@
                 <div class="tab-content">
                     <section class="grid-two-block">
                         <div class="flex-box justify-center align-center">
-                            <div class="index-intro-img" ><img src="../../assets/img/upload.png"/></div>
+                            <div class="index-intro-img" ><img src="<?php echo Path::ROOT . 'assets/img/upload.png' ?>"/></div>
                         </div>
                         <div class="index-intro-right mb-4">
                             <p class="index-intro-text">Try out file-related processes such as image uploading and PDF output.</p>
                                 <h3>■ Image Upload(png/jpg)</h3>
                                 <p> see storage/doc directory</p>
                                 <div class="flex-box justify-center">
-                                    <form method ="POST" action="../../logics/user_auth/upload.php" enctype="multipart/form-data">
+                                    <form method ="POST" action="<?php echo Path::ROOT . 'upload' ?>" enctype="multipart/form-data">
                                         <input type="hidden" name="max_file_size" value="1000000">
                                         <input id="upload"  type="file" name="upfile" size="40">
                                         <div class="flex-box justify-center mt-2">
@@ -120,7 +109,7 @@
                                 <h3>■ PDF</h3>
                                 <div class="flex-box justify-center">
                                     <div class="flex-box justify-center">
-                                        <form action="../../logics/user_auth/pdf.php" method="POST">
+                                        <form action="<?php echo Path::ROOT . 'pdf' ?>" method="POST">
                                             <label class="file-label">
                                                 PDF download
                                                 <input type="submit" name="pdf" class="file-input" value="pdf">
@@ -141,7 +130,7 @@
         <div class="close">×</div>
         <h2>APP DEMO</h2>
         <p>This is an example of a function that can record a visit to a music concert.</p>
-        <a href="/the-elephant-in-the-room/pages/home.php" class="modal-btn">DEMO</a>
+        <a href="/the-elephant-in-the-room/home" class="modal-btn">DEMO</a>
     </div> 
 </div>
 <?php include('pages/layouts/footer.php'); ?>

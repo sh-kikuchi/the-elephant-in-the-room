@@ -1,8 +1,13 @@
 <?php
-require_once 'database/db_connect.php';
-require_once 'util/trait/file.php';
 
-class ArtistConcert
+namespace app\models;
+
+use app\database\DataBaseConnect;
+use app\classes\ArtistConcertRequest;
+
+require_once 'interfaces\models\IArtistConcert.php';
+
+class ArtistConcert implements IArtistConcert
 {
     /**
      * Show ArtistConcert lists
@@ -11,7 +16,8 @@ class ArtistConcert
      */
     public function show():array{
       $concerts_array = [];
-      $pdo = db_connect();
+      $dbConnect = new DataBaseConnect();
+      $pdo       = $dbConnect->getPDO();
       $sql = "SELECT 
           c.name AS concert_name
           ,c.id  AS concert_id
@@ -25,7 +31,7 @@ class ArtistConcert
           ON c.id = ac.concert_id
           ORDER BY c.date desc";
       $concerts = $pdo->query($sql);
-      $result = $concerts->fetchAll(PDO::FETCH_ASSOC|PDO::FETCH_GROUP);
+      $result = $concerts->fetchAll(\PDO::FETCH_ASSOC|\PDO::FETCH_GROUP);
       foreach($result as $key => $concert){
           $artist_names = [];
           $concert_data = [];
@@ -48,18 +54,19 @@ class ArtistConcert
      * @param  array   $postData
      * @return boolean $result
      */
-    public function create(array $postData):bool{
+    public function create(ArtistConcertRequest $artist_concert_request):bool{
         $result = false;
-        $pdo    = db_connect();
+        $dbConnect = new DataBaseConnect();
+        $pdo       = $dbConnect->getPDO();
         $sql    ="INSERT INTO artist_concert(artist_id, concert_id) VALUES(:artist_id,:concert_id)";
         $stmt   = $pdo->prepare($sql);
-        $concert_id = $postData["concert_id"];
-        $artist_ids = $postData["artist_id"];
+        $concert_id = $artist_concert_request->getConcertId();
+        $artist_ids = $artist_concert_request->getArtistId();
         try{  
             $pdo->beginTransaction();
             foreach($artist_ids as $artist_id){
-                $stmt->bindValue(":artist_id", $artist_id, PDO::PARAM_STR);
-                $stmt->bindValue(":concert_id", $concert_id, PDO::PARAM_STR);
+                $stmt->bindValue(":artist_id", $artist_id, \PDO::PARAM_STR);
+                $stmt->bindValue(":concert_id", $concert_id, \PDO::PARAM_STR);
                 $stmt->execute();
             };
             $result = true;
@@ -76,16 +83,17 @@ class ArtistConcert
      * @param  array   $postData
      * @return boolean $result
      */
-    public function delete(array $postData):bool{
+    public function delete(ArtistConcertRequest $artist_concert_request):bool{
         $result = false;
-        $pdo    = db_connect();
+        $dbConnect = new DataBaseConnect();
+        $pdo       = $dbConnect->getPDO();
         $sql    = "DELETE FROM artist_concert WHERE concert_id = :concert_id";
         $stmt   = $pdo->prepare($sql);
-        $id     = intval($postData["concert_id"]);
+        $id     = intval($artist_concert_request->getConcertId());
         try{
             $pdo->beginTransaction();
             $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(":concert_id", $id, PDO::PARAM_INT);
+            $stmt->bindValue(":concert_id", $id, \PDO::PARAM_INT);
             $stmt->execute();
             $pdo->commit();
             $result = true;

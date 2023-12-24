@@ -1,20 +1,3 @@
-<?php
-    session_start();
-    require_once '../../util/fragile.php';
-    require_once '../../models/Artist.php';
-    require_once '../../models/Concert.php';
-    require_once '../../models/UserAuth.php';
-    $artist_models  = new Artist();
-    $concert_models = new Concert();
-    $artists        = $artist_models->show();
-    $concerts       = $concert_models->show();
-    $result         = UserAuth::checkSign();
-    $signin_user    = isset($_SESSION['signin_user']) ? $_SESSION['signin_user']: null;
-    $errors         = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
-    $old            = isset($_SESSION['old']) ? $_SESSION['old'] : null;
-    unset($_SESSION['errors']);
-    unset($_SESSION['old']);
-?>
 <?php include('pages/layouts/header.php') ?>
 <div class="wrapper">
     <?php if (isset($errors)) : ?>
@@ -25,9 +8,9 @@
         </ul>
     <?php endif; ?>
     <h2 class="text-center pt-2">Artist_Concert <br>Registration</h2>
-    <a class="pl-3" href="../artist_concert">BACK</a>
+    <a class="pl-3" href="<?php echo Path::ROOT . 'artist_concert' ?>">BACK</a>
     <section class="flex-box justify-center">
-        <form method="post" action="../../logics/artist_concert/create.php">
+        <form method="post" action="<?php echo Path::ROOT . 'artist_concert/create' ?>">
             <input hidden name="user_id" class="crud-form-input" value="<?php echo h($signin_user['id']);?>">
             <div class="flex-box justify-center">
             <div class="my-2">

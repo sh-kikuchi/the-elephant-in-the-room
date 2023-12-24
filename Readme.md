@@ -29,7 +29,7 @@
 │  ├─errors
 │  ├─layouts
 │  └─user_auth
-├─rules
+├─classes
 ├─storage
 │  └─doc
 ├─tests

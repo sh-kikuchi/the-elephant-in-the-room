@@ -1,23 +1,23 @@
 <?php
-require_once 'database/db_connect.php';
-require_once 'util/trait/file.php';
-require_once 'util/trait/mail.php';
-require_once 'util/trait/pdf.php';
-require_once 'interfaces/file.php';
-require_once 'interfaces/mail.php';
-require_once 'interfaces/pdf.php';
 
-class UserAuth implements IFile, IMail, IPDF {
-    use File, Mail, PDF;
+namespace app\models;
+
+use app\database\DataBaseConnect;
+
+require_once 'interfaces\models\IUserAuth.php';
+
+class UserAuth implements IUserAuth {
+
     /**
      * Register a user
      * @param array $userData
      * @return bool $result
      */
     public static function signup($userData):bool {
-        $result = false;
-        $pdo    = db_connect();
-        $sql    = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
+        $result    = false;
+        $dbConnect = new DataBaseConnect();
+        $pdo       = $dbConnect->getPDO();
+        $sql       = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
 
         // putting user data into an array
         $arr   = [];
@@ -64,6 +64,8 @@ class UserAuth implements IFile, IMail, IPDF {
             return $result;
         }
         $_SESSION['msg'] =  $password;
+
+
         return $result;
     }
     /**
@@ -71,15 +73,16 @@ class UserAuth implements IFile, IMail, IPDF {
      * @param string $email
      * @return array|bool $user|false
      */
-    public static function getUserByEmail(string $email) :array
+    public static function getUserByEmail(string $email)
     {
         $sql = 'SELECT * FROM users WHERE email = ?';
+        $dbConnection = new DataBaseConnect();
+        $pdo = $dbConnection->getPDO();
 
         $arr = [];
         $arr[] = $email;
-
         try {
-          $stmt = db_connect()->prepare($sql);
+          $stmt = $pdo->prepare($sql);
           $stmt->execute($arr);
           $user = $stmt->fetch();
           return $user;
@@ -94,12 +97,12 @@ class UserAuth implements IFile, IMail, IPDF {
      */
     public static function checkSign():bool
     {
-        $result = false;
-        // true if there is 'signin_user' in the session
-        if (isset($_SESSION['signin_user']) && $_SESSION['signin_user']['id'] > 0) {
-          return $result = true;
-        }
-        return $result;
+      $result = false;
+      // true if there is 'signin_user' in the session
+      if (isset($_SESSION['signin_user']) && $_SESSION['signin_user']['id'] > 0) {
+        $result = true;
+      }
+      return $result;
     }
     /**
      * Signout
@@ -109,6 +112,6 @@ class UserAuth implements IFile, IMail, IPDF {
     public static function signout():void{
         session_destroy();
         //Back to Sign-in Page.
-        header('Location: /the-elephant-in-the-room/pages/user_auth/signin_form.php');
+        header('Location: /the-elephant-in-the-room/signin');
     }
 }

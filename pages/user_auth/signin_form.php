@@ -1,18 +1,3 @@
-<?php
-    session_start();
-    require_once '../../util/fragile.php';
-    require_once '../../models/UserAuth.php';
-    require_once '../../models/UserAuth.php';
-    $result = UserAuth::checkSign();
-    if($result) {
-      header('Location: my_page.php');
-      return;
-    }
-    $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
-    $old    = isset($_SESSION['old']) ? $_SESSION['old'] : null;
-    unset($_SESSION['errors']);
-    unset($_SESSION['old']);
-?>
 <?php require('pages/layouts/header.php') ?>
 <div class="wrapper">
     <?php if (isset($errors)) : ?>
@@ -24,7 +9,7 @@
     <?php endif; ?>
     <h2 class="text-center pt-2">Sign-in</h2>
     <section class="flex-box justify-center">
-        <form action="../../logics/user_auth/signin.php" method="POST">
+        <form action=<?php echo Path::ROOT."signin" ?> method="POST">
           <input type="hidden" name="csrf_token" value="<?php echo h(setToken()); ?>">  
           <div class="flex-box justify-center">
               <label for="email" class="label">E-mail:</label>
@@ -37,7 +22,7 @@
             <div class="flex-box justify-center my-2">
               <input type="submit" class="button primary " value="Enter"> 
             </div>
-            <a href="signup_form.php" class="text-center">Click here to register as a new user.</a>
+            <a href=<?php echo Path::ROOT."signup" ?> class="text-center">Click here to register as a new user.</a>
         </form>
     </section>
 </div>

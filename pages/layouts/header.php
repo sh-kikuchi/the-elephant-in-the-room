@@ -32,12 +32,12 @@
         <ul class="nav-items">
             <li class="nav-item"><a class="nav-item" href=<?php echo Path::ROOT ?> >TOP</a></li>
             <?php if (!isset($_SESSION['signin_user'])) : ?>
-                <li class="nav-item"><a class="nav-item" href=<?php echo Path::ROOT."pages/user_auth/signin_form.php" ?>>Signin</a></li>
-                <li class="nav-item"><a class="nav-item" href=<?php echo Path::ROOT."pages/user_auth/signup_form.php" ?>>Signup</a></li>
+                <li class="nav-item"><a class="nav-item" href=<?php echo Path::ROOT."signin" ?>>Signin</a></li>
+                <li class="nav-item"><a class="nav-item" href=<?php echo Path::ROOT."signup" ?>>Signup</a></li>
             <?php else: ?>
-                <li class="nav-item"><a class="nav-item" href=<?php echo Path::ROOT."pages/home.php" ?> >Home</a></li>
+                <li class="nav-item"><a class="nav-item" href=<?php echo Path::ROOT."home" ?> >Home</a></li>
                 <li class="nav-item flex-box justify-center">
-                    <form action="<?php echo Path::ROOT."logics/user_auth/signout.php" ?>" method="POST">
+                    <form action="<?php echo Path::ROOT."signout" ?>" method="POST">
                         <input type="submit" name="signout" class="input-init" value="Signout" style="font-size:21px; cursor: pointer;">
                     </form>
                 </li>

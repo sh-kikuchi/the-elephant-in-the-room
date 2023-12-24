@@ -1,17 +1,3 @@
-
-<?php
-    session_start();
-    require_once '../../util/fragile.php';
-    require_once '../../util/pagination.php';
-    require_once '../../models/Artist.php';
-    $models     = new Artist();
-    $showData   = $models->show();
-    $pagination = paginate($showData, 10);
-    $artists    = $pagination['data'];
-    $max_page   = $pagination['max_page'];
-    $errors      = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
-    unset($_SESSION['errors']);
-?>
 <?php include('pages/layouts/header.php'); ?>
 <div class="wrapper px-2">
     <?php if (isset($errors)) : ?>
@@ -22,8 +8,8 @@
         </ul>
     <?php endif; ?>
     <h2 class="text-center pt-2">Artists</h2>
-    <div class="text-left pl-2"><a href="../home.php">Home</a></div>
-    <div class="text-right"><a href="../artist/create_form.php">create a new artist</a></div>
+    <div class="text-left pl-2"><a href="<?php echo Path::ROOT."home" ?> ">Home</a></div>
+    <div class="text-right"><a href="<?php echo Path::ROOT."artist/create" ?>">create a new artist</a></div>
     <div class="flex-box justify-center">
         <table class="mx-3">
             <thead>
@@ -49,12 +35,13 @@
                     <td class="text-center">
                         <div class="flex-box justify-center">
                             <div>
-                                <a class="crud-edit " href="../artist/update_form.php?id=<?php echo $artist["id"]; ?>">EDIT</a>
+                                <a class="crud-edit" href="<?php echo Path::ROOT .'artist/update?id='. h($artist["id"]); ?>">EDIT</a>
                             </div>
                         </div>
                         <div>
-                            <form name="id"  method="POST" action="../../logics/artist/delete.php">
+                            <form name="id"  method="POST" action="<?php echo Path::ROOT .'artist/delete' ?>">
                                 <input hidden name="id" value="<?php echo h($artist["id"]); ?>">
+                                <input hidden name="delete" value="">
                                 <button type="submit" class="crud-delete">DELETE</button>
                             </form>
                         </div>
@@ -69,7 +56,7 @@
         <?php for($i = 1; $i <= $max_page; $i++){?>
             <a 
                 class="pagenation"
-                href="/the-elephant-in-the-room/pages/artist?page_id=<?php echo $i; ?>" 
+                href="<?php echo Path::ROOT . 'artist?page_id=' . $i; ?>" 
             > <?php echo  $i ?></a>
         <?php }?>
     </div>

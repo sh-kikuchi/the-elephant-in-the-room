@@ -1,22 +1,9 @@
-
-<?php
-    session_start();
-    require_once '../../util/fragile.php';
-    require_once '../../util/pagination.php';
-    require_once '../../models\Concert.php';
-    $models     = new Concert();
-    $showData   = $models->show();
-    $pagination = paginate($showData, 10);
-    $concerts   = $pagination['data'];
-    $max_page   = $pagination['max_page'];
-    $signin_user = isset($_SESSION['signin_user'])?$_SESSION['signin_user']:null;
-?>
 <?php include('pages/layouts/header.php'); ?>
 <div class="wrapper">
     <h2 class="text-center pt-2">Concerts</h2>
-    <div class="text-left pl-2"><a href="../home.php">Home</a></div>
+    <div class="text-left pl-2"><a href="<?php echo Path::ROOT . 'home' ?>">Home</a></div>
     <div class="text-right pr-2 my-2">
-        <a class="crud-create" href="../concert/create_form.php">create a new concert</a>
+        <a class="crud-create" href="<?php echo Path::ROOT . 'concert/create' ?>">create a new concert</a>
     </div>
     <div class="flex-box justify-center">
         <table class="mx-3">
@@ -43,12 +30,13 @@
                     <td class="text-center">
                         <div class="flex-box justify-center">
                             <div>
-                              <a class="crud-edit" href="../concert/update_form.php?id=<?php echo h($concert["id"]); ?>">EDIT</a>
+                              <a class="crud-edit" href="<?php echo Path::ROOT . 'concert/update?id='. h($concert["id"]); ?>">EDIT</a>
                             </div>
                         </div>
                         <div>
-                            <form method="POST" action="../../logics/concert/delete.php">
+                            <form method="POST" action="<?php echo Path::ROOT . 'concert/delete'; ?>">
                                 <input hidden class="crud-form-input" name="id" value="<?php echo h($concert["id"]); ?>">
+                                <input hidden name="delete" value="">
                                 <button type="submit" class="crud-delete">DELETE</button>
                             </form>
                         </div>
@@ -61,7 +49,7 @@
     <!--pagenation-->
     <div class="flex-box justify-center my-2">
         <?php for($i = 1; $i <= $max_page; $i++){?>
-        <a class="pagenation" href="/the-elephant-in-the-room/pages/concert?page_id=<?php echo $i; ?>" > <?php echo  $i ?></a>
+        <a class="pagenation" href="/the-elephant-in-the-room/concert?page_id=<?php echo $i; ?>" > <?php echo  $i ?></a>
         <?php }?>
     </div>
 </div>

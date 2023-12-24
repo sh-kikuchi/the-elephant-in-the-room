@@ -1,10 +1,14 @@
 <?php
-require_once 'database/db_connect.php';
-require_once 'util/trait/file.php';
 
-class Concert
+namespace app\models;
+
+use app\database\DataBaseConnect;
+use app\classes\ConcertRequest;
+
+require_once 'interfaces\models\IConcert.php';
+
+class Concert implements IConcert
 {
-    use File; 
     /**
      * Show concert lists
      * @param  - 
@@ -12,7 +16,8 @@ class Concert
      */
     public function show():array{
       $concerts_array = [];
-      $pdo = db_connect();
+      $dbConnect = new DataBaseConnect();
+      $pdo       = $dbConnect->getPDO();
       $sql = "SELECT
           id 
           ,name
@@ -31,7 +36,8 @@ class Concert
     */
     public function getConcert(int $id):array{
       $concerts_array = [];
-      $pdo = db_connect();
+      $dbConnect = new DataBaseConnect();
+      $pdo       = $dbConnect->getPDO();
       $sql = "SELECT 
           id
           ,name
@@ -49,21 +55,22 @@ class Concert
      * @param  array   $postData
      * @return boolean $result
      */
-    public function create(array $postData):bool{
+    public function create(ConcertRequest $concert_request):bool{
         $result = false;
-        $pdo              = db_connect();
+        $dbConnect = new DataBaseConnect();
+        $pdo       = $dbConnect->getPDO();
         $sql              = "INSERT INTO concerts(user_id, name, date, place) VALUES(:user_id ,:name, :date, :place)";
         $stmt             = $pdo->prepare($sql);
-        $user_id          = $postData["user_id"];
-        $name             = $postData["name"];
-        $date             = $postData["date"];
-        $place            = $postData["place"]; 
+        $user_id          = $concert_request->getUserId();
+        $name             = $concert_request->getName();
+        $date             = $concert_request->getDate();
+        $place            = $concert_request->getPlace(); 
         try{
             $pdo->beginTransaction();
-            $stmt->bindValue(":user_id", $user_id, PDO::PARAM_STR);
-            $stmt->bindValue(":name", $name, PDO::PARAM_STR);
-            $stmt->bindValue(":date", $date, PDO::PARAM_STR);
-            $stmt->bindValue(":place", $place, PDO::PARAM_STR);
+            $stmt->bindValue(":user_id", $user_id, \PDO::PARAM_STR);
+            $stmt->bindValue(":name", $name, \PDO::PARAM_STR);
+            $stmt->bindValue(":date", $date, \PDO::PARAM_STR);
+            $stmt->bindValue(":place", $place, \PDO::PARAM_STR);
             $stmt->execute();
             $pdo->commit();
             $result = true;
@@ -79,21 +86,23 @@ class Concert
      * @param  array $postData
      * @return boolean $result
      */
-    public function update($postData):bool{
-        $result       = false;
-        $pdo          = db_connect();
-        $sql          = "UPDATE concerts SET name = :name, date = :date, place = :place WHERE id = :id";
-        $stmt         = $pdo->prepare($sql);
-        $id           = $postData["id"];
-        $name         = $postData["name"];
-        $date         = $postData["date"];
-        $place        = $postData["place"];
+    public function update(ConcertRequest $concert_request):bool{
+
+        $result = false;
+        $dbConnect = new DataBaseConnect();
+        $pdo       = $dbConnect->getPDO();
+        $sql    = "UPDATE concerts SET name = :name, date = :date, place = :place WHERE id = :id";
+        $stmt   = $pdo->prepare($sql);
+        $id     = $concert_request->getId();
+        $name   = $concert_request->getName();
+        $date   = $concert_request->getDate();
+        $place  = $concert_request->getPlace(); 
         try{
           $pdo->beginTransaction();
-          $stmt->bindValue(":id", $id, PDO::PARAM_INT);
-          $stmt->bindValue(":name", $name, PDO::PARAM_STR);
-          $stmt->bindValue(":date", $date, PDO::PARAM_STR);
-          $stmt->bindValue(":place", $place, PDO::PARAM_STR);
+          $stmt->bindValue(":id", $id, \PDO::PARAM_INT);
+          $stmt->bindValue(":name", $name, \PDO::PARAM_STR);
+          $stmt->bindValue(":date", $date, \PDO::PARAM_STR);
+          $stmt->bindValue(":place", $place, \PDO::PARAM_STR);
           $stmt->execute();
           $pdo->commit();
           $result = true;
@@ -106,18 +115,19 @@ class Concert
     }
     /**
      * Delete Concert Data
-     * @param  array   $postData
-     * @return boolean $result
+     * @param  ConcertRequest $concert_request
+     * @return boolean        $result
      */
-    public function delete(array $postData):bool{
-        $result  = false;
-        $pdo     = db_connect();
-        $sql     = "DELETE FROM concerts WHERE id = :concert_id";
-        $id      = $postData["id"];
+    public function delete(ConcertRequest $concert_request):bool{
+        $result    = false;
+        $dbConnect = new DataBaseConnect();
+        $pdo       = $dbConnect->getPDO();
+        $sql       = "DELETE FROM concerts WHERE id = :concert_id";
+        $id        = intval($concert_request->getId());
         try{
             $pdo->beginTransaction();
             $stmt = $pdo->prepare($sql);
-            $stmt->bindValue(":concert_id", $id , PDO::PARAM_INT);
+            $stmt->bindValue(":concert_id", $id , \PDO::PARAM_INT);
             $stmt->execute();
             $pdo->commit();
             $result = true;
