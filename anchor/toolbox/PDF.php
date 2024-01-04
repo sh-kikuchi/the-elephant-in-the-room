@@ -16,7 +16,7 @@ class PDF{
         $tcpdf = new TCPDF('L', "mm", 'A4', true, "UTF-8");
         $tcpdf->SetFont('times', '', 12);// font
 
-        // Remove custom headers (top and bottom margins), create pages
+        // Remove custom headers (top and bottom margins), create templates
         $tcpdf->setPrintHeader(false);
         $tcpdf->setPrintFooter(false);
         $tcpdf->AddPage();

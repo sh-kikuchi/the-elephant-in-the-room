@@ -1,7 +1,7 @@
 <?php
 namespace app\services;
 
-use app\models\UserAuth;
+use app\models\repositories\UserAuth;
 use app\classes\UserAuthRequest;
 use app\anchor\toolbox\Session;
 use app\anchor\toolbox\File;
@@ -28,7 +28,7 @@ class UserAuthService implements IUserAuthServiceInterface {
         }
         $signin_user = $_SESSION['signin_user'];
     
-        include "pages/user_auth/my_page.php";
+        include "templates/user_auth/my_page.php";
     }
 
     public function complete(){
@@ -40,12 +40,12 @@ class UserAuthService implements IUserAuthServiceInterface {
         }
         $signin_user = $_SESSION['signin_user'];
     
-        include "pages/user_auth/complete.php";
+        include "templates/user_auth/complete.php";
     }
 
     public function signup_form(){
-        $models = new UserAuth();
-        $result = $models->checkSign();
+        $repositories = new UserAuth();
+        $result = $repositories->checkSign();
         if($result) {
             header('Location:/the-elephant-in-the-room/my_page');
             exit();
@@ -55,7 +55,7 @@ class UserAuthService implements IUserAuthServiceInterface {
         unset($_SESSION['errors']);
         unset($_SESSION['old']);
 
-        include "pages/user_auth/signup_form.php";
+        include "templates/user_auth/signup_form.php";
     }
 
     public function signup(){
@@ -93,7 +93,7 @@ class UserAuthService implements IUserAuthServiceInterface {
         unset($_SESSION['errors']);
         unset($_SESSION['old']);
 
-        include "pages/user_auth/signin_form.php";
+        include "templates/user_auth/signin_form.php";
     }
 
     public function signin(){

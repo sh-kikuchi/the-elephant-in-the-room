@@ -1,19 +1,17 @@
 <?php
 
 require_once __DIR__ . '/vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 use app\anchor\App;
 use app\services\UserAuthService;
-use app\services\ArtistService;
-use app\services\ConcertService;
-use app\services\ArtistConcertService;
+use app\services\PostService;
 
 $app = new App();
 
-$app->router->get('',      function () { include "pages/welcome.php"; });
-$app->router->get('home',  function () { include "pages/home.php"; });
-$app->router->get('home',  function () { include "pages/home.php"; });
-$app->router->get('error', function () { include "pages/errors/error.php";});
+$app->router->get('',      function () { include "templates/welcome.php"; });
+$app->router->get('error', function () { include "templates/errors/error.php";});
 
 //users
 $app->router->get('signin',  function () {(new UserAuthService)->signin_form();});
@@ -26,26 +24,12 @@ $app->router->get('complete', function () {(new UserAuthService)->complete();});
 $app->router->post('mail',   function () {(new UserAuthService)->mail();});
 $app->router->post('upload', function () {(new UserAuthService)->upload();});
 $app->router->post('pdf',    function () {(new UserAuthService)->pdf();});
-
-//artist
-$app->router->get('artist',         function () { (new ArtistService)->index(); });
-$app->router->get('artist/create',  function () { (new ArtistService)->read_create_form(); });
-$app->router->get('artist/update',  function () { (new ArtistService)->read_update_form();  });
-$app->router->post('artist/create', function () { (new ArtistService)->create(); });
-$app->router->post('artist/update', function () { (new ArtistService)->update(); });
-$app->router->post('artist/delete', function () { (new ArtistService)->delete();  });
-//concert
-$app->router->get('concert',         function () { (new ConcertService)->index(); });
-$app->router->get('concert/create',  function () { (new ConcertService)->read_create_form(); });
-$app->router->get('concert/update',  function () { (new ConcertService)->read_update_form();  });
-$app->router->post('concert/create', function () { (new ConcertService)->create(); });
-$app->router->post('concert/update', function () { (new ConcertService)->update(); });
-$app->router->post('concert/delete', function () { (new ConcertService)->delete();  });
-//artist_concert
-$app->router->get('artist_concert',         function () { (new ArtistConcertService)->index(); });
-$app->router->get ('artist_concert/create', function () { (new ArtistConcertService)->read_create_form(); });
-$app->router->post('artist_concert/create', function () { (new ArtistConcertService)->create(); });
-$app->router->post('artist_concert/delete', function () { (new ArtistConcertService)->delete();  });
-
+//post
+$app->router->get('post',         function () { (new PostService)->index(); });
+$app->router->get('post/create',  function () { (new PostService)->createForm(); });
+$app->router->get('post/update',  function () { (new PostService)->updateForm();  });
+$app->router->post('post/create', function () { (new PostService)->create(); });
+$app->router->post('post/update', function () { (new PostService)->update(); });
+$app->router->post('post/delete', function () { (new PostService)->delete();  });
 
 $app->run();

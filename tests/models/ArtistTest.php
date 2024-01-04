@@ -1,6 +1,6 @@
-<!-- vendor/bin/phpunit tests\models\ArtistTest.php -->
+<!-- vendor/bin/phpunit tests\models\repositories\ArtistTest.php -->
 <?php
-use app\models\Artist;
+use app\models\repositories\Artist;
 use app\classes\ArtistRequest;
 use PHPUnit\Framework\TestCase;
 

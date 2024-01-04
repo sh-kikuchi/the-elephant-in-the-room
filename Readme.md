@@ -22,8 +22,8 @@
 │  ├─concert
 │  └─user_auth
 ├─logs
-├─models
-├─pages
+├─repositories
+├─templates
 │  ├─artist
 │  ├─concert
 │  ├─errors
