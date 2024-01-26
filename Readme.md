@@ -20,16 +20,16 @@
 ├─logics
 │  ├─artist
 │  ├─concert
-│  └─user_auth
+│  └─user
 ├─logs
-├─models
-├─pages
+├─repositories
+├─templates
 │  ├─artist
 │  ├─concert
 │  ├─errors
 │  ├─layouts
-│  └─user_auth
-├─rules
+│  └─user
+├─classes
 ├─storage
 │  └─doc
 ├─tests

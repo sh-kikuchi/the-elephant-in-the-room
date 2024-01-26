@@ -1,4 +1,9 @@
 <?php
+namespace app\config;
+
+use app\config\Path;
+
+// https://www.php.net/manual/ja/filter.filters.validate.php
 class Message {
     const UPLOAD_ERR = [
         'INT_SIZE'    => 'HTML MAX_FILE_SIZE limit exceeded.',
