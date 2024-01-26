@@ -10,7 +10,8 @@
     <h2 class="text-center pt-2">Posts</h2>
     <a class="pl-3" href="<?php echo Path::ROOT . 'post' ?>">BACK</a>
     <section class="flex-box justify-center">
-      <form method="post" action="<?php echo Path::ROOT . 'post/create' ?>">
+      <form name ="post_create" method="post" action="<?php echo Path::ROOT . 'post/create' ?>">
+        <input hidden name="csrf_token" value="<?php echo h($csrf); ?>">  
         <input hidden name="user_id" value="<?php echo h($signin_user["id"]);?>"> 
         <div class="flex-box">
           <label for="title" class="label">title</label>

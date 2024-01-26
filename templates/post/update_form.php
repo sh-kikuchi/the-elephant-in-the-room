@@ -10,7 +10,8 @@
     <h2 class="text-center pt-2">Posts</h2>
     <a class="pl-3" href="<?php echo Path::ROOT . 'post' ?>">BACK</a>
     <section class="flex-box justify-center">
-        <form method="post"  action="<?php echo Path::ROOT . 'post/update' ?>">
+        <form name="post_update" method="post"  action="<?php echo Path::ROOT . 'post/update' ?>">
+            <input hidden name="csrf_token" value="<?php echo h($csrf); ?>">  
             <?php foreach ($posts as $post){?>
                 <input hidden name="id" value="<?php echo h($post["id"]);?>">
                 <div class="flex-box">

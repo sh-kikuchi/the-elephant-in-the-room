@@ -1,7 +1,7 @@
 <?php
     namespace app\database\migrations;
     require_once 'vendor/autoload.php';
-    use app\database\DataBaseConnect;
+    use app\anchor\database\DataBaseConnect;
 
     class UsersTable {
         public function migrate(){

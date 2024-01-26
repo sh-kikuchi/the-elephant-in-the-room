@@ -4,9 +4,9 @@ namespace app\classes;
 use app\anchor\toolbox\Session;
 use app\anchor\https\Validator;
 
-require_once 'interfaces\classes\IUserAuthRequest.php';
+require_once 'interfaces\classes\IUserRequest.php';
 
-class UserAuthRequest implements IUserAuthRequest{
+class UserRequest implements IUserRequest{
     protected int    $id;
     protected string $name;
     protected string $email;
@@ -100,19 +100,20 @@ class UserAuthRequest implements IUserAuthRequest{
         $csrf_token    = $this->csrf_token;
 
         $validator->required($email,'email');
-        $validator->required($password,'password');
-
-        $errors = $validator->getErrors();
+        $validator->required($password,'password'); 
 
         if (!isset($_SESSION['csrf_token']) || $csrf_token !== $_SESSION['csrf_token']) {
             array_push($errors,'Invalid request.');
         }
+
         
         if ($errors !== [] &&  count($errors) > 0) {
             $_SESSION['errors'] = $errors;       
             header('Location: /the-elephant-in-the-room/signin');
             exit();
         }
+  
+        return $this->getArrayData();
     }
     /**
      * Validate POST data for sign-up

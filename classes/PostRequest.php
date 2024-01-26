@@ -5,7 +5,7 @@ namespace app\classes;
 use app\anchor\toolbox\Session;
 use app\anchor\https\Validator;
 use app\models\repositories\PostRepository;
-use app\database\DataBaseConnect;
+use app\anchor\database\DataBaseConnect;
 
 require_once 'interfaces\classes\IPostRequest.php';
 

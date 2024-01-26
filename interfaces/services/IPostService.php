@@ -9,4 +9,5 @@ interface IPostService {
     public function create();
     public function update();
     public function delete();
+    public function makePost($post_form);
 }

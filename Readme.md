@@ -20,7 +20,7 @@
 ├─logics
 │  ├─artist
 │  ├─concert
-│  └─user_auth
+│  └─user
 ├─logs
 ├─repositories
 ├─templates
@@ -28,7 +28,7 @@
 │  ├─concert
 │  ├─errors
 │  ├─layouts
-│  └─user_auth
+│  └─user
 ├─classes
 ├─storage
 │  └─doc

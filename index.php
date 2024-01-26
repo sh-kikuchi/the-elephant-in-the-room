@@ -5,7 +5,7 @@ $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 use app\anchor\App;
-use app\services\UserAuthService;
+use app\services\UserService;
 use app\services\PostService;
 
 $app = new App();
@@ -14,16 +14,16 @@ $app->router->get('',      function () { include "templates/welcome.php"; });
 $app->router->get('error', function () { include "templates/errors/error.php";});
 
 //users
-$app->router->get('signin',  function () {(new UserAuthService)->signin_form();});
-$app->router->post('signin', function () {(new UserAuthService)->signin();});
-$app->router->get('signup',  function () {(new UserAuthService)->signup_form();});
-$app->router->post('signup', function () {(new UserAuthService)->signup();});
-$app->router->post('signout',function () {(new UserAuthService)->signout();});
-$app->router->get('my_page', function () {(new UserAuthService)->my_page();});
-$app->router->get('complete', function () {(new UserAuthService)->complete();});
-$app->router->post('mail',   function () {(new UserAuthService)->mail();});
-$app->router->post('upload', function () {(new UserAuthService)->upload();});
-$app->router->post('pdf',    function () {(new UserAuthService)->pdf();});
+$app->router->get('signin',  function () {(new UserService)->signinForm();});
+$app->router->post('signin', function () {(new UserService)->signin();});
+$app->router->get('signup',  function () {(new UserService)->signupForm();});
+$app->router->post('signup', function () {(new UserService)->signup();});
+$app->router->post('signout',function () {(new UserService)->signout();});
+$app->router->get('my_page', function () {(new UserService)->myPage();});
+$app->router->get('complete', function () {(new UserService)->complete();});
+$app->router->post('mail',   function () {(new UserService)->mail();});
+$app->router->post('upload', function () {(new UserService)->upload();});
+$app->router->post('pdf',    function () {(new UserService)->pdf();});
 //post
 $app->router->get('post',         function () { (new PostService)->index(); });
 $app->router->get('post/create',  function () { (new PostService)->createForm(); });

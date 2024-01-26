@@ -1,8 +1,3 @@
-<?php 
-require 'repositories/UserAuth.php';
-session_start();
-$signin_user = isset($_SESSION['signin_user'])?$_SESSION['signin_user']:null;
-?>
 <?php include('templates/layouts/header.php'); ?>
     <section id="index-firstview">
         <div class="index-fv-title">
@@ -53,7 +48,7 @@ $signin_user = isset($_SESSION['signin_user'])?$_SESSION['signin_user']:null;
                 <div>
                     <h3 class="text-left">■ repositories</h3>
                     <div>
-                        <p>A place to prepare classes describing the processing of DB operations (CRUD). As the class name is UpperCamel type (e.g. UserAuth), the file name also matches this.</p>
+                        <p>A place to prepare classes describing the processing of DB operations (CRUD). As the class name is UpperCamel type (e.g. User), the file name also matches this.</p>
                     </div>
                 </div>
                 <div>

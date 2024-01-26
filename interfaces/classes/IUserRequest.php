@@ -2,7 +2,7 @@
 
 namespace app\classes;
 
-interface IUserAuthRequest {
+interface IUserRequest {
     public function setId($id);
     public function setName($name);
     public function setEmail($email);

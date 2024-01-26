@@ -8,8 +8,8 @@ class PostEntity
     private $userId;
     private $title;
     private $body;
-    private $createdAt;
-    private $updatedAt;
+    private $created_at;
+    private $updated_at;
 
     //Getter
     public function getId()
@@ -34,12 +34,12 @@ class PostEntity
 
     public function getCreatedAt()
     {
-        return $this->createdAt;
+        return $this->created_at;
     }
 
     public function getUpdatedAt()
     {
-        return $this->updatedAt;
+        return $this->updated_at;
     }
 
     //Setter
@@ -65,11 +65,11 @@ class PostEntity
 
     public function setCreatedAt(string $created_at): string
     {
-        return $this->createdAt = $created_at;
+        return $this->created_at = $created_at;
     }
 
-    public function setUpdatedAt(string $updatedAt): string
+    public function setUpdatedAt(string $updated_at): string
     {
-        return $this->updatedAt = $updated_at;
+        return $this->updated_at = $updated_at;
     }
 }

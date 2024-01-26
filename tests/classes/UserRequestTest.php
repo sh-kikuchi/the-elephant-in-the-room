@@ -1,53 +1,44 @@
+<!-- vendor/bin/phpunit tests\classes\UserRequestTest.php -->
 <?php
-use app\classes\UserAuthRequest;
 use PHPUnit\Framework\TestCase;
+use app\classes\UserRequest;
 
-class UserAuthRequestTest extends TestCase{
-    protected $user;
+class UserRequestTest extends TestCase {
+    protected $userRequest;
 
-    public function setup(): void {
-      $data=[];
-      $this->user = new UserAuthRequest($data);
+    protected function setUp(): void {
+        parent::setUp();
+        $this->userRequest = new UserRequest([]);
+        $_SESSION['errors'] = [];
+        $_SESSION['csrf_token'] = 'valid_csrf_token';
     }
 
-    public function testGetId(): void {
-      $this->user->setId(123456);
-      $this->assertEquals($this->user->getId(), 123456);
+    public function testSignInValidation() {
+
+        $postData = [
+            'email'      => 'test@example.com',
+            'password'   => 'password123',
+            'csrf_token' => 'valid_csrf_token'
+        ];
+
+        $this->userRequest = new UserRequest($postData);
+        $this->userRequest->signInValidation();
+       
+        $this->assertEmpty($_SESSION['errors']);
     }
 
-    public function testGetName(): void {
-      $this->user->setName('revue');
-      $this->assertEquals($this->user->getName(), 'revue');
-    }
+    public function testSignUpValidation() {
+        $postData = [
+            'name'           => 'John Doe',
+            'email'          => 'john.doe@example.com',
+            'password'       => 'StrongPass123',
+            'password_conf'  => 'StrongPass123',
+            'csrf_token'     => 'valid_csrf_token'
+        ];
 
-    public function testGetEmail(): void {
-      $this->user->setEmail('elephant@room.jp');
-      $this->assertEquals($this->user->getEmail(), 'elephant@room.jp');
-    }
+        $this->userRequest = new UserRequest($postData);
+        $this->userRequest->signUpValidation();
 
-    public function testGetPassword(): void {
-      $this->user->setPassword('password');
-      $this->assertEquals($this->user->getPassword(), 'password');
-    }
-
-    public function testGetPasswordConf(): void {
-      $this->user->setPasswordConf('password');
-      $this->assertEquals($this->user->getPasswordConf(), 'password');
-    }
-
-    public function testGetCsrfToken(): void {
-      $this->user->setCsrfToken('xcbnxcjhxjh');
-      $this->assertEquals($this->user->getCsrfToken(), 'xcbnxcjhxjh');
-    }
-
-    public function testGetArrayData(): void {
-        $data['id']             = 0;
-        $data['name']           = '';
-        $data['email']          = '';
-        $data['password']       = '';
-        $data['password_conf']  = '';
-        $data['csrf_token']     = '';
-
-        $this->assertEquals($this->user->getArrayData(), $data);
+        $this->assertEmpty($_SESSION['errors']);
     }
 }

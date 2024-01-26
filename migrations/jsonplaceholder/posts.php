@@ -3,7 +3,7 @@
 require 'vendor/autoload.php'; // Composer autoloader
 
 use GuzzleHttp\Client;
-use app\database\DataBaseConnect;
+use app\anchor\database\DataBaseConnect;
 
 $dbConnect = new DataBaseConnect();
 $pdo = $dbConnect->getPDO();
@@ -16,21 +16,21 @@ $client = new Client([
     'base_uri' => $baseUrl,
 ]);
 
-// APIからusersデータを取得
-$response = $client->get('/users');
+// APIからpostsデータを取得
+$response = $client->get('/posts');
 
 // ステータスコードが200 OKの場合のみ処理を続行
 if ($response->getStatusCode() == 200) {
     // レスポンスボディをJSON形式でデコード
-    $users = json_decode($response->getBody(), true);
+    $posts = json_decode($response->getBody(), true);
 
     // データを表示
-    foreach ($users as $user) {
-        $stmt = $pdo->prepare('INSERT INTO users (name, email, password) VALUES (:name, :email, :password)');
+    foreach ($posts as $post) {
+        $stmt = $pdo->prepare('INSERT INTO posts (user_id, title, body) VALUES (:user_id, :title, :body)');
         $stmt->execute([
-            ':name'  => $user['name'],
-            ':email' => $user['email'],
-            ':password' => password_hash('password', PASSWORD_DEFAULT)
+            ':user_id' => $post['userId'],
+            ':title' => $post['title'],
+            ':body' => $post['body'],
         ]);
     }
 

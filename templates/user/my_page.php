@@ -130,7 +130,7 @@
         <div class="close">×</div>
         <h2>APP DEMO</h2>
         <p>This is an example of a function that can record a visit to a music concert.</p>
-        <a href="/the-elephant-in-the-room/home" class="modal-btn">DEMO</a>
+        <a href="/the-elephant-in-the-room/post" class="modal-btn">DEMO</a>
     </div> 
 </div>
 <?php include('templates/layouts/footer.php'); ?>

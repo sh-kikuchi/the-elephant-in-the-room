@@ -2,78 +2,116 @@
 
 namespace app\services;
 
-use app\models\repositories\PostRepository;
-use app\classes\PostRequest;
-use app\models\repositories\UserAuth;
+use app\anchor\Service;
+use app\anchor\Template;
 use app\anchor\toolbox\Session;
-use app\anchor\toolbox\Page;
+use app\classes\PostRequest;
 use app\models\entities\PostEntity as Post;
+use app\models\repositories\PostRepository;
+use app\models\repositories\UserRepository;
 
 require_once 'anchor\toolbox\functions\fragile.php';
 require_once 'anchor\toolbox\functions\pagination.php';
-
 require_once 'interfaces\services\IPostService.php';
 
-class PostService implements IPostService {
+class PostService extends Service implements IPostService {
 
     public function index(){
-        new Session;
-    
-        $result = UserAuth::checkSign();
+        // send form name for setting the token. 
+        $csrf = $this->setToken('post_delete');
+
+        $user   = new UserRepository();
+        $result = $user->checkSign();
         if (!$result) {
           // $_SESSION['signin_err'] = Message::sign_error;
           header('Location: /the-elephant-in-the-room/signin');
           return;
         }
+
         $repository = new PostRepository();
         $showData   = $repository->show();
         $pagination = paginate($showData, 10);
-        $posts    = $pagination['data'];
-        $max_page   = $pagination['max_page'];
-        $errors      = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
+
+        // rendering
+        $template = new Template(
+            'post/index', [
+                'csrf'     => $this->setToken('post_delete'),
+                'posts'    => $pagination['data'],
+                'max_page' => $pagination['max_page'],
+                'errors'   => isset($_SESSION['errors']) ? $_SESSION['errors'] : null
+            ]
+        );
+
         unset($_SESSION['errors']);
 
-        include "templates/post/index.php";
+        return $template->render();
     }
 
     public function createForm(){
         new Session;
-        $result = UserAuth::checkSign();
+        $user   = new UserRepository();
+
+        // check authorization
+        $result = $user->checkSign();
         if (!$result) {
           header('Location: /the-elephant-in-the-room/signin');
           return;
         }
+
         $post_repositories    = new PostRepository();
-        $posts          = $post_repositories->show();
-        $signin_user    = isset($_SESSION['signin_user']) ? $_SESSION['signin_user']: null;
-        $errors         = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
-        $old            = isset($_SESSION['old']) ? $_SESSION['old'] : null;
+
+        // rendering
+        $template = new Template(
+            'post/create_form', [
+                'csrf'        => $this->setToken('post_create'),
+                'posts'       => $post_repositories->show(),
+                'signin_user' => isset($_SESSION['signin_user']) ? $_SESSION['signin_user']: null,
+                'errors'      => isset($_SESSION['errors']) ? $_SESSION['errors'] : null,
+                'old'         => isset($_SESSION['old']) ? $_SESSION['old'] : null
+            ]
+        );
         unset($_SESSION['errors']);
         unset($_SESSION['old']);
-    
-        return include "templates/post/create_form.php";
 
+        return $template->render();
     }
 
     public function updateForm(){
         new Session;
-        $result = UserAuth::checkSign();
+        $user   = new UserRepository();
+        $result = $user->checkSign();
+
         if (!$result) {
           header('Location: /the-elephant-in-the-room/signin');
           return;
         }
+
         $repository = new PostRepository();
-        $posts = $repository->getPost(intval($_GET["id"]));
-        $result = UserAuth::checkSign();
-        $signin_user = isset($_SESSION['signin_user']) ? $_SESSION['signin_user']: null;
-        $errors = isset($_SESSION['errors']) ? $_SESSION['errors'] : null;
+
+        // rendering
+        $template = new Template(
+            'post/update_form', [
+                'csrf'        => $this->setToken('post_update'),
+                'posts'       => $repository->getPost(intval($_GET["id"])),
+                'signin_user' => isset($_SESSION['signin_user']) ? $_SESSION['signin_user']: null,
+                'errors'      => isset($_SESSION['errors']) ? $_SESSION['errors'] : null,
+            ]
+        );
         unset($_SESSION['errors']);
         unset($_SESSION['old']);
-    
-        include "templates/post/update_form.php";
+
+        return $template->render();
     }
 
     public function create(){
+
+        //check_token
+        $checkTokenResult = $this->checkToken('post_create');
+
+        if(!$checkTokenResult){
+            echo 'Invalid token.';
+            return false;
+        }
 
         // Create an instance
         $post         = new PostRepository();
@@ -92,6 +130,15 @@ class PostService implements IPostService {
     }
 
     public function update(){
+
+        //check_token
+        $checkTokenResult = $this->checkToken('post_update');
+
+        if(!$checkTokenResult){
+            echo 'Invalid token.';
+            return false;
+        }
+
         // Create an instance
         $post         = new PostRepository();
         $post_request = $this->makePost($_POST);
@@ -110,11 +157,17 @@ class PostService implements IPostService {
 
 
     public function delete(){
+        //check_token
+        $checkTokenResult = $this->checkToken('post_delete');
+
+        if(!$checkTokenResult){
+            echo 'Invalid token.';
+            return false;
+        }
+
         // Create an instance
         $post = new PostRepository();
         $post_request = new PostRequest($_POST);
-        // Validate post request data
-        //$post_request->searchConcertData();
 
         // Execute Query
         $result = $post->delete($post_request);

@@ -38,7 +38,8 @@
                             </div>
                         </div>
                         <div>
-                            <form name="id"  method="POST" action="<?php echo Path::ROOT .'post/delete' ?>">
+                            <form name="post_delete"  method="POST" action="<?php echo Path::ROOT .'post/delete' ?>">
+                                <input hidden name="csrf_token" value="<?php echo h($csrf); ?>">  
                                 <input hidden name="id" value="<?php echo h($post["id"]); ?>">
                                 <input hidden name="delete" value="">
                                 <button type="submit" class="crud-delete">DELETE</button>

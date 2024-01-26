@@ -2,7 +2,7 @@
 
 namespace app\models\repositories;
 
-use app\database\DataBaseConnect;
+use app\anchor\database\DataBaseConnect;
 use app\classes\PostRequest;
 use app\models\entities\PostEntity as Post;
 
@@ -20,9 +20,6 @@ class PostRepository implements IPostRepository
         $pdo       = $dbConnect->getPDO();
         $sql = "SELECT * FROM posts ORDER BY id ASC;";
         $posts = $pdo->query($sql);
-
-        // $post = new PostEntity();
-        // $post->hydrate($data);
 
         return $posts->fetchAll();
     }

@@ -8,54 +8,55 @@ class UserEntity
     private $name;
     private $email;
     private $password;
+    private $created_at;
+    private $updated_at;
 
-    public function getId()
-    {
+    public function getId() {
         return $this->id;
     }
 
-    public function getName()
-    {
+    public function getName() {
         return $this->name;
     }
 
-    public function getEmail()
-    {
+    public function getEmail() {
         return $this->email;
     }
 
-    public function getPassword()
-    {
+    public function getPassword() {
         return $this->password;
     }
 
-    public function setId()
-    {
-        return $this->id;
+    public function getCreatedAt() {
+        return $this->created_at;
     }
 
-    public function setName()
-    {
-        return $this->name;
+    public function getUpdatedAt() {
+        return $this->updated_at;
     }
 
-    public function setEmail()
-    {
-        return $this->email;
+    public function setId(int $id) {
+        return $this->id = $id;
     }
 
-    public function setPassword()
-    {
-        return $this->password;
+    public function setName(string $name) {
+        return $this->name = $name;
     }
 
-    // Add setters if needed
-
-    public function setData(array $data)
-    {
-        $this->id       = $data['id'] ?? null;
-        $this->name     = $data['name'] ?? null;
-        $this->email    = $data['email'] ?? null;
-        $this->password = $data['password'] ?? null;
+    public function setEmail(string $email) {
+        return $this->email = $email;
     }
+
+    public function setPassword(string $password):string {
+        return $this->password = $password;
+    }
+
+    public function setCreatedAt(string $created_at): string {
+        return $this->created_at = $created_at;
+    }
+
+    public function setUpdatedAt(string $updated_at): string {
+        return $this->updated_at = $updated_at;
+    }
+
 }

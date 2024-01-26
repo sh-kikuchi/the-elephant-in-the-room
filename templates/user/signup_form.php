@@ -9,8 +9,8 @@
     <?php endif; ?>
     <h2 class="text-center pt-2">Sign-up</h2>
     <section class="flex-box justify-center">
-        <form action=<?php echo Path::ROOT."signup" ?> method="POST">
-            <input type="hidden" name="csrf_token" value="<?php echo h(setToken()); ?>">
+        <form name="signup" action=<?php echo Path::ROOT."signup" ?> method="POST">
+            <input type="hidden" name="csrf_token" value="<?php echo h($csrf); ?>">
             <div class="flex-box justify-center my-2">
                 <label for="name" class="label">Username：</label>
                 <input type="text" name="name" class="form-input" value="<?php if($old){echo h($old['name']);}"}"?>">

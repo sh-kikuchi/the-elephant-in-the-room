@@ -2,18 +2,19 @@
 
 namespace app\models\repositories;
 
-use app\database\DataBaseConnect;
+use app\anchor\database\DataBaseConnect;
+use app\models\entities\UserEntity as User;
 
-require_once 'interfaces\models\repositories\IUserAuth.php';
+require_once 'interfaces\models\repositories\IUserRepository.php';
 
-class UserAuth implements IUserAuth {
+class UserRepository implements IUserRepository {
 
     /**
      * Register a user
-     * @param array $userData
+     * @param array $user
      * @return bool $result
      */
-    public static function signup($userData):bool {
+    public function signup(User $user):bool {
         $result    = false;
         $dbConnect = new DataBaseConnect();
         $pdo       = $dbConnect->getPDO();
@@ -21,9 +22,9 @@ class UserAuth implements IUserAuth {
 
         // putting user data into an array
         $arr   = [];
-        $arr[] = $userData['name'];
-        $arr[] = $userData['email'];
-        $arr[] = password_hash($userData['password'], PASSWORD_DEFAULT);
+        $arr[] = $user->getName();
+        $arr[] = $user->getEmail();
+        $arr[] = password_hash($user->getPassword(), PASSWORD_DEFAULT);
 
         try {    
           $pdo->beginTransaction();
@@ -44,22 +45,21 @@ class UserAuth implements IUserAuth {
      * @param string $password
      * @return bool $result
      */
-    public static function signin(array $userData) :bool
-    {
-        $result = false;
-        $email    = $userData['email'];
-        $password = $userData['password'];
+    public function signin(User $user) :bool {
+        $result   = false;
+        $email    = $user->getEmail();
+        $password = $user->getPassword();
         // retrieve users by searching email
-        $user = self::getUserByEmail($email);
+        $user_data = self::getUserByEmail($email);
 
-        if (!$user) {
+        if (!$user_data) {
             $_SESSION['msg'] = 'e-mail does not match.';
             return $result;
         }
         // password enquiry
-        if (password_verify($password, $user['password'])) {
+        if (password_verify($password, $user_data['password'])) {
             session_regenerate_id(true);
-            $_SESSION['signin_user'] = $user;
+            $_SESSION['signin_user'] = $user_data;
             $result = true;
             return $result;
         }
@@ -73,7 +73,7 @@ class UserAuth implements IUserAuth {
      * @param string $email
      * @return array|bool $user|false
      */
-    public static function getUserByEmail(string $email)
+    public function getUserByEmail(string $email)
     {
         $sql = 'SELECT * FROM users WHERE email = ?';
         $dbConnection = new DataBaseConnect();
@@ -95,21 +95,20 @@ class UserAuth implements IUserAuth {
      * @param void
      * @return bool $result
      */
-    public static function checkSign():bool
-    {
-      $result = false;
-      // true if there is 'signin_user' in the session
-      if (isset($_SESSION['signin_user']) && $_SESSION['signin_user']['id'] > 0) {
-        $result = true;
-      }
-      return $result;
+    public function checkSign() :bool {
+        $result = false;
+        // true if there is 'signin_user' in the session
+        if (isset($_SESSION['signin_user']) && $_SESSION['signin_user']['id'] > 0) {
+          $result = true;
+        }
+        return $result;
     }
     /**
      * Signout
      * @param void
      * @return void
      */
-    public static function signout():void{
+    public  function signout():void{
         session_destroy();
         //Back to Sign-in Page.
         header('Location: /the-elephant-in-the-room/signin');
