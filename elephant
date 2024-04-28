@@ -10,8 +10,13 @@
 |
 |--------------------------------------------------------------------------*/
 
+require_once __DIR__ . '/vendor/autoload.php';
 class Elephant {
   public function autoload($class_name){
+    
+      $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+      $dotenv->load();
+
       try {
         include './axis/toolbox/commands/' . ucfirst($class_name) . '.php';
 
@@ -26,8 +31,6 @@ class Elephant {
           print($e->getMessage());
       }
   }
-
-  
 }
 
 $elephant = new Elephant();
