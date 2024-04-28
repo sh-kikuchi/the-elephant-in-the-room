@@ -8,7 +8,7 @@ This project code is named "Gladiolus," inspired by its flower language of "unwa
 
 
 ## 1. Artchitecture (Directory)
-![Artchitecture](architecture.png)
+![Artchitecture](./public/assets/img/architecture.png)
 
 ```
 ROOT
