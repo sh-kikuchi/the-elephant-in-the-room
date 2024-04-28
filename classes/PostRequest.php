@@ -2,10 +2,10 @@
 
 namespace app\classes;
 
-use app\anchor\toolbox\Session;
-use app\anchor\https\Validator;
+use app\axis\toolbox\Session;
+use app\axis\https\Validator;
 use app\models\repositories\PostRepository;
-use app\anchor\database\DataBaseConnect;
+use app\axis\database\DataBaseConnect;
 
 require_once 'interfaces\classes\IPostRequest.php';
 

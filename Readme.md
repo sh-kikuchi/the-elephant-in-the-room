@@ -1,60 +1,204 @@
 # the Elephant in the room
 'the Elephant in the room' is my private PHP flame work.
+
+#### ※ project code: Gladiolus
+This project code is named "Gladiolus," inspired by its flower language of "unwavering effort" and "victory." Just as the gladiolus flower represents triumph through perseverance, this framework is crafted with the aim of guiding the passion and effort of engineers towards victory. The framework itself is designed to be simple yet flexible, allowing developers to customize it according to their own preferences and needs.
+
 <br> since 2023.7.26
 
-## 1. directory
+
+## 1. Artchitecture (Directory)
+![Artchitecture](architecture.png)
+
 ```
-|
-├─assets
-│  ├─css
-│  ├─img
-│  ├─js
-│  └─pdf
-├─config
-├─database
-│  ├─csv
-│  │  ├─downloads
-│  │  └─uploads
-│  └─migrations
-├─interfaces
-├─logics
-│  ├─artist
-│  ├─concert
-│  └─user
-├─logs
-├─repositories
-├─templates
-│  ├─artist
-│  ├─concert
-│  ├─errors
-│  ├─layouts
-│  └─user
+ROOT
+│  .env
+│  .gitignore
+│  .htaccess
+│  composer.json
+│  composer.lock
+│  index.php
+│  Readme.md
+│  
+├─axis
+│  │  App.php
+│  │  Service.php
+│  │  Template.php
+│  │  
+│  ├─database
+│  │      DataBaseConnect.php
+│  │      
+│  ├─https
+│  │      Request.php
+│  │      Response.php
+│  │      Validator.php
+│  │      
+│  ├─routes
+│  │      Router.php
+│  │      
+│  └─toolbox
+│      │  File.php
+│      │  Mail.php
+│      │  PDF.php
+│      │  Session.php
+│      │  
+│      └─functions
+│              date.php
+│              fragile.php
+│              pagination.php
+│              
 ├─classes
+│      PostRequest.php
+│      UserRequest.php
+│      
+├─config
+│      label.php
+│      message.php
+│      
+├─interfaces
+│  ├─classes
+│  │      IPostRequest.php
+│  │      IUserRequest.php
+│  │      
+│  ├─models
+│  │  └─repositories
+│  │          IPostRepository.php
+│  │          IUserRepository.php
+│  │          
+│  └─services
+│          IPostService.php
+│          IUserService.php
+│          
+├─logs
+│      error.log
+│      
+├─migrations
+│  ├─csv
+│  │  │  db_csv_input.php
+│  │  │  db_csv_output.php
+│  │  │  
+│  │  └─csv
+│  │      └─uploads
+│  │              artists.csv
+│  │              artist_concert.csv
+│  │              concerts.csv
+│  │              users.csv
+│  │              
+│  ├─jsonplaceholder
+│  │      posts.php
+│  │      users.php
+│  │      
+│  └─migrate
+│          PostsTable.php
+│          UsersTable.php
+│          
+├─models
+│  ├─entities
+│  │      PostEntity.php
+│  │      UserEntity.php
+│  │      
+│  └─repositories
+│          PostRepository.php
+│          UserRepository.php
+│          
+├─public
+│  └─assets
+│      ├─css
+│      │      common.css
+│      │      js-parts.css
+│      │      style.css
+│      │      
+│      ├─img
+│      │      auth.png
+│      │      db.png
+│      │      elephant.jpg
+│      │      home.png
+│      │      mail.png
+│      │      upload.png
+│      │      
+│      ├─js
+│      │      script.js
+│      │      
+│      └─pdf
+│              test.php
+│              
+├─services
+│      PostService.php
+│      UserService.php
+│      
 ├─storage
 │  └─doc
+├─templates
+│  │  welcome.php
+│  │  
+│  ├─errors
+│  │      404.php
+│  │      error.php
+│  │      
+│  ├─layouts
+│  │      footer.php
+│  │      header.php
+│  │      
+│  ├─post
+│  │      create_form.php
+│  │      index.php
+│  │      update_form.php
+│  │      
+│  └─user
+│          my_page.php
+│          signin_form.php
+│          signup_form.php
+│          
 ├─tests
-├─util
-│  └─trait
+│  ├─classes
+│  │      PostRequestTest.php
+│  │      UserRequestTest.php
+│  │      
+│  ├─models
+│  │  ├─entities
+│  │  │      PostEntityTest.php
+│  │  │      UserEntityTest.php
+│  │  │      
+│  │  └─repositories
+│  │          PostRepositoryTest.php
+│  │          UserRepositoryTest.php
+│  │          
+│  └─services
+│          PostServiceTest.php
+│          UserServiceTest.php
+│          
 └─vendor
+    │  autoload.php
+    │  
     ├─bin
+    │      .phpunit.result.cache
+    │      php-parse
+    │      php-parse.bat
+    │      phpunit
+    │      phpunit.bat
+    │      
     ├─composer
+    │      
+    ├─graham-campbell
+    │              
     ├─guzzlehttp
+    |
     ├─myclabs
+    |
     ├─nikic
+    │                      
     ├─phar-io
+    │                  
+    ├─phpoption
+    │                  
     ├─phpunit
-    ├─psr
-    ├─ralouphie
-    ├─sebastian
-    ├─symfony
-    ├─tecnickcom
-    └─theseer
+
 ```
 
 <br>
 
 
-## 2. Set up
+## 2. Clone Projectes & Install Packages
 
 - Let's start by cloning the project.
     ```
@@ -70,34 +214,25 @@
 
 <br>
 
-## 3. database
-1. Set up the DB in 'db_connect.php' in the database directory 
-2. There are PHP files for creating sample tables in database>migrations, which you can run with the command.You can run the sample application by executing the commands in all the table files provided.
+## 3. Database
+1. Set up the DB in '.env' in the project directory 
+2. Please create a class in PascalCase inside "migrations/migrate". Within that class, create a method named 'getSql' (public) that returns SQL. Please take a look at the following example.
 
     ```
-    C:\xampp\htdocs\the-elephant-in-the-room/database>php 202306031133_create_artists.php
+    php elephant migrate
     ```
-<br>
 
-3. There is a db_csv_input.php directly under the database directory. This reads the CSV files provided in database>uploads and inserts the data into the relevant table. By default, the 'Artists' table is targeted,
+    ```php
+
+    php  migrations\jsonplaceholder\users.php        
+    php  migrations\jsonplaceholder\posts.php  
+
     ```
-    C:\xampp\htdocs\the-elephant-in-the-room/database>php db_csv_input.php
-    ```
-<br>
-※The file db_csv_output.php allows data from specified tables to be stored in CSV. Make use of this if necessary.
+   - Scan files within the migrations/migrate directory, load each file, and execute migrations. It's assumed that each migration file is a class with a getSql method, and its SQL query is executed. If an error occurs, an exception is caught, and an error message is output.
+  
+   - Inserting data still doesn't have a custom command, but it's possible to insert data into users and posts using PHP file execution commands. Dummy data is being used with jsonplaceholder.
 
-<br>　
-
-## 4. Settings
-
-### ■ including_path
-- Set include_path to the path to the project directory in the ini file.
-For example, if you are using XAMPP, set up the following
-```php
-;include_path=C:\xampp\php\PEAR
-include_path=C:\xampp\htdocs\the-elephant-in-the-room
-```
- 
+## 4. Email 
 ### ■ Test for sending google mail on XAMPP (windows)
 
 #### 【php.ini】

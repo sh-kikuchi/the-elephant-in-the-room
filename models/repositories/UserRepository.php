@@ -2,7 +2,7 @@
 
 namespace app\models\repositories;
 
-use app\anchor\database\DataBaseConnect;
+use app\axis\database\DataBaseConnect;
 use app\models\entities\UserEntity as User;
 
 require_once 'interfaces\models\repositories\IUserRepository.php';

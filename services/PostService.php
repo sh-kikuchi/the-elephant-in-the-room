@@ -2,16 +2,16 @@
 
 namespace app\services;
 
-use app\anchor\Service;
-use app\anchor\Template;
-use app\anchor\toolbox\Session;
+use app\axis\Service;
+use app\axis\Template;
+use app\axis\toolbox\Session;
 use app\classes\PostRequest;
 use app\models\entities\PostEntity as Post;
 use app\models\repositories\PostRepository;
 use app\models\repositories\UserRepository;
 
-require_once 'anchor\toolbox\functions\fragile.php';
-require_once 'anchor\toolbox\functions\pagination.php';
+require_once 'axis\toolbox\functions\fragile.php';
+require_once 'axis\toolbox\functions\pagination.php';
 require_once 'interfaces\services\IPostService.php';
 
 class PostService extends Service implements IPostService {

@@ -2,7 +2,7 @@
 
 namespace app\models\repositories;
 
-use app\anchor\database\DataBaseConnect;
+use app\axis\database\DataBaseConnect;
 use app\classes\PostRequest;
 use app\models\entities\PostEntity as Post;
 

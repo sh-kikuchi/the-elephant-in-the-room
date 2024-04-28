@@ -8,6 +8,7 @@
       </div>
     </div>
     <section class="flex-box justify-center">
+       
         <div>
             <h2 class="text-center">Contents</h2>
             <ul class="tab-list flex-box justify-center">
@@ -20,7 +21,7 @@
                 <div class="tab-content active">
                     <section class="grid-two-block">
                         <div class="flex-box justify-center align-center">
-                            <div class="index-intro-img" ><img src="<?php echo Path::ROOT . 'assets/img/auth.png' ?>"/></div>
+                            <div class="index-intro-img" ><img src="/the-elephant-in-the-room/public/assets/img/auth.png"/></div>
                             
                         </div>
                         <div class="index-intro-right">
@@ -36,7 +37,7 @@
                 <div class="tab-content">
                     <section class="grid-two-block">
                         <div class="flex-box justify-center align-center">
-                            <div class="index-intro-img" ><img src="<?php echo Path::ROOT . 'assets/img/db.png' ?>"/></div>
+                            <div class="index-intro-img" ><img src="/the-elephant-in-the-room/public/assets/img/db.png"/></div>
                         </div>
                         <div class="index-intro-right">
                             <p class="index-intro-text">In conjunction with SQL, read, create, update, and delete operations can be easily performed on the DB.</p>
@@ -47,7 +48,7 @@
                 <div class="tab-content">
                     <section class="grid-two-block">
                         <div class="flex-box justify-center align-center">
-                            <div class="index-intro-img" ><img src="<?php echo Path::ROOT . 'assets/img/mail.png' ?>"/></div>
+                            <div class="index-intro-img" ><img src="/the-elephant-in-the-room/public/assets/img/mail.png"/></div>
                         </div>
                         <div class="index-intro-right">
                             <p class="index-intro-text">You can use the function mb_send_mail to implement mail. For example, it is useful for sending a contact form.</p>
@@ -55,7 +56,7 @@
                                 <form 
                                     id="contactForm" 
                                     class="flex-box"
-                                    action="<?php echo Path::ROOT . 'mail' ?>" method="POST">
+                                    action="/the-elephant-in-the-room/mail" method="POST">
                                     <div class="mr-2">
                                         <div class="form-group">
                                             <label for="name">name</label>
@@ -90,14 +91,14 @@
                 <div class="tab-content">
                     <section class="grid-two-block">
                         <div class="flex-box justify-center align-center">
-                            <div class="index-intro-img" ><img src="<?php echo Path::ROOT . 'assets/img/upload.png' ?>"/></div>
+                            <div class="index-intro-img" ><img src="/the-elephant-in-the-room/public/assets/img/upload.png"/></div>
                         </div>
                         <div class="index-intro-right mb-4">
-                            <p class="index-intro-text">Try out file-related processes such as image uploading and PDF output.</p>
+                            <p class="index-intro-text">Try out file-related processes such as image uploading.</p>
                                 <h3>■ Image Upload(png/jpg)</h3>
                                 <p> see storage/doc directory</p>
                                 <div class="flex-box justify-center">
-                                    <form method ="POST" action="<?php echo Path::ROOT . 'upload' ?>" enctype="multipart/form-data">
+                                    <form method ="POST" action="/the-elephant-in-the-room/upload" enctype="multipart/form-data">
                                         <input type="hidden" name="max_file_size" value="1000000">
                                         <input id="upload"  type="file" name="upfile" size="40">
                                         <div class="flex-box justify-center mt-2">
@@ -105,17 +106,6 @@
                                         </div>
                                         
                                     </form>
-                                </div>
-                                <h3>■ PDF</h3>
-                                <div class="flex-box justify-center">
-                                    <div class="flex-box justify-center">
-                                        <form action="<?php echo Path::ROOT . 'pdf' ?>" method="POST">
-                                            <label class="file-label">
-                                                PDF download
-                                                <input type="submit" name="pdf" class="file-input" value="pdf">
-                                            </label>
-                                        </form>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -130,7 +120,7 @@
         <div class="close">×</div>
         <h2>APP DEMO</h2>
         <p>This is an example of a function that can record a visit to a music concert.</p>
-        <a href="/the-elephant-in-the-room/post" class="modal-btn">DEMO</a>
+        <a href= "/the-elephant-in-the-room/post" class="modal-btn">DEMO</a>
     </div> 
 </div>
 <?php include('templates/layouts/footer.php'); ?>

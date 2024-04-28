@@ -4,7 +4,7 @@
 use PHPUnit\Framework\TestCase;
 use app\models\repositories\UserRepository;
 use app\models\entities\UserEntity;
-use app\anchor\database\DataBaseConnect;
+use app\axis\database\DataBaseConnect;
 
 class UserRepositoryTest extends TestCase {
     

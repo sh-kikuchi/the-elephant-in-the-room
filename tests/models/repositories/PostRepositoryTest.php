@@ -4,7 +4,7 @@
 use PHPUnit\Framework\TestCase;
 use app\models\repositories\PostRepository;
 use app\models\entities\PostEntity;
-use app\anchor\database\DataBaseConnect;
+use app\axis\database\DataBaseConnect;
 
 class PostRepositoryTest extends TestCase
 {

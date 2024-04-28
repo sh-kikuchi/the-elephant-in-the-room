@@ -11,6 +11,5 @@ interface IUserService {
     public function signout();
     public function mail();
     public function upload();
-    public function pdf();
     public function makeUser($user_form);
 }

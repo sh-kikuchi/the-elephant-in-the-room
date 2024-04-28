@@ -1,6 +1,8 @@
 <?php
 
-namespace app\anchor\toolbox;
+namespace app\axis\toolbox;
+
+use app\config\Message;
 
 class File {
     /**
@@ -12,18 +14,19 @@ class File {
         $result = false;
         if (empty($file_data['upfile']['full_path'])) {
             $_SESSION['msg'] = 'No files have been uploaded.';
-            header('Location: /the-elephant-in-the-room/my_page');
+            header('Location: /my_page');
             exit();
         } 
         if($file_data['upfile']['error'] !== UPLOAD_ERR_OK){
-            $msg =[
-              UPLOAD_ERR_INT_SIZE   => Message::UPLOAD_ERR['INT_SIZE'],
-              UPLOAD_ERR_PARTIAL    => Message::UPLOAD_ERR['PARTIAL'],
-              UPLOAD_ERR_NO_FILE    => Message::UPLOAD_ERR['NO_FILE'],
-              UPLOAD_ERR_NO_TMP_DIR => Message::UPLOAD_ERR['NO_TMP_DIR'],
-              UPLOAD_ERR_CANT_WRITE => Message::UPLOAD_ERR['CANT_WRITE'],
-              UPLOAD_ERR_EXTENSION  => Message::UPLOAD_ERR['EXTENSION'],
+            $msg = [
+              'UPLOAD_ERR_INT_SIZE'   => Message::UPLOAD_ERR['INT_SIZE'],
+              'UPLOAD_ERR_PARTIAL'    => Message::UPLOAD_ERR['PARTIAL'],
+              'UPLOAD_ERR_NO_FILE'    => Message::UPLOAD_ERR['NO_FILE'],
+              'UPLOAD_ERR_NO_TMP_DIR' => Message::UPLOAD_ERR['NO_TMP_DIR'],
+              'UPLOAD_ERR_CANT_WRITE' => Message::UPLOAD_ERR['CANT_WRITE'],
+              'UPLOAD_ERR_EXTENSION'  => Message::UPLOAD_ERR['EXTENSION'],
             ];
+
             $err_msg = $msg[$file_data['upfile']['error']];
         }else if(!in_array(strtolower(pathinfo($file_data['upfile']['name'])['extension']),
           ['gif','jpg', 'jpeg', 'png']))
@@ -43,14 +46,13 @@ class File {
            * @param string $src　       temporary file path
            * @param string [path].$dest destination to save to
            */
-          
+
           if(!move_uploaded_file($src, 'storage/doc/'.$dest)){
             $err_msg = Message::UPLOAD_ERR['FAILED'];
           }else{
             $result = true;
           }
         }
-
 
         return $result;
     }

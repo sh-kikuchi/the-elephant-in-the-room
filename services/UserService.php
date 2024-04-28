@@ -1,19 +1,17 @@
 <?php
 namespace app\services;
 
-use app\anchor\Service;
-use app\anchor\Template;
-use app\anchor\toolbox\Session;
-use app\anchor\toolbox\File;
-use app\anchor\toolbox\Mail;
-use app\anchor\toolbox\PDF;
+use app\axis\Service;
+use app\axis\Template;
+use app\axis\toolbox\Session;
+use app\axis\toolbox\File;
+use app\axis\toolbox\Mail;
 use app\models\entities\UserEntity as User;
 use app\models\repositories\UserRepository;
 use app\classes\UserRequest;
 
-require_once 'anchor\toolbox\functions\fragile.php';
-require_once 'anchor\toolbox\functions\pagination.php';
-require_once 'assets\pdf\test.php';
+require_once 'axis\toolbox\functions\fragile.php';
+require_once 'axis\toolbox\functions\pagination.php';
 require_once 'interfaces\services\IUserService.php';
 
 class UserService extends Service implements IUserService {
@@ -66,8 +64,7 @@ class UserService extends Service implements IUserService {
 
     public function signup(){
         //check_token
-        $checkTokenResult = $this->checkToken('signin');
-
+        $checkTokenResult = $this->checkToken('signup');
         if(!$checkTokenResult){
             echo 'Invalid token.';
             return false;
@@ -166,18 +163,6 @@ class UserService extends Service implements IUserService {
         header('Location:/the-elephant-in-the-room/my_page');
         exit();
     } 
-
-    public function pdf(){
-
-        //Create an instance
-        $file = new PDF();
-
-        /*
-            Execute methods
-            Return processing results as required.
-        */
-        $file->output($html);
-    }
 
     public function makeUser($user_form){
 

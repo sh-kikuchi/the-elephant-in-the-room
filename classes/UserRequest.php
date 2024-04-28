@@ -1,8 +1,8 @@
 <?php
 namespace app\classes;
 
-use app\anchor\toolbox\Session;
-use app\anchor\https\Validator;
+use app\axis\toolbox\Session;
+use app\axis\https\Validator;
 
 require_once 'interfaces\classes\IUserRequest.php';
 

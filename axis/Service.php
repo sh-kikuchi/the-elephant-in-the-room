@@ -1,9 +1,9 @@
 <?php
 
-namespace app\anchor;
+namespace app\axis;
 
-use app\anchor\Template;
-use app\anchor\toolbox\Session;
+use app\axis\Template;
+use app\axis\toolbox\Session;
 
 class Service {
 
@@ -32,6 +32,7 @@ class Service {
         $result;
         
         if(!isset($_SESSION['csrf_token'][$form_name])) { return false; }
+
         if(($_POST["csrf_token"] !== $_SESSION['csrf_token'][$form_name])) {
             $result = false;
         }else{
@@ -41,11 +42,15 @@ class Service {
         return $result;
     }
 
+    /**
+     * Rendering a template file
+     * @param  void
+     * @return $template->render();
+     */
     function render(): mixed {
-      $template = new Template;
+        $template = new Template;
 
-      return $template->render();
-        
+        return $template->render();
     }
 
 }

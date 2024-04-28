@@ -8,7 +8,7 @@
         </ul>
     <?php endif; ?>
     <h2 class="text-center pt-2">Posts</h2>
-    <div class="text-right"><a href="<?php echo Path::ROOT."post/create" ?>">create a new post</a></div>
+    <div class="text-right"><a href="/the-elephant-in-the-room/post/create">create a new post</a></div>
     <div class="flex-box justify-center" style="height:80%; overflow-y:auto;">
         <table class="mx-3">
             <thead>
@@ -34,11 +34,11 @@
                     <td class="text-center">
                         <div class="flex-box justify-center">
                             <div>
-                                <a class="crud-edit" href="<?php echo Path::ROOT .'post/update?id='. h($post["id"]); ?>">EDIT</a>
+                                <a class="crud-edit" href="<?php echo '/the-elephant-in-the-room/post/update?id='. h($post["id"]); ?>">EDIT</a>
                             </div>
                         </div>
                         <div>
-                            <form name="post_delete"  method="POST" action="<?php echo Path::ROOT .'post/delete' ?>">
+                            <form name="post_delete"  method="POST" action="/the-elephant-in-the-room/post/delete">
                                 <input hidden name="csrf_token" value="<?php echo h($csrf); ?>">  
                                 <input hidden name="id" value="<?php echo h($post["id"]); ?>">
                                 <input hidden name="delete" value="">
@@ -56,7 +56,7 @@
         <?php for($i = 1; $i <= $max_page; $i++){?>
             <a 
                 class="pagenation"
-                href="<?php echo Path::ROOT . 'post?page_id=' . $i; ?>" 
+                href= <?php echo "/the-elephant-in-the-room/post?page_id=" . $i; ?>
             > <?php echo  $i ?></a>
         <?php }?>
     </div>

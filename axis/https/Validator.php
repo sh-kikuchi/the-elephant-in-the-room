@@ -1,5 +1,5 @@
 <?php 
-namespace app\anchor\https;
+namespace app\axis\https;
 
 class Validator {
     private $errors = [];

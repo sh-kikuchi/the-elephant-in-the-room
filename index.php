@@ -4,7 +4,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
-use app\anchor\App;
+use app\axis\App;
 use app\services\UserService;
 use app\services\PostService;
 

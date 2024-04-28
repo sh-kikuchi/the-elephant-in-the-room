@@ -1,6 +1,6 @@
 <?php
 
-namespace app\anchor\https;
+namespace app\axis\https;
 
 class Request
 {

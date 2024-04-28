@@ -1,0 +1,34 @@
+<?php
+
+/*--------------------------------------------------------------------------
+| 
+|---------------------------------------------------------------------------
+|
+| Once Artisan has finished running, we will fire off the shutdown events
+| so that any final work may be done by the application before we shut
+| down the process. This is the last thing to happen to the request.
+|
+|--------------------------------------------------------------------------*/
+
+class Elephant {
+  public function autoload($class_name){
+      try {
+        include './axis/toolbox/commands/' . ucfirst($class_name) . '.php';
+
+        if (class_exists($class_name)) {
+          $instance = new $class_name();
+          $instance->run();
+        }else{
+          throw new LogicException("Unable to load class: $class_name");
+        }
+         
+      } catch (Exception $e) {
+          print($e->getMessage());
+      }
+  }
+
+  
+}
+
+$elephant = new Elephant();
+$elephant->autoload($argv[1]);

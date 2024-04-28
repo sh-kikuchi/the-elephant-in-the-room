@@ -9,7 +9,7 @@
     <?php endif; ?>
     <h2 class="text-center pt-2">Sign-in</h2>
     <section class="flex-box justify-center">
-        <form name ="signin" action=<?php echo Path::ROOT."signin" ?> method="POST">
+        <form name ="signin" action="/the-elephant-in-the-room/signin" method="POST">
           <input type="hidden" name="csrf_token" value="<?php echo h($csrf); ?>">  
           <div class="flex-box justify-center">
               <label for="email" class="label">E-mail:</label>
@@ -22,7 +22,7 @@
             <div class="flex-box justify-center my-2">
               <input type="submit" class="button primary " value="Enter"> 
             </div>
-            <a href=<?php echo Path::ROOT."signup" ?> class="text-center">Click here to register as a new user.</a>
+            <a href="/the-elephant-in-the-room/signup" class="text-center">Click here to register as a new user.</a>
         </form>
     </section>
 </div>

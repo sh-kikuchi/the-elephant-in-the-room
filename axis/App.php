@@ -1,9 +1,9 @@
 <?php
 
-namespace app\anchor;
+namespace app\axis;
 
-use app\anchor\https\Request;
-use app\anchor\routes\Router;
+use app\axis\https\Request;
+use app\axis\routes\Router;
 
 class App
 {

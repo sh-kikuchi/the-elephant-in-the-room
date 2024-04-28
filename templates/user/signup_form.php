@@ -9,7 +9,7 @@
     <?php endif; ?>
     <h2 class="text-center pt-2">Sign-up</h2>
     <section class="flex-box justify-center">
-        <form name="signup" action=<?php echo Path::ROOT."signup" ?> method="POST">
+        <form name="signup" action="/the-elephant-in-the-room/signup" method="POST">
             <input type="hidden" name="csrf_token" value="<?php echo h($csrf); ?>">
             <div class="flex-box justify-center my-2">
                 <label for="name" class="label">Username：</label>

@@ -1,6 +1,6 @@
 <?php
 
-namespace app\anchor;
+namespace app\axis;
 
 class Template {
 

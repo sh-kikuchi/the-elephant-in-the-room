@@ -1,6 +1,6 @@
 <?php
 
-namespace app\anchor\toolbox;
+namespace app\axis\toolbox;
 
 class Mail{
     /**
@@ -9,8 +9,6 @@ class Mail{
    * @return boolean $result
    */
     function sendMail($post_data){
-      var_dump($post_data);
-
         $result =  false;
         
         mb_language("Japanese");
@@ -23,7 +21,7 @@ class Mail{
         }
         $title   = 'Letter from '.$post_data['username'];
         $message = $post_data['comment'];
-        $headers =  'From:'.$post_data['mail'];
+        $headers =  'From:'. $post_data['mail'];
         
         if(mb_send_mail($to, $title, $message, $headers)){
           $result = true;

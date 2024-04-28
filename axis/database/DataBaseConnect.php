@@ -1,6 +1,6 @@
 <?php
 
-namespace app\anchor\database;
+namespace app\axis\database;
 
 class DataBaseConnect {
     private $pdo;
@@ -16,7 +16,7 @@ class DataBaseConnect {
     //    $user = $_ENV['DB_USER'];
     //    $pass = $_ENV['DB_PASS'];
        $host = 'localhost';
-       $db   = 'elephant';
+       $db   = 'test';
        $user = 'root';
        $pass = '';
        $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
