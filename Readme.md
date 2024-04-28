@@ -216,6 +216,13 @@ ROOT
 
 ## 3. Database
 1. Set up the DB in '.env' in the project directory 
+    ```
+    DB_HOST = 'localhost'
+    DB_NAME = 'test'
+    DB_USER = 'root'
+    DB_PASS = ''
+    PASSWORD = 'password'
+    ```
 2. Please create a class in PascalCase inside "migrations/migrate". Within that class, create a method named 'getSql' (public) that returns SQL. Please take a look at the following example.
 
     ```
