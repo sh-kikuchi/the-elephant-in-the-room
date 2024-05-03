@@ -10,10 +10,6 @@ use app\models\entities\PostEntity as Post;
 use app\models\repositories\PostRepository;
 use app\models\repositories\UserRepository;
 
-require_once 'axis\toolbox\functions\fragile.php';
-require_once 'axis\toolbox\functions\pagination.php';
-require_once 'interfaces\services\IPostService.php';
-
 class PostService extends Service implements IPostService {
 
     public function index(){

@@ -1,4 +1,4 @@
-<?php require('templates/layouts/header.php') ?>
+<?php include('templates/layouts/header.php') ?>
 <div class="wrapper">
     <?php if (isset($errors)) : ?>
       <ul>
@@ -26,4 +26,4 @@
         </form>
     </section>
 </div>
-<?php require('templates/layouts/footer.php') ?>
+<?php include('templates/layouts/footer.php') ?>

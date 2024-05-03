@@ -1,9 +1,3 @@
-
-
-<?php
-    require_once($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/config/path.php'); 
-    require_once($_SERVER['DOCUMENT_ROOT'].'/the-elephant-in-the-room/config/label.php');
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

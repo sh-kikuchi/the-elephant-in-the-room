@@ -10,10 +10,6 @@ use app\models\entities\UserEntity as User;
 use app\models\repositories\UserRepository;
 use app\classes\UserRequest;
 
-require_once 'axis\toolbox\functions\fragile.php';
-require_once 'axis\toolbox\functions\pagination.php';
-require_once 'interfaces\services\IUserService.php';
-
 class UserService extends Service implements IUserService {
 
     public function __construct() {
