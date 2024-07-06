@@ -14,7 +14,7 @@ class File {
         $result = false;
         if (empty($file_data['upfile']['full_path'])) {
             $_SESSION['msg'] = 'No files have been uploaded.';
-            header('Location: /my_page');
+            header('Location: /index');
             exit();
         } 
         if($file_data['upfile']['error'] !== UPLOAD_ERR_OK){

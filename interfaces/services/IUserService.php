@@ -4,9 +4,9 @@ namespace app\services;
 
 interface IUserService {
     public function myPage();
-    public function signupForm();
+    public function showSignUpForm();
     public function signup();
-    public function signinForm();
+    public function showSignInForm();
     public function signin();
     public function signout();
     public function mail();

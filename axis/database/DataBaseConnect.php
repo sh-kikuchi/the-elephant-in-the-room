@@ -15,10 +15,7 @@ class DataBaseConnect {
        $db   = $_ENV['DB_NAME'];
        $user = $_ENV['DB_USER'];
        $pass = $_ENV['DB_PASS'];
-    //    $host = 'localhost';
-    //    $db   = 'test';
-    //    $user = 'root';
-    //    $pass = '';
+       
        $dsn = "mysql:host=$host;dbname=$db;charset=utf8mb4";
 
         try {

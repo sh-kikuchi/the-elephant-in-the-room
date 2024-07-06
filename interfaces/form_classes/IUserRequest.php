@@ -1,6 +1,6 @@
 <?php
 
-namespace app\classes;
+namespace app\form_classes;
 
 interface IUserRequest {
     public function setId($id);

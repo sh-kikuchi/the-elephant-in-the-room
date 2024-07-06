@@ -1,12 +1,9 @@
 <?php
 
-class Migrate{
-    protected $directory = 'migrations/migrate';
+class Seed{
+    protected $directory = 'migrations/seed';
     
     function run(){
-        // connect db
-        require_once 'axis/database/DataBaseConnect.php';
-        $dbConnect = new app\axis\database\DataBaseConnect();
 
         // scan files in the dir
         $files = scandir($this->directory);
@@ -17,11 +14,9 @@ class Migrate{
             require_once $this->directory .'/'.  $file;
             
             try {
-       
                 $table_class = explode(".", $file)[1];
                 $table_instance = new $table_class();
-                $sql = $table_instance->getSql();
-                $pdo->query($sql);
+                $table_instance->seed();
 
             } catch (PDOException $e) {
                 print($e->getMessage());

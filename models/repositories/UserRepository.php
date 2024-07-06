@@ -9,6 +9,18 @@ require_once 'interfaces\models\repositories\IUserRepository.php';
 
 class UserRepository implements IUserRepository {
 
+    private $pdo;
+
+    public function __construct($pdo = null)
+    {
+        if ($pdo === null) {
+            $dbConnect = new DataBaseConnect();
+            $this->pdo = $dbConnect->getPDO();
+        } else {
+            $this->pdo = $pdo;
+        }
+    }
+  
     /**
      * Register a user
      * @param array $user
@@ -16,8 +28,6 @@ class UserRepository implements IUserRepository {
      */
     public function signup(User $user):bool {
         $result    = false;
-        $dbConnect = new DataBaseConnect();
-        $pdo       = $dbConnect->getPDO();
         $sql       = 'INSERT INTO users (name, email, password) VALUES (?, ?, ?)';
 
         // putting user data into an array
@@ -27,14 +37,14 @@ class UserRepository implements IUserRepository {
         $arr[] = password_hash($user->getPassword(), PASSWORD_DEFAULT);
 
         try {    
-          $pdo->beginTransaction();
-          $stmt   = $pdo->prepare($sql);
+          $this->pdo->beginTransaction();
+          $stmt   = $this->pdo->prepare($sql);
           $result = $stmt->execute($arr);
-          $pdo->commit();
+          $this->pdo->commit();
           $result = true;
         } catch(\Exception $e) {
-          $pdo->rollBack();
-          error_log($e, 3, '/the-elephant-in-the-room/log/error.log');
+          $this->pdo->rollBack();
+          error_log($e, 3, '/log/error.log');
         }finally{
           return $result;
         }
@@ -47,6 +57,7 @@ class UserRepository implements IUserRepository {
      */
     public function signin(User $user) :bool {
         $result   = false;
+
         $email    = $user->getEmail();
         $password = $user->getPassword();
         // retrieve users by searching email
@@ -65,7 +76,6 @@ class UserRepository implements IUserRepository {
         }
         $_SESSION['msg'] =  $password;
 
-
         return $result;
     }
     /**
@@ -76,13 +86,10 @@ class UserRepository implements IUserRepository {
     public function getUserByEmail(string $email)
     {
         $sql = 'SELECT * FROM users WHERE email = ?';
-        $dbConnection = new DataBaseConnect();
-        $pdo = $dbConnection->getPDO();
-
         $arr = [];
         $arr[] = $email;
         try {
-          $stmt = $pdo->prepare($sql);
+          $stmt = $this->pdo->prepare($sql);
           $stmt->execute($arr);
           $user = $stmt->fetch();
           return $user;
@@ -109,8 +116,9 @@ class UserRepository implements IUserRepository {
      * @return void
      */
     public  function signout():void{
+        $_SESSION = [];
         session_destroy();
         //Back to Sign-in Page.
-        header('Location: /the-elephant-in-the-room/signin');
+        header('Location:' .  dirname($_SERVER['SCRIPT_NAME'])  . '/signin');
     }
 }

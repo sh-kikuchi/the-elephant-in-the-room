@@ -1,7 +1,7 @@
-<!-- vendor/bin/phpunit tests\classes\UserRequestTest.php -->
+<!-- vendor/bin/phpunit tests\form_classes\UserRequestTest.php -->
 <?php
 use PHPUnit\Framework\TestCase;
-use app\classes\UserRequest;
+use app\form_classes\UserRequest;
 
 class UserRequestTest extends TestCase {
     protected $userRequest;

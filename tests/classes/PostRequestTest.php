@@ -1,7 +1,7 @@
-<!-- vendor/bin/phpunit tests\classes\PostRequestTest.php -->
+<!-- vendor/bin/phpunit tests\form_classes\PostRequestTest.php -->
 <?php
 use PHPUnit\Framework\TestCase;
-use app\classes\PostRequest;
+use app\form_classes\PostRequest;
 
 class PostRequestTest extends TestCase {
     protected function setUp(): void {

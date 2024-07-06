@@ -1,67 +1,4 @@
 /*********************************
-* the Elephant in the Room: TOP
-*********************************/
-#index-firstview {
-  display: grid;
-  height: 100vh;
-  gap: 10px;
-  grid-template-columns: 1fr 1fr;
-}
-/******right side*****/
-.index-fv-title {
-  height: 100vh;
-  display: flex;
-  font-size: 50px;
-  text-align: right;
-  justify-content: end;
-  align-items: center;
-}
-.elephant-letter {
-  color: crimson;
-}
-.index-fv-img>img {
-  width:  250px;
-  height: 250px;
-  margin: 30px;
-  border: 2px dashed #000;
-  transform: rotateZ(-10deg);
-}
-.index-fv-img {
-  display: flex;
-  align-items: center;
-  justify-content: start;
-}
-/*****left side*****/
-.index-intro-title {
-  font-size: 30px;
-  text-align: center;
-}
-.index-intro-img {
-  display: flex;
-  justify-content: center;
-}
-.index-intro-img>img {
-  width:  150px;
-  height: 150px;
-}
-.index-intro-text {
-  width: 80%;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-}
-.index-message {
-  background-color:palegreen;
-  font-size: 15px;
-  text-align: center;
-}
-/*****responsive design*****/
-@media(max-width: 400px) {
-  .index-firstview {
-    grid-template-columns: 1fr;
-  }
-}
-/*********************************
 * LAYOUT
 *********************************/
 header{
@@ -75,8 +12,8 @@ header{
   padding-left: 10px;
 }
 header> #title {
-font-size: 25px;
-font-weight: 800;
+  font-size: 25px;
+  font-weight: 800;
 }
 header> #menu> a {
   color: bisque;
@@ -119,7 +56,10 @@ button{
   background-color: skyblue;
   border-radius: 50%;
 }
-.footer{
+footer{
   margin: 0;
-  height: 12px;
+  height: 24px;
+  background-color:palegreen;
+  font-size: 15px;
+  text-align: center;
 }

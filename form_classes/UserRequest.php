@@ -1,10 +1,10 @@
 <?php
-namespace app\classes;
+namespace app\form_classes;
 
 use app\axis\toolbox\Session;
 use app\axis\https\Validator;
 
-require_once 'interfaces\classes\IUserRequest.php';
+require_once 'interfaces\form_classes\IUserRequest.php';
 
 class UserRequest implements IUserRequest{
     protected int    $id;
@@ -109,7 +109,7 @@ class UserRequest implements IUserRequest{
         
         if ($errors !== [] &&  count($errors) > 0) {
             $_SESSION['errors'] = $errors;       
-            header('Location: /the-elephant-in-the-room/signin');
+            header('Location: /signin');
             exit();
         }
   
@@ -148,7 +148,7 @@ class UserRequest implements IUserRequest{
         if ($errors !== [] &&  count($errors) > 0) {
             $_SESSION['errors'] = $errors;        
             $session->oldPostValue($targetData);
-            header('Location: /the-elephant-in-the-room/signup');
+            header('Location: /signup');
             exit();
         }
 

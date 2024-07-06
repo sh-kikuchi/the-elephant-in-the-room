@@ -1,13 +1,13 @@
 <?php
 
-namespace app\classes;
+namespace app\form_classes;
 
 use app\axis\toolbox\Session;
 use app\axis\https\Validator;
 use app\models\repositories\PostRepository;
 use app\axis\database\DataBaseConnect;
 
-require_once 'interfaces\classes\IPostRequest.php';
+require_once 'interfaces\form_classes\IPostRequest.php';
 
 class PostRequest implements IPostRequest {
 
@@ -90,10 +90,10 @@ class PostRequest implements IPostRequest {
           $session->oldPostValue($targetData);
           if(!empty($targetData['id'])){
               $param = '?id='. $targetData['id'];
-              header('Location: /the-elephant-in-the-room/post/update'.$param);
+              header('Location: /post/update'.$param);
               exit();
           }else{
-              header('Location: /the-elephant-in-the-room/post/create');
+              header('Location: /post/create');
               exit();
           }
         }

@@ -1,11 +1,7 @@
 # the Elephant in the room
 'the Elephant in the room' is my private PHP flame work.
 
-#### ※ project code: Gladiolus
-This project code is named "Gladiolus," inspired by its flower language of "unwavering effort" and "victory." Just as the gladiolus flower represents triumph through perseverance, this framework is crafted with the aim of guiding the passion and effort of engineers towards victory. The framework itself is designed to be simple yet flexible, allowing developers to customize it according to their own preferences and needs.
-
 <br> since 2023.7.26
-
 
 ## 1. Artchitecture (Directory)
 ![Artchitecture](./public/assets/img/architecture.png)
@@ -47,7 +43,7 @@ ROOT
 │              fragile.php
 │              pagination.php
 │              
-├─classes
+├─form_classes
 │      PostRequest.php
 │      UserRequest.php
 │      
@@ -56,7 +52,7 @@ ROOT
 │      message.php
 │      
 ├─interfaces
-│  ├─classes
+│  ├─form_classes
 │  │      IPostRequest.php
 │  │      IUserRequest.php
 │  │      
@@ -145,12 +141,12 @@ ROOT
 │  │      update_form.php
 │  │      
 │  └─user
-│          my_page.php
+│          index.php
 │          signin_form.php
 │          signup_form.php
 │          
 ├─tests
-│  ├─classes
+│  ├─form_classes
 │  │      PostRequestTest.php
 │  │      UserRequestTest.php
 │  │      
@@ -226,13 +222,11 @@ ROOT
 2. Please create a class in PascalCase inside "migrations/migrate". Within that class, create a method named 'getSql' (public) that returns SQL. Please take a look at the following example.
 
     ```
-    php elephant migrate
+    　php elephant migrate
     ```
 
     ```php
-
-    php  migrations\jsonplaceholder\users.php        
-    php  migrations\jsonplaceholder\posts.php  
+    　php elephant seed     
 
     ```
    - Scan files within the migrations/migrate directory, load each file, and execute migrations. It's assumed that each migration file is a class with a getSql method, and its SQL query is executed. If an error occurs, an exception is caught, and an error message is output.
