@@ -2,6 +2,11 @@
 
 namespace app\services;
 
+/**
+ * Interface IPostService
+ *
+ * Defines the contract for Post service classes.
+ */
 interface IPostService {
     public function index();
     public function showCreateForm();

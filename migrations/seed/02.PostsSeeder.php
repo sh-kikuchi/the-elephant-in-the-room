@@ -5,34 +5,54 @@ require 'vendor/autoload.php'; // Composer autoloader
 use GuzzleHttp\Client;
 use app\axis\database\DataBaseConnect;
 
+/**
+ * Class PostsSeeder
+ * 
+ * This class seeds the 'posts' table with data from an external API.
+ */
 class PostsSeeder {
     
+    /**
+     * @var Client The Guzzle HTTP client instance.
+     */
     private $client;
+
+    /**
+     * @var \PDO The PDO instance for database interaction.
+     */
     private $pdo;
 
+    /**
+     * PostsSeeder constructor.
+     * 
+     * Initializes the database connection and the HTTP client.
+     */
     public function __construct() {
         $this->dbConnect = new DataBaseConnect();
         $this->pdo = $this->dbConnect->getPDO();
 
-        // JSONPlaceholderのベースURL
+        // Base URL for JSONPlaceholder
         $baseUrl = 'https://jsonplaceholder.typicode.com';
 
-        // Guzzleクライアントの作成
+        // Create Guzzle client
         $this->client = new Client([
             'base_uri' => $baseUrl,
         ]);
     }
 
+    /**
+     * Seeds the 'posts' table with data from an external API.
+     */
     public function seed() {
-        // APIからpostsデータを取得
+        // Retrieve posts data from the API
         $response = $this->client->get('/posts');
 
-        // ステータスコードが200 OKの場合のみ処理を続行
+        // Continue processing only if the status code is 200 OK
         if ($response->getStatusCode() == 200) {
-            // レスポンスボディをJSON形式でデコード
+            // Decode the response body in JSON format
             $posts = json_decode($response->getBody(), true);
 
-            // データを表示
+            // Display data
             foreach ($posts as $post) {
                 $stmt = $this->pdo->prepare('INSERT INTO posts (user_id, title, body) VALUES (:user_id, :title, :body)');
                 $stmt->execute([

@@ -2,6 +2,11 @@
 
 namespace app\form_classes;
 
+/**
+ * Interface IUserRequest
+ *
+ * Defines the contract for UserRequest classes.
+ */
 interface IUserRequest {
     public function setId($id);
     public function setName($name);

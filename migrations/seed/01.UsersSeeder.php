@@ -5,36 +5,56 @@ require 'vendor/autoload.php'; // Composer autoloader
 use GuzzleHttp\Client;
 use app\axis\database\DataBaseConnect;
 
+/**
+ * Class UsersSeeder
+ * 
+ * This class seeds the 'users' table with data from an external API.
+ */
 class UsersSeeder
 {
+    /**
+     * @var Client The Guzzle HTTP client instance.
+     */
     private $client;
+
+    /**
+     * @var \PDO The PDO instance for database interaction.
+     */
     private $pdo;
 
+    /**
+     * UsersSeeder constructor.
+     * 
+     * Initializes the database connection and the HTTP client.
+     */
     public function __construct()
     {
         $this->dbConnect = new DataBaseConnect();
         $this->pdo = $this->dbConnect->getPDO();
 
-        // JSONPlaceholderのベースURL
+        // Base URL for JSONPlaceholder
         $baseUrl = 'https://jsonplaceholder.typicode.com';
 
-        // Guzzleクライアントの作成
+        // Create Guzzle client
         $this->client = new Client([
             'base_uri' => $baseUrl,
         ]);
     }
 
+    /**
+     * Seeds the 'users' table with data from an external API.
+     */
     public function seed()
     {
-        // APIからusersデータを取得
+        // Retrieve users data from the API
         $response = $this->client->get('/users');
 
-        // ステータスコードが200 OKの場合のみ処理を続行
+        // Continue processing only if the status code is 200 OK
         if ($response->getStatusCode() == 200) {
-            // レスポンスボディをJSON形式でデコード
+            // Decode the response body in JSON format
             $users = json_decode($response->getBody(), true);
 
-            // データを表示
+            // Display data
             foreach ($users as $user) {
                 $stmt = $this->pdo->prepare('INSERT INTO users (name, email, password) VALUES (:name, :email, :password)');
                 $stmt->execute([
@@ -49,4 +69,3 @@ class UsersSeeder
         }
     }
 }
-

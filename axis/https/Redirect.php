@@ -2,13 +2,18 @@
 
 namespace app\axis\https;
 
+/**
+ * Class Redirect
+ *
+ * Provides methods for handling HTTP redirects.
+ */
 class Redirect
 {
     /**
      * Redirect to a specified URL.
      *
      * @param string $path The path to redirect to.
-     * @param int $statusCode The HTTP status code for the redirect (optional).
+     * @param int $statusCode The HTTP status code for the redirect (optional, default is 302).
      * @return void
      */
     public static function to($path, $statusCode = 302)
@@ -21,7 +26,7 @@ class Redirect
     /**
      * Redirect to the error page.
      *
-     * @param int $statusCode The HTTP status code for the error (optional).
+     * @param int $statusCode The HTTP status code for the error (optional, default is 404).
      * @return void
      */
     public static function error($statusCode = 404)

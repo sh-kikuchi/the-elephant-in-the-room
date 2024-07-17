@@ -15,7 +15,7 @@
         >
             <input type="hidden" name="csrf_token" value="<?php echo h($csrf); ?>">
             <div class="input-area">
-                <!-- email -->  
+                <!-- username -->  
                 <?php if($form_name === 'signup'): ?>
                   <div class="flex-box justify-center my-2">
                     <label for="name" class="label">Username：</label>

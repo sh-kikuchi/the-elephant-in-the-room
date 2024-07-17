@@ -14,6 +14,9 @@ use app\form_classes\UserRequest;
 
 /**
  * Class UserService
+ * 
+ * Handles business logic related to user management, including sign-up,
+ * sign-in, and user profile management.
  *
  * @package app\services
  */
@@ -23,7 +26,7 @@ class UserService extends Service implements IUserService {
      * UserService constructor.
      */
     public function __construct() {
-        $session  = new Session;
+        $session = new Session;
     }
 
     /**
@@ -36,11 +39,10 @@ class UserService extends Service implements IUserService {
         $result = $user_repository->checkSign();
         if (!$result) {
             $_SESSION['signin_err'] = 'Please sign in.';
-            header('Location:' .  dirname($_SERVER['SCRIPT_NAME']) . '/signin');
+            header('Location:' . dirname($_SERVER['SCRIPT_NAME']) . '/signin');
             return;
         }
-        $signin_user = $_SESSION['signin_user'];
-    
+        
         // Rendering
         $template = new Template(
             'user/index', [
@@ -67,14 +69,13 @@ class UserService extends Service implements IUserService {
         $template = new Template(
             'user/form', [
                 'csrf' => $this->setToken('signup'),
-                'errors' => isset($_SESSION['errors']) ? $_SESSION['errors'] : null,
-                'old' => isset($_SESSION['old']) ? $_SESSION['old'] : null,
+                'errors' => $_SESSION['errors'] ?? null,
+                'old' => $_SESSION['old'] ?? null,
                 'form_name' => 'signup'
             ]
         );
 
-        unset($_SESSION['errors']);
-        unset($_SESSION['old']);
+        unset($_SESSION['errors'], $_SESSION['old']);
 
         return $template->render();
     }
@@ -86,15 +87,14 @@ class UserService extends Service implements IUserService {
      */
     public function signup() {
         // Check token
-        $checkTokenResult = $this->checkToken('signup');
-        if (!$checkTokenResult) {
+        if (!$this->checkToken('signup')) {
             echo 'Invalid token.';
             return false;
         }
 
-        // Set variables & Create an instance
+        // Create an instance
         $user = new UserRepository();
-        $user_request = $this->makeUser($_POST);
+        $user_request = $this->makeUser($_POST, 'signup');
 
         // Execute methods
         $result = $user->signup($user_request);
@@ -126,14 +126,13 @@ class UserService extends Service implements IUserService {
         $template = new Template(
             'user/form', [
                 'csrf' => $this->setToken('signin'),
-                'errors' => isset($_SESSION['errors']) ? $_SESSION['errors'] : null,
-                'old' => isset($_SESSION['old']) ? $_SESSION['old'] : null,
+                'errors' => $_SESSION['errors'] ?? null,
+                'old' => $_SESSION['old'] ?? null,
                 'form_name' => 'signin'
             ]
         );
 
-        unset($_SESSION['errors']);
-        unset($_SESSION['old']);
+        unset($_SESSION['errors'], $_SESSION['old']);
 
         return $template->render();
     }
@@ -145,15 +144,14 @@ class UserService extends Service implements IUserService {
      */
     public function signin() {
         // Check token
-        $checkTokenResult = $this->checkToken('signin');
-        if (!$checkTokenResult) {
+        if (!$this->checkToken('signin')) {
             echo 'Invalid token.';
             return false;
         }
 
-        // Set variables & Create an instance
+        // Create an instance
         $user = new UserRepository();
-        $user_request = $this->makeUser($_POST);
+        $user_request = $this->makeUser($_POST, 'signin');
 
         // Execute methods
         $result = $user->signin($user_request);
@@ -170,9 +168,6 @@ class UserService extends Service implements IUserService {
      * Handle the sign-out process.
      */
     public function signout() {
-        // Set variables
-        $logout = filter_input(INPUT_POST, 'logout');
-
         // Create an instance
         $user = new UserRepository();
 
@@ -191,38 +186,46 @@ class UserService extends Service implements IUserService {
     /**
      * Handle file upload.
      *
-     * @return bool
+     * @return void
      */
     public function upload() {
-        // Execute methods
-        // Return processing results as required.
+        // Create an instance
         $file = new File();
         $result = $file->uploadFile($_FILES);
 
         // Transitioning screen
         Redirect::to('index');
         exit();
-    } 
+    }
 
     /**
      * Create a User entity from the form data.
      *
      * @param array $user_form The form data.
+     * @param string $type The type of request (signup or signin).
      * @return User The User entity.
      */
-    public function makeUser($user_form) {
+    public function makeUser(array $user_form, string $type): User {
         $user = new User();
         $user_request = new UserRequest($user_form);
+
+        // Validate based on the request type
+        switch ($type) {
+            case 'signup':
+                $user_request->signUpValidation();
+                break;
+            case 'signin':
+                $user_request->signInValidation();
+                break;
+        }
 
         if ($user_request->getId() !== null) {
             $user->setId($user_request->getId());
         }
-        $user->setId($user_request->getId());
         $user->setName($user_request->getName());
         $user->setEmail($user_request->getEmail());
         $user->setPassword($user_request->getPassword());
-        
+
         return $user;
     }
-
 }

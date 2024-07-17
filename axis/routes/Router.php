@@ -4,35 +4,66 @@ namespace app\axis\routes;
 
 use app\axis\https\Request;
 
+/**
+ * Class Router
+ *
+ * Handles routing for HTTP requests, mapping paths to their respective callbacks.
+ */
 class Router
 {
-  public Request $request;
-  protected array $routes = [];
+    public Request $request;
+    protected array $routes = [];
 
-  public function __construct(Request $request)
-  {
-    $this->request = $request;
-  }
-
-  public function get($path, $callback)
-  {
-    $this->routes['get'][$path] = $callback;
-  }
-
-  public function post($path, $callback)
-  {
-    $this->routes['post'][$path] = $callback;
-  }
-
-  public function resolve()
-  {
-    $path   = $this->request->getPath();
-    $method = $this->request->getMethod();
-    $callback = $this->routes[$method][$path] ?? false;
-    if ($callback === false) {
-      echo "Not found";
-      exit;
+    /**
+     * Router constructor.
+     *
+     * @param Request $request The HTTP request instance.
+     */
+    public function __construct(Request $request)
+    {
+        $this->request = $request;
     }
-    echo call_user_func($callback);
-  }
+
+    /**
+     * Registers a GET route.
+     *
+     * @param string $path The path for the route.
+     * @param callable $callback The callback to execute for this route.
+     * @return void
+     */
+    public function get($path, $callback)
+    {
+        $this->routes['get'][$path] = $callback;
+    }
+
+    /**
+     * Registers a POST route.
+     *
+     * @param string $path The path for the route.
+     * @param callable $callback The callback to execute for this route.
+     * @return void
+     */
+    public function post($path, $callback)
+    {
+        $this->routes['post'][$path] = $callback;
+    }
+
+    /**
+     * Resolves the current request to the appropriate route.
+     *
+     * @return void
+     */
+    public function resolve()
+    {
+        $path   = $this->request->getPath();
+        $method = $this->request->getMethod();
+        $callback = $this->routes[$method][$path] ?? false;
+        
+        if ($callback === false) {
+            echo "Not found";
+            exit;
+        }
+
+        echo call_user_func($callback);
+    }
 }

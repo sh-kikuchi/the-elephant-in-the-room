@@ -1,38 +1,62 @@
 <?php
 
-/*--------------------------------------------------------------------------
-| 
-|---------------------------------------------------------------------------
-|
-| Once Artisan has finished running, we will fire off the shutdown events
-| so that any final work may be done by the application before we shut
-| down the process. This is the last thing to happen to the request.
-|
-|--------------------------------------------------------------------------*/
-
 require_once __DIR__ . '/vendor/autoload.php';
 
+/**
+ * Class Elephant
+ * 
+ * This class is responsible for autoloading and executing commands.
+ */
 class Elephant {
-  public function autoload($class_name){
-    
-      $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-      $dotenv->load();
-var_dump(ucfirst($class_name) );
-      try {
-        include './axis/toolbox/commands/' . ucfirst($class_name) . '.php';
+    protected $class_name;
+    protected $option;
 
-        if (class_exists($class_name)) {
-          $instance = new $class_name();
-          $instance->run();
-        }else{
-          throw new LogicException("Unable to load class: $class_name");
+    /**
+     * Constructor for the Elephant class.
+     *
+     * Sets environment variables and initializes class properties.
+     *
+     * @param string $class_name The name of the class to autoload.
+     * @param mixed $option Optional parameter to pass to the class.
+     */
+    public function __construct($class_name, $option = null) {
+        // Set environment variables
+        $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+        $dotenv->load();
+
+        // Set properties
+        $this->class_name = $class_name;
+        $this->option     = $option;
+    }
+
+    /**
+     * Autoloads the specified class and executes its run method.
+     *
+     * @throws LogicException If the class cannot be loaded.
+     */
+    public function autoload(){
+        try {
+            include './axis/toolbox/commands/' . ucfirst($this->class_name) . '.php';
+
+            if (class_exists($this->class_name)) {
+                $instance = new $this->class_name();
+
+                if ($this->option !== null) {
+                    var_dump($this->option);
+                    $instance->run($this->option);
+                } else {
+                    $instance->run();
+                }
+
+            } else {
+                throw new LogicException("Unable to load class: $this->class_name");
+            }
+
+        } catch (Exception $e) {
+            print($e->getMessage());
         }
-         
-      } catch (Exception $e) {
-          print($e->getMessage());
-      }
-  }
+    }
 }
 
-$elephant = new Elephant();
-$elephant->autoload($argv[1]);
+$elephant = new Elephant($argv[1], $argv[2] ?? null);
+$elephant->autoload();

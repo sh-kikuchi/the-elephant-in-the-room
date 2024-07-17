@@ -13,6 +13,9 @@ use app\models\repositories\UserRepository;
 
 /**
  * Class PostService
+ * 
+ * Handles business logic related to posts, including creation, updating,
+ * deletion, and rendering of post-related views.
  *
  * @package app\services
  */
@@ -30,7 +33,6 @@ class PostService extends Service implements IPostService {
         $user = new UserRepository();
         $result = $user->checkSign();
         if (!$result) {
-            // $_SESSION['signin_err'] = Message::sign_error;
             Redirect::to('signin');
             return;
         }
@@ -45,7 +47,7 @@ class PostService extends Service implements IPostService {
                 'csrf' => $this->setToken('post_delete'),
                 'posts' => $pagination['data'],
                 'max_page' => $pagination['max_page'],
-                'errors' => isset($_SESSION['errors']) ? $_SESSION['errors'] : null
+                'errors' => $_SESSION['errors'] ?? null
             ]
         );
 
@@ -74,9 +76,9 @@ class PostService extends Service implements IPostService {
         $template = new Template(
             'post/form', [
                 'csrf' => $this->setToken('post_create'),
-                'signin_user' => isset($_SESSION['signin_user']) ? $_SESSION['signin_user'] : null,
-                'errors' => isset($_SESSION['errors']) ? $_SESSION['errors'] : null,
-                'old' => isset($_SESSION['old']) ? $_SESSION['old'] : null
+                'signin_user' => $_SESSION['signin_user'] ?? null,
+                'errors' => $_SESSION['errors'] ?? null,
+                'old' => $_SESSION['old'] ?? null
             ]
         );
         unset($_SESSION['errors']);
@@ -108,8 +110,8 @@ class PostService extends Service implements IPostService {
             'post/form', [
                 'csrf' => $this->setToken('post_update'),
                 'post' => $post,
-                'signin_user' => isset($_SESSION['signin_user']) ? $_SESSION['signin_user'] : null,
-                'errors' => isset($_SESSION['errors']) ? $_SESSION['errors'] : null,
+                'signin_user' => $_SESSION['signin_user'] ?? null,
+                'errors' => $_SESSION['errors'] ?? null,
             ]
         );
         unset($_SESSION['errors']);
@@ -121,14 +123,11 @@ class PostService extends Service implements IPostService {
     /**
      * Create a new post.
      *
-     * @return bool
+     * @return bool True on success, false on failure.
      */
     public function create() {
-
         // Check token
-        $checkTokenResult = $this->checkToken('post_create');
-
-        if (!$checkTokenResult) {
+        if (!$this->checkToken('post_create')) {
             echo 'Invalid token.';
             return false;
         }
@@ -151,13 +150,11 @@ class PostService extends Service implements IPostService {
     /**
      * Update an existing post.
      *
-     * @return bool
+     * @return bool True on success, false on failure.
      */
     public function update() {
         // Check token
-        $checkTokenResult = $this->checkToken('post_update');
-
-        if (!$checkTokenResult) {
+        if (!$this->checkToken('post_update')) {
             echo 'Invalid token.';
             return false;
         }
@@ -180,13 +177,11 @@ class PostService extends Service implements IPostService {
     /**
      * Delete an existing post.
      *
-     * @return bool
+     * @return bool True on success, false on failure.
      */
     public function delete() {
         // Check token
-        $checkTokenResult = $this->checkToken('post_delete');
-
-        if (!$checkTokenResult) {
+        if (!$this->checkToken('post_delete')) {
             echo 'Invalid token.';
             return false;
         }
@@ -212,7 +207,7 @@ class PostService extends Service implements IPostService {
      * @param array $post_form The form data.
      * @return Post The Post entity.
      */
-    public function makePost($post_form) {
+    public function makePost(array $post_form): Post {
         $post = new Post();
         $post_request = new PostRequest($post_form);
 
