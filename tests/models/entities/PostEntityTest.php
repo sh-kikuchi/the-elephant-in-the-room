@@ -13,7 +13,7 @@ class PostEntityTest extends TestCase {
     public function testGetters() {
         $post = new PostEntity();
         $post->setId(1);
-        $post->setUserId('user123');
+        $post->setUserId(2);
         $post->setTitle('Sample Title');
         $post->setBody('Sample Body');
         $post->setCreatedAt('2022-01-01 12:00:00');
@@ -21,7 +21,7 @@ class PostEntityTest extends TestCase {
 
         // Check that the getter methods return the expected values
         $this->assertEquals(1, $post->getId());
-        $this->assertEquals('user123', $post->getUserId());
+        $this->assertEquals(2, $post->getUserId());
         $this->assertEquals('Sample Title', $post->getTitle());
         $this->assertEquals('Sample Body', $post->getBody());
         $this->assertEquals('2022-01-01 12:00:00', $post->getCreatedAt());
@@ -34,7 +34,7 @@ class PostEntityTest extends TestCase {
     public function testSetters() {
         $post = new PostEntity();
         $post->setId(1);
-        $post->setUserId('user123');
+        $post->setUserId(2);
         $post->setTitle('Sample Title');
         $post->setBody('Sample Body');
         $post->setCreatedAt('2022-01-01 12:00:00');
@@ -42,7 +42,7 @@ class PostEntityTest extends TestCase {
 
         // Check that the setter methods correctly update the values
         $this->assertEquals(1, $post->getId());
-        $this->assertEquals('user123', $post->getUserId());
+        $this->assertEquals(2, $post->getUserId());
         $this->assertEquals('Sample Title', $post->getTitle());
         $this->assertEquals('Sample Body', $post->getBody());
         $this->assertEquals('2022-01-01 12:00:00', $post->getCreatedAt());

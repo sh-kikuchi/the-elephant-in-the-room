@@ -1,4 +1,3 @@
-<!-- vendor/bin/phpunit tests\services\PostServiceTest.php -->
 <?php
 
 use PHPUnit\Framework\TestCase;
@@ -15,11 +14,19 @@ require 'bootstrap.php';
 
 /**
  * Test case for the PostService class
+ *
+ * This class contains test methods for verifying the functionality of the PostService class.
+ * It uses PHPUnit framework to create mock objects and test various methods of the PostService class.
  */
 class PostServiceTest extends TestCase
 {
     /**
-     * Test the index method of the PostService class
+     * Test the index method of the PostService class.
+     *
+     * This test verifies that the index method correctly handles session errors,
+     * interacts with the UserRepository and PostRepository, and initializes the Template correctly.
+     *
+     * @return void
      */
     public function testIndex() 
     {
@@ -64,7 +71,12 @@ class PostServiceTest extends TestCase
     }
 
     /**
-     * Test the createForm method of the PostService class
+     * Test the createForm method of the PostService class.
+     *
+     * This test verifies that the createForm method initializes the Template correctly
+     * with the expected data.
+     *
+     * @return void
      */
     public function testCreateForm() 
     {
@@ -85,7 +97,12 @@ class PostServiceTest extends TestCase
     }
 
     /**
-     * Test the updateForm method of the PostService class
+     * Test the updateForm method of the PostService class.
+     *
+     * This test verifies that the updateForm method correctly retrieves post data
+     * and initializes the Template with the expected data.
+     *
+     * @return void
      */
     public function testUpdateForm() 
     {
@@ -122,7 +139,12 @@ class PostServiceTest extends TestCase
     }
 
     /**
-     * Test the makePost method of the PostService class
+     * Test the makePost method of the PostService class.
+     *
+     * This test verifies that the makePost method correctly creates a PostEntity
+     * instance from POST data.
+     *
+     * @return void
      */
     public function testMakePost() 
     {
@@ -146,7 +168,12 @@ class PostServiceTest extends TestCase
     }
 
     /**
-     * Test the create method of the PostService class
+     * Test the create method of the PostService class.
+     *
+     * This test verifies that the create method checks the CSRF token and calls
+     * the PostRepository create method correctly.
+     *
+     * @return void
      */
     public function testCreate() 
     {
@@ -158,7 +185,7 @@ class PostServiceTest extends TestCase
         $_SESSION['csrf_token']['post_create'] = 'valid_token';
 
         $_POST = [
-            'user_id' => '1',
+            'user_id' => 1,
             'title' => 'Test Title',
             'body' => 'Test Body',
             'csrf_token' => 'valid_token'
@@ -174,7 +201,12 @@ class PostServiceTest extends TestCase
     }
 
     /**
-     * Test the update method of the PostService class
+     * Test the update method of the PostService class.
+     *
+     * This test verifies that the update method checks the CSRF token and calls
+     * the PostRepository update method correctly.
+     *
+     * @return void
      */
     public function testUpdate() 
     {
@@ -203,7 +235,12 @@ class PostServiceTest extends TestCase
     }
 
     /**
-     * Test the delete method of the PostService class
+     * Test the delete method of the PostService class.
+     *
+     * This test verifies that the delete method checks the CSRF token and calls
+     * the PostRepository delete method correctly.
+     *
+     * @return void
      */
     public function testDelete() 
     {
@@ -215,8 +252,8 @@ class PostServiceTest extends TestCase
         $_SESSION['csrf_token']['post_delete'] = 'valid_token';
 
         $_POST = [
-            'id'      => 100,
-            'user_id' => '1',
+            'id'      => 1,
+            'user_id' => 1,
             'title' => 'Test Title',
             'body' => 'Test Body',
             'csrf_token' => 'valid_token'

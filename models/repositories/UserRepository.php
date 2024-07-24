@@ -4,6 +4,7 @@ namespace app\models\repositories;
 
 use app\axis\database\DataBaseConnect;
 use app\models\entities\UserEntity as User;
+use app\axis\https\Redirect;
 
 require_once 'interfaces/models/repositories/IUserRepository.php';
 
@@ -142,6 +143,6 @@ class UserRepository implements IUserRepository {
         $_SESSION = [];
         session_destroy();
         // Back to sign-in page
-        header('Location:' . dirname($_SERVER['SCRIPT_NAME']) . '/signin');
+        Redirect::to('signin');
     }
 }

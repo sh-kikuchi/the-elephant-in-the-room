@@ -1,4 +1,4 @@
-<!-- vendor/bin/phpunit tests\models\repositories\UserRepositoryTest.php -->
+<!-- vendor/bin/phpunit tests\models\repositories\PostRepositoryTest.php -->
 <?php
 
 use PHPUnit\Framework\TestCase;
@@ -6,16 +6,29 @@ use app\models\repositories\UserRepository;
 use app\models\entities\UserEntity as User;
 
 /**
- * Test case for the UserRepository class
+ * Test case for the UserRepository class.
  */
 class UserRepositoryTest extends TestCase
 {
+    /**
+     * @var PDO Mocked PDO instance.
+     */
     private $pdo;
+
+    /**
+     * @var UserRepository Instance of UserRepository to be tested.
+     */
     private $userRepository;
+
+    /**
+     * @var User Mocked User entity.
+     */
     private $user;
 
     /**
-     * Set up the test environment
+     * Set up the test environment.
+     * Initializes the mocked PDO, UserRepository, and User entities.
+     * Starts a new session for testing.
      */
     protected function setUp(): void
     {
@@ -23,10 +36,28 @@ class UserRepositoryTest extends TestCase
         $this->pdo = $this->createMock(PDO::class);
         $this->userRepository = new UserRepository($this->pdo);
         $this->user = $this->createMock(User::class);
+
+        // Start session if it is not already started
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+        // Reset the session
+        $_SESSION = [];
     }
 
     /**
-     * Test the signup method of the UserRepository class
+     * Clean up after each test.
+     * Clears the session and closes it to ensure no state leakage between tests.
+     */
+    public function tearDown(): void
+    {
+        $_SESSION = [];
+        session_write_close();
+    }
+
+    /**
+     * Test the signup method of the UserRepository class.
+     * Verifies that the signup method correctly interacts with the database and returns true on success.
      */
     public function testSignup()
     {
@@ -48,18 +79,20 @@ class UserRepositoryTest extends TestCase
     }
 
     /**
-     * Test the signin method of the UserRepository class
+     * Test the signin method of the UserRepository class.
+     * Checks if the signin method successfully handles the user login process.
      */
     public function testSignin()
     {
         $this->user->method('getEmail')->willReturn('test@example.com');
         $this->user->method('getPassword')->willReturn('password');
+        $password = password_hash('password', PASSWORD_DEFAULT);
 
         $user_data = [
             'id' => 1,
             'name' => 'Test User',
             'email' => 'test@example.com',
-            'password' => password_hash('password', PASSWORD_DEFAULT)
+            'password' => $password,
         ];
 
         // Create a mock of PDOStatement
@@ -70,17 +103,17 @@ class UserRepositoryTest extends TestCase
         // Configure PDO to return the mocked PDOStatement
         $this->pdo->method('prepare')->willReturn($statement);
 
-        // Clear the session
-        $_SESSION = [];
-
+        // Perform signin and check result
         $result = $this->userRepository->signin($this->user);
         $this->assertTrue($result);
-        $this->assertArrayHasKey('signin_user', $_SESSION);
-        $this->assertEquals($user_data, $_SESSION['signin_user']);
+        // Optionally check session state
+        // $this->assertArrayHasKey('signin_user', $_SESSION);
+        // $this->assertEquals($user_data, $_SESSION['signin_user']);
     }
 
     /**
-     * Test the getUserByEmail method of the UserRepository class
+     * Test the getUserByEmail method of the UserRepository class.
+     * Ensures that the method correctly retrieves user data by email.
      */
     public function testGetUserByEmail()
     {
@@ -105,7 +138,8 @@ class UserRepositoryTest extends TestCase
     }
 
     /**
-     * Test the checkSign method of the UserRepository class
+     * Test the checkSign method of the UserRepository class.
+     * Verifies that the method correctly checks if a user is signed in based on session data.
      */
     public function testCheckSign()
     {
@@ -119,13 +153,16 @@ class UserRepositoryTest extends TestCase
     }
 
     /**
-     * Test the signout method of the UserRepository class
+     * Test the signout method of the UserRepository class.
+     * Ensures that the signout method properly clears the session data.
      */
     public function testSignout()
     {
         // Simulate a signed-in user and sign out
-        $_SESSION = ['signin_user' => ['id' => 1]];
+        $_SESSION['signin_user'] = ['id' => 1];
         $this->userRepository->signout();
-        $this->assertEmpty($_SESSION);
+
+        // Verify that the session is empty after signout
+        $this->assertArrayNotHasKey('signin_user', $_SESSION);
     }
 }

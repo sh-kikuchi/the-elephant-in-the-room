@@ -1,3 +1,4 @@
+<!-- vendor/bin/phpunit tests\services\UserServiceTest.php -->
 <?php
 
 use PHPUnit\Framework\TestCase;
@@ -80,32 +81,32 @@ class UserServiceTest extends TestCase {
     /**
      * Test for user signup process.
      */
-public function testSignup() {
-    $_SESSION['csrf_token']['signup'] = 'valid_token';
+    public function testSignup() {
+        $_SESSION['csrf_token']['signup'] = 'valid_token';
 
-    $_POST = [
-        'name'       => 'testman',
-        'email'      => 'test@test.com',
-        'password'   => 'testtest1234',
-        'password_conf' => 'testtest1234',
-        'csrf_token' => 'valid_token'
-    ];
+        $_POST = [
+            'name'       => 'testman',
+            'email'      => 'test@test.com',
+            'password'   => 'testtest1234',
+            'password_conf' => 'testtest1234',
+            'csrf_token' => 'valid_token'
+        ];
 
-    $user_service = new UserService();
-    
-    // Check CSRF token and create user data
-    $token_check = $user_service->checkToken('signup');
-    // Pass both parameters: the POST data and the 'signup' type
-    $user_data = $user_service->makeUser($_POST, 'signup');
+        $user_service = new UserService();
+        
+        // Check CSRF token and create user data
+        $token_check = $user_service->checkToken('signup');
+        // Pass both parameters: the POST data and the 'signup' type
+        $user_data = $user_service->makeUser($_POST, 'signup');
 
-    // Create a mock for UserRepository
-    $mock_user_repository = $this->getMockBuilder(UserRepository::class)->getMock();
-    $mock_user_repository->method('signup')->willReturn(true);
+        // Create a mock for UserRepository
+        $mock_user_repository = $this->getMockBuilder(UserRepository::class)->getMock();
+        $mock_user_repository->method('signup')->willReturn(true);
 
-    $result = $mock_user_repository->signup($user_data);
-    $this->assertTrue($token_check);
-    $this->assertTrue($result);
-}
+        $result = $mock_user_repository->signup($user_data);
+        $this->assertTrue($token_check);
+        $this->assertTrue($result);
+    }
 
     /**
      * Test for rendering the Signin form.

@@ -3,6 +3,7 @@
 namespace app\axis\toolbox;
 
 use app\config\Message;
+use app\axis\https\Redirect;
 
 class File {
     /**
@@ -14,7 +15,7 @@ class File {
         $result = false;
         if (empty($file_data['upfile']['full_path'])) {
             $_SESSION['msg'] = 'No files have been uploaded.';
-            header('Location: /index');
+            Redirect::to('index');
             exit();
         } 
         if($file_data['upfile']['error'] !== UPLOAD_ERR_OK){
@@ -47,7 +48,7 @@ class File {
            * @param string [path].$dest destination to save to
            */
 
-          if(!move_uploaded_file($src, 'storage/doc/'.$dest)){
+          if(!move_uploaded_file($src, 'storage/'.$dest)){
             $err_msg = Message::UPLOAD_ERR['FAILED'];
           }else{
             $result = true;

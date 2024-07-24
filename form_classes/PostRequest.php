@@ -150,6 +150,7 @@ class PostRequest implements IPostRequest {
         $validator->validateString($post_title, 'title', true, 0, 100);
 
         $errors = $validator->getErrors();
+
         
         if ($errors !== [] && count($errors) > 0) {
             $_SESSION['errors'] = $errors;

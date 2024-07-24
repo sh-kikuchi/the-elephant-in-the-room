@@ -86,7 +86,7 @@
                                     </div>
                                 </form>
                             </div>
-                            <p class="text-center"> see storage/doc directory</p>
+                            <p class="text-center"> see storage directory</p>
                         </div>
                     </section>
                 </div>

@@ -39,7 +39,7 @@ class UserService extends Service implements IUserService {
         $result = $user_repository->checkSign();
         if (!$result) {
             $_SESSION['signin_err'] = 'Please sign in.';
-            header('Location:' . dirname($_SERVER['SCRIPT_NAME']) . '/signin');
+            Redirect::to('signin');
             return;
         }
         
