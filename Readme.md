@@ -41,6 +41,21 @@
     　php elephant seed     
     ```
 
+#### Data Import and Export via CSV
+- Importing Data
+To import data into a table, for example, the users table, create a CSV file named users.csv in the Storage/csv directory. The first row of the CSV should contain column names. Run the following command from the project directory:
+
+  ```
+  php elephant importCSV users
+  ```
+
+- Exporting Data
+To export data, run the following command from the project directory. This is an example for exporting posts.
+
+  ```
+  php elephant exportCSV posts
+  ```
+
 ### 4. Architecture
 #### 3-tier architecture
 - This framework is based on a 3-tier architecture, consisting of three layers: Model, Service, and View.
@@ -107,6 +122,7 @@ Moreover,By providing interfaces for models and services, you can write type-saf
 
 ### 7. Testing
 - You can execute tests using PHPUnit. Here's an example of running tests.
+
   ```
   vendor/bin/phpunit tests\form_classes\PostRequestTest.php
   ```

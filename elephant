@@ -42,7 +42,6 @@ class Elephant {
                 $instance = new $this->class_name();
 
                 if ($this->option !== null) {
-                    var_dump($this->option);
                     $instance->run($this->option);
                 } else {
                     $instance->run();
